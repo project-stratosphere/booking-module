@@ -1,8 +1,8 @@
 {
-  "name": "",
+  "name": "Booking AirBnC",
   "version": "",
-  "description": "",
-  "author": "",
+  "description": "Full stack booking module, potentially to be used for the group project AirBnC",
+  "author": "Catherine Ligad",
   "license": "",
   "engines": {
     "node": ">=6.13.0"
