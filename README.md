@@ -4,10 +4,10 @@
 
 ## Related Projects
 
-  - https://github.com/airBnC/CatProxy
-  - https://github.com/airBnC/property-info
-  - https://github.com/airBnC/Reviews
-  - 
+  - https://github.com/airBnC/calendar-module
+  - https://github.com/airBnC/property-info-module
+  - https://github.com/airBnC/reviews-module
+  - https://github.com/airBnC/cat-proxy-server
 
 ## Table of Contents
 
