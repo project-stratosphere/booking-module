@@ -1,3 +1,6 @@
+-- mysql -u root < database/populateUsers.sql
+USE Booking;
+
 INSERT INTO user (name) VALUES ("Leone Batz DDS");
 INSERT INTO user (name) VALUES ("Raquel Rosenbaum");
 INSERT INTO user (name) VALUES ("Khalid Dare");

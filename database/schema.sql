@@ -1,4 +1,8 @@
--- mysql -u root < server/schema.sql
+-- mysql -u root < database/schema.sql
+-- mysql -u root < database/populateUsers.sql
+-- mysql -u root < database/populateUserListings.sql
+-- mysql -u root < database/populateOccupiedDates.sql
+
 DROP DATABASE IF EXISTS Booking;
 
 CREATE DATABASE Booking;
@@ -34,8 +38,6 @@ CREATE TABLE occupied_dates (
   PRIMARY KEY (id)
 );
 
-
-
 -- Foreign Keys 
 ALTER TABLE userListing ADD FOREIGN KEY (user_id) REFERENCES user (id);
 ALTER TABLE occupied_dates ADD FOREIGN KEY (listing_id) REFERENCES userListing (id);
@@ -43,11 +45,3 @@ ALTER TABLE occupied_dates ADD FOREIGN KEY (listing_id) REFERENCES userListing (
 -- INSERT INTO user (id,name) VALUES ('','');
 -- INSERT INTO userListing (id,name,user_id,price_per_night,star_rating,cust_rev_num,min_stay,cleaning_fee,service_fee,max_guests) VALUES ('','','','','','','','','','');
 -- INSERT INTO occupied_dates (id,listing_id,date) VALUES ('','','');
-
--- POPULATING USERS:
-
-
--- POPULATING USER LISTINGS:
-
-
--- POPULATING OCCUPIED DATES:

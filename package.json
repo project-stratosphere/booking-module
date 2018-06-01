@@ -1,5 +1,5 @@
 {
-  "name": "Booking AirBnC",
+  "name": "bookingairbnc",
   "version": "1.0",
   "description": "Full stack booking module, potentially to be used for the group project AirBnC",
   "author": "Catherine Ligad",
@@ -8,9 +8,12 @@
     "node": ">=6.13.0"
   },
   "scripts": {},
-  "dependencies": {},
-  "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+  "dependencies": {
     "faker": "^4.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0"
   }
 }

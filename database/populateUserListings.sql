@@ -1,3 +1,6 @@
+-- mysql -u root < database/populateUserListings.sql
+USE Booking;
+
 INSERT INTO userListing (name,user_id,price_per_night,star_rating,cust_rev_num,min_stay,cleaning_fee,service_fee, max_guests) VALUES ('183 Bradford Divide',61,382,1,1151,2,56,33,8);
 INSERT INTO userListing (name,user_id,price_per_night,star_rating,cust_rev_num,min_stay,cleaning_fee,service_fee, max_guests) VALUES ('200 Juana Underpass',66,35,3,1644,4,55,25,2);
 INSERT INTO userListing (name,user_id,price_per_night,star_rating,cust_rev_num,min_stay,cleaning_fee,service_fee, max_guests) VALUES ('0489 Blick Ramp',12,488,1,235,2,44,43,2);
