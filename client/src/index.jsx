@@ -8,9 +8,9 @@ export default class App extends Component {
 
   render() {
     return(
-      <h1>
+      <div>
         Hi!
-      </h1>
+      </div>
     )
   }
 }
