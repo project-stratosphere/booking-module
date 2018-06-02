@@ -1,6 +1,6 @@
-import React from "react";
-import PricePerNight from "./PricePerNight";
-import Rating from "./Rating";
+import React from 'react';
+import PricePerNight from './PricePerNight.jsx';
+import Rating from './Rating.jsx';
 
 export default function ModOne() {
   return (

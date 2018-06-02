@@ -1,10 +1,20 @@
 /* eslint-disable no-console */
-const path = require( "path" );
-const express = require( "express" );
+const path = require( 'path' );
+const parser = require( 'body-parser' );
+const express = require( 'express' );
 
+const PORT = 3000;
 const app = express();
-app.use( "/", express.static( path.join( __dirname, "/../client/dist" ) ) );
+app.use( parser.json() );
 
-app.listen( 3000, () => {
-  console.log( "I'm listening!" );
+app.use( '/', express.static( path.join( __dirname, '../client/dist/' ) ) );
+app.use( '/rooms/:listingID', express.static( path.join( __dirname, '../client/dist/' ) ) );
+
+app.get( '/:listingID', ( req, res ) => {
+  console.log( req.params );
+  res.json( { result: 'hello!' } );
+} );
+
+app.listen( PORT, () => {
+  console.log( `I'm in the year ${ PORT }` );
 } );
