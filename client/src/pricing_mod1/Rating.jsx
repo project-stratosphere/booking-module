@@ -1,7 +1,17 @@
 import React from 'react';
 
 export default function Rating( props ) {
-  return (
-    <div className="mod1Holder" />
-  );
+  if ( props.rating ) {
+    return (
+      <div className="mod1RatingHolder">
+        <div className="rating">
+          {props.rating}
+        </div>
+        <div className="numReviews">
+          {props.numReviews}
+        </div>
+      </div>
+    );
+  }
+  return null;
 }
