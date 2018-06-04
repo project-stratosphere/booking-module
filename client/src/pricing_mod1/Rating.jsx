@@ -1,7 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactStars from 'react-stars';
 
 export default function Rating( props ) {
+  Rating.propTypes = {
+    rating: PropTypes.number,
+    numReviews: PropTypes.number,
+  };
+  Rating.defaultProps = {
+    rating: 0,
+    numReviews: 0,
+  };
   if ( props.rating ) {
     return (
       <div className="mod1RatingHolder">

@@ -1,6 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function PricePerNight( props ) {
+  PricePerNight.propTypes = {
+    price: PropTypes.number,
+  };
+  PricePerNight.defaultProps = {
+    price: 0,
+  };
   if ( props.price ) {
     return (
       <div className="priceHolder">
