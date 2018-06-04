@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import ModOne from './pricing_mod1/ModOne.jsx';
 // import ModTwo from "./calendar_mod2/ModTwo";
 // import ModThree from './guestsAndCalc_mod3/ModThree';
@@ -61,4 +61,4 @@ export default class App extends Component {
   }
 }
 
-ReactDOM.render( <App />, document.getElementById( 'root' ) );
+render( <App />, document.getElementById( 'root' ) );
