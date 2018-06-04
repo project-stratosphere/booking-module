@@ -47,7 +47,6 @@ export default class App extends Component {
     return (
       <div className="holder">
         <ModOne listingData={this.state.listingData} />
-        HI!
         {/* <ModTwo />
         <ModThree /> */}
       </div>

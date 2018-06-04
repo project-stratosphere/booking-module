@@ -1,9 +1,12 @@
 import React from 'react';
 
-export default function PricePerNight() {
-  return (
-    <div className="mod1Holder">
-      <PricePerNight />
-    </div>
-  );
+export default function PricePerNight( props ) {
+  if ( props.price ) {
+    return (
+      <div className="price">
+        {props.price}
+      </div>
+    );
+  }
+  return null;
 }

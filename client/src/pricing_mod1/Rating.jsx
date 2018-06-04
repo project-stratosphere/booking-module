@@ -1,9 +1,7 @@
 import React from 'react';
 
-export default function Rating() {
+export default function Rating( props ) {
   return (
-    <div className="mod1Holder">
-      <Rating />
-    </div>
+    <div className="mod1Holder" />
   );
 }
