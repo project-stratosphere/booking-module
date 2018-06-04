@@ -24,6 +24,9 @@ export default class App extends Component {
 
   getPathname = () => {
     const id = window.location.pathname;
+    if ( id === '/' ) {
+      return 1;
+    }
     return id.substr( 1 );
   }
 
@@ -34,14 +37,16 @@ export default class App extends Component {
     }
     axios.get( `http://127.0.0.1:3002/rooms/${ idToUse }` )
       .then( ( response ) => {
-        console.log( response );
+        this.setState( {
+          listingData: response.data,
+        } );
       } );
   }
 
   render() {
     return (
       <div className="holder">
-        {/* <ModOne /> */}
+        <ModOne listingData={this.state.listingData} />
         HI!
         {/* <ModTwo />
         <ModThree /> */}
