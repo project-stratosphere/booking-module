@@ -1,5 +1,5 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-export default function ModThree() {
+export default function ModThree( props ) {
 
 }

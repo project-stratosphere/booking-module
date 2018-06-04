@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ModOne from './pricing_mod1/ModOne.jsx';
 // import ModTwo from "./calendar_mod2/ModTwo";
-// import ModThree from "./guestsAndCalc_mod3/ModThree";
+import ModThree from './guestsAndCalc_mod3/ModThree';
 
 const axios = require( 'axios' );
 
@@ -47,8 +47,8 @@ export default class App extends Component {
     return (
       <div className="holder">
         <ModOne listingData={this.state.listingData} />
-        {/* <ModTwo />
-        <ModThree /> */}
+        {/* <ModTwo /> */}
+        <ModThree listingData={this.state.listingData} />
       </div>
     );
   }
