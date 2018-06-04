@@ -11,12 +11,28 @@ const axios = require( 'axios' );
 export default class App extends Component {
   constructor( props ) {
     super( props );
+    const id = this.getPathname();
     this.state = {
+      pathname: id,
     };
   }
 
   componentDidMount() {
-    axios.get( 'http://127.0.0.1:3000/50' )
+    this.getPathname();
+    this.getListingData( this.state.pathname );
+  }
+
+  getPathname = () => {
+    const id = window.location.pathname;
+    return id.substr( 1 );
+  }
+
+  getListingData = ( id ) => {
+    let idToUse = id;
+    if ( !idToUse ) {
+      idToUse = 1;
+    }
+    axios.get( `http://127.0.0.1:3002/rooms/${ idToUse }` )
       .then( ( response ) => {
         console.log( response );
       } );
