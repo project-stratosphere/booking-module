@@ -7,8 +7,7 @@ module.exports = {
     path: path.join(__dirname, '/client/dist'),
   },
   resolve: {
-    extensions: ['.js','.jsx'],
-    root: path.resolve(__dirname)
+    extensions: ['','.js','.jsx'],
   },
   module: {
     rules: [

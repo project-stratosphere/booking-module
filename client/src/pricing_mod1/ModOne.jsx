@@ -5,16 +5,21 @@ import Rating from './Rating.jsx';
 
 export default function ModOne( props ) {
   ModOne.propTypes = {
-    listingData: PropTypes.node,
+    price: PropTypes.number,
+    rating: PropTypes.number,
+    numReviews: PropTypes.Number,
+
   };
   ModOne.defaultProps = {
-    listingData: {},
+    price: 0,
+    rating: 0,
+    numReviews: 0,
   };
-  if ( props.listingData ) {
+  if ( props.price ) {
     return (
       <div className="mod1Holder">
-        <PricePerNight price={props.listingData.pricePerNight} />
-        <Rating rating={props.listingData.starRating} numReviews={props.listingData.custRevNum} />
+        <PricePerNight price={props.price} />
+        <Rating rating={props.rating} numReviews={props.numReviews} />
       </div>
     );
   }

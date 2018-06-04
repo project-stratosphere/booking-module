@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import ModOne from './pricing_mod1/ModOne.jsx';
 // import ModTwo from "./calendar_mod2/ModTwo";
 // import ModThree from './guestsAndCalc_mod3/ModThree';
@@ -45,13 +44,20 @@ export default class App extends Component {
   }
 
   render() {
-    return (
-      <div className="holder">
-        <ModOne listingData={this.state.listingData} />
-        {/* <ModTwo /> */}
-        {/* <ModThree listingData={this.state.listingData} /> */}
-      </div>
-    );
+    if ( this.state.listingData ) {
+      return (
+        <div className="holder">
+          <ModOne
+            price={this.state.listingData.pricePerNight}
+            rating={this.state.listingData.starRating}
+            numReviews={this.state.listingData.custRevNum}
+          />
+          {/* <ModTwo /> */}
+          {/* <ModThree listingData={this.state.listingData} /> */}
+        </div>
+      );
+    }
+    return null;
   }
 }
 
