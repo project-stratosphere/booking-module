@@ -15,14 +15,30 @@ app.use( '/', express.static( path.join( __dirname, '../client/dist/' ) ) );
 app.use( '/:listingID', express.static( path.join( __dirname, '../client/dist/' ) ) );
 
 app.get( '/rooms/:listingID', async ( req, res ) => {
-  console.log( req.params.listingID );
   try {
-    const results = await mysql.query( `select * from userListing where id =${ req.params.listingID }` );
-    console.log( results );
+    const listingResults = await mysql.query( `select * from userListing where id =${ req.params.listingID }` );
+    const calendarResults = await mysql.query( `select * from occupied_dates where listing_id=${ req.params.listingID }` );
+    const toSendBack = {};
+    const dateArr = [];
+
+    toSendBack.name = listingResults[ 0 ].name;
+    toSendBack.pricePerNight = listingResults[ 0 ].price_per_night;
+    toSendBack.starRating = listingResults[ 0 ].star_rating;
+    toSendBack.custRevNum = listingResults[ 0 ].cust_rev_num;
+    toSendBack.minStay = listingResults[ 0 ].min_stay;
+    toSendBack.cleaningFee = listingResults[ 0 ].cleaning_fee;
+    toSendBack.serviceFee = listingResults[ 0 ].service_fee;
+    toSendBack.maxGuests = listingResults[ 0 ].max_guests;
+
+    calendarResults.forEach( ( result ) => {
+      dateArr.push( result.date );
+    } );
+
+    toSendBack.datesTaken = dateArr;
+    res.json( toSendBack );
   } catch ( err ) {
     console.log( err );
   }
-  res.json( { result: req.params } );
 } );
 
 app.listen( PORT, () => {
