@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PricePerNight from './PricePerNight';
 import Rating from './Rating';
 
-const Holder = styled.div`
+export const Holder = styled.div`
   display: flex;
   justify-content: center; 
   align-items: center;
@@ -19,7 +19,7 @@ export default function ModOne( props ) {
   ModOne.propTypes = {
     price: PropTypes.number,
     rating: PropTypes.number,
-    numReviews: PropTypes.Number,
+    numReviews: PropTypes.number,
 
   };
   ModOne.defaultProps = {
