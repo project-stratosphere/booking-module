@@ -12,21 +12,6 @@
     "watch": "webpack -d --watch",
     "test": "jest"
   },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "bower_components",
-      "shared"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
-    }
-  },
   "dependencies": {
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
@@ -45,21 +30,18 @@
     "webpack-cli": "^2.1.4"
   },
   "devDependencies": {
-    "@types/jest": "^23.0.0",
     "babel-eslint": "^8.2.3",
     "babel-jest": "^23.0.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
-    "enzyme-to-json": "^3.3.4",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.8.2",
     "jest": "^23.1.0",
-    "nodemon": "^1.17.5",
-    "react-test-renderer": "^16.4.0",
-    "ts-jest": "^22.4.6"
+    "jest-styled-components": "^5.0.1",
+    "nodemon": "^1.17.5"
   }
 }

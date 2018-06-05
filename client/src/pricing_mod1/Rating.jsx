@@ -23,6 +23,7 @@ export default function Rating( props ) {
     rating: 0,
     numReviews: 0,
   };
+
   if ( props.rating ) {
     return (
       <Holder>
