@@ -1,21 +1,88 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+/* eslint-disable no-console */
+
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import styled, { injectGlobal } from 'styled-components';
+import axios from 'axios';
+import ModOne from './pricing_mod1/ModOne';
+// import ModTwo from "./calendar_mod2/ModTwo";
+// import ModThree from './guestsAndCalc_mod3/ModThree';
+
+injectGlobal( [ `
+  html, body{
+    height: 100%;
+    width: 100%
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+` ] );
+
+export const Holder = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;  
+  height: 300px;
+  border: 1px solid rgb(172, 172, 172);
+  font-family: Quicksand;
+`;
 
 export default class App extends Component {
   constructor( props ) {
     super( props );
     this.state = {
-      here: 1,
     };
   }
 
+  componentDidMount() {
+    this.getPathname().then( () => {
+      this.getListingData();
+    } );
+  }
+
+  getPathname = () => new Promise( ( resolve ) => {
+    let id = window.location.pathname;
+    if ( id === '/' ) {
+      id = 1;
+    } else {
+      id = id.replace( /\//g, '' );
+    }
+    resolve( this.setState( {
+      pathname: id,
+    } ) );
+  } )
+
+  getListingData = () => {
+    axios.get( `http://127.0.0.1:3002/rooms/${ this.state.pathname }/bookingInfo/` )
+      .then( ( response ) => {
+        this.setState( {
+          listingData: response.data,
+        } );
+      } )
+      .catch( ( error ) => {
+        console.log( error );
+      } );
+  }
+
   render() {
-    return (
-      <div>
-        HI!
-      </div>
-    );
+    if ( this.state.listingData ) {
+      return (
+        <Holder>
+          <ModOne
+            price={this.state.listingData.pricePerNight}
+            rating={this.state.listingData.starRating}
+            numReviews={this.state.listingData.custRevNum}
+          />
+          {/* <ModTwo /> */}
+          {/* <ModThree listingData={this.state.listingData} /> */}
+        </Holder>
+      );
+    }
+    return null;
   }
 }
 
-ReactDOM.render( <App />, document.getElementById( "root" ) );
+render( <App />, document.getElementById( 'root' ) );

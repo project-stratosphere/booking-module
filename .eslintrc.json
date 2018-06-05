@@ -3,7 +3,7 @@
         "browser": true,
         "es6": true,
         "node": true,
-        "mocha": true
+        "jest": true
     },
     "extends": "airbnb",
     "parser": "babel-eslint",
@@ -17,14 +17,12 @@
         "computed-property-spacing": [ 2, "always" ],
         "no-multiple-empty-lines": [ 2, { "max": 1, "maxEOF": 0, "maxBOF": 0 } ],
   
-        "quotes": [ 2, "double", "avoid-escape" ],
-  
         "no-use-before-define": [ 2, { "functions": false } ],
         
         "prefer-const": 1,
-        
-        "complexity": [ 1, 5 ],
-        
-        "react/prefer-es6-class": 0
+                
+        "react/prefer-es6-class": 0,
+
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
       }
   }

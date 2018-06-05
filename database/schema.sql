@@ -31,7 +31,7 @@ CREATE TABLE userListing (
 );
 
 		
-CREATE TABLE occupied_dates (
+CREATE TABLE occupiedDates (
   id INTEGER NOT NULL AUTO_INCREMENT,
   listing_id INTEGER NOT NULL,
   date DATE NOT NULL,
@@ -40,8 +40,8 @@ CREATE TABLE occupied_dates (
 
 -- Foreign Keys 
 ALTER TABLE userListing ADD FOREIGN KEY (user_id) REFERENCES user (id);
-ALTER TABLE occupied_dates ADD FOREIGN KEY (listing_id) REFERENCES userListing (id);
+ALTER TABLE occupiedDates ADD FOREIGN KEY (listing_id) REFERENCES userListing (id);
 
 -- INSERT INTO user (id,name) VALUES ('','');
 -- INSERT INTO userListing (id,name,user_id,price_per_night,star_rating,cust_rev_num,min_stay,cleaning_fee,service_fee,max_guests) VALUES ('','','','','','','','','','');
--- INSERT INTO occupied_dates (id,listing_id,date) VALUES ('','','');
+-- INSERT INTO occupiedDates (id,listing_id,date) VALUES ('','','');
