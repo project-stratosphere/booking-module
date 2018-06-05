@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const mysql = require( 'mysql' );
+const mysql = require( './mysql' );
 const path = require( 'path' );
 const parser = require( 'body-parser' );
 const express = require( 'express' );
@@ -14,7 +14,7 @@ app.use( parser.json() );
 app.use( '/', express.static( path.join( __dirname, '../client/dist/' ) ) );
 app.use( '/:listingID', express.static( path.join( __dirname, '../client/dist/' ) ) );
 
-app.get( '/rooms/:listingID', async ( req, res ) => {
+app.get( '/rooms/:listingID/bookingInfo', async ( req, res ) => {
   try {
     const listingResults = await mysql.query( `select * from userListing where id =${ req.params.listingID }` );
     const calendarResults = await mysql.query( `select * from occupiedDates where listing_id=${ req.params.listingID }` );

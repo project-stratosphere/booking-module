@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import styled, { injectGlobal } from 'styled-components';
 import axios from 'axios';
+import util from 'util';
 import ModOne from './pricing_mod1/ModOne';
 // import ModTwo from "./calendar_mod2/ModTwo";
 // import ModThree from './guestsAndCalc_mod3/ModThree';
@@ -33,31 +34,34 @@ export const Holder = styled.div`
 export default class App extends Component {
   constructor( props ) {
     super( props );
-    const id = this.getPathname();
     this.state = {
-      pathname: id,
     };
   }
 
   componentDidMount() {
-    this.getPathname();
-    this.getListingData( this.state.pathname );
+    this.getPathname().then( () => {
+      this.getListingData( this.state.pathname );
+    } );
   }
 
-  getPathname = () => {
-    const id = window.location.pathname;
+  getPathname = () => new Promise( ( resolve ) => {
+    let id = window.location.pathname;
     if ( id === '/' ) {
-      return 1;
+      id = 1;
+    } else {
+      id = id.replace( /\//g, '' );
     }
-    return id.substr( 1 );
-  }
+    resolve( this.setState( {
+      pathname: id,
+    } ) );
+  } )
 
   getListingData = ( id ) => {
     let idToUse = id;
     if ( !idToUse ) {
       idToUse = 1;
     }
-    axios.get( `http://127.0.0.1:3002/rooms/${ idToUse }` )
+    axios.get( `http://127.0.0.1:3002/rooms/${ idToUse }/bookingInfo/` )
       .then( ( response ) => {
         this.setState( {
           listingData: response.data,
