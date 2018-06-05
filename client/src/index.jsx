@@ -40,7 +40,7 @@ export default class App extends Component {
 
   componentDidMount() {
     this.getPathname().then( () => {
-      this.getListingData( this.state.pathname );
+      this.getListingData();
     } );
   }
 
@@ -56,12 +56,8 @@ export default class App extends Component {
     } ) );
   } )
 
-  getListingData = ( id ) => {
-    let idToUse = id;
-    if ( !idToUse ) {
-      idToUse = 1;
-    }
-    axios.get( `http://127.0.0.1:3002/rooms/${ idToUse }/bookingInfo/` )
+  getListingData = () => {
+    axios.get( `http://127.0.0.1:3002/rooms/${ this.state.pathname }/bookingInfo/` )
       .then( ( response ) => {
         this.setState( {
           listingData: response.data,
