@@ -18,7 +18,6 @@ app.get( '/rooms/:listingID/bookingInfo', async ( req, res ) => {
   const { listingID } = req.params;
   const listingResultsQuery = `select * from userListing where id =${ listingID }`;
   const calendarResultsQuery = `select * from occupiedDates where listing_id =${ listingID }`;
-
   try {
     const listingResults = await mysql.query( listingResultsQuery );
     const calendarResults = await mysql.query( calendarResultsQuery );
@@ -40,7 +39,6 @@ app.get( '/rooms/:listingID/bookingInfo', async ( req, res ) => {
 
     res.status( 200 ).json( toSendBack );
   } catch ( err ) {
-    console.log( err );
     res.status( 404 );
   }
 } );

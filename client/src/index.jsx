@@ -1,12 +1,10 @@
-/* eslint-disable no-console */
-
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import styled, { injectGlobal } from 'styled-components';
 import axios from 'axios';
 import ModOne from './pricing_mod1/ModOne';
 // import ModTwo from "./calendar_mod2/ModTwo";
-// import ModThree from './guestsAndCalc_mod3/ModThree';
+import ModThree from './guestsAndCalc_mod3/ModThree';
 
 injectGlobal( [ `
   html, body{
@@ -24,6 +22,7 @@ export const Holder = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   width: 300px;  
   height: 300px;
   border: 1px solid rgb(172, 172, 172);
@@ -77,7 +76,12 @@ export default class App extends Component {
             numReviews={this.state.listingData.custRevNum}
           />
           {/* <ModTwo /> */}
-          {/* <ModThree listingData={this.state.listingData} /> */}
+          <ModThree
+            cleaningFee={this.state.listingData.cleaningFee}
+            maxGuests={this.state.listingData.maxGuests}
+            minStay={this.state.listingData.minStay}
+            serviceFee={this.state.listingData.serviceFee}
+          />
         </Holder>
       );
     }
