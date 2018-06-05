@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import ReactStars from 'react-stars';
 import styled from 'styled-components';
 
-const Holder = styled.div`
+export const Holder = styled.div`
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
   width: inherit;
 `;
 
-const NumReviews = styled.div`
+export const NumReviews = styled.div`
   margin-left: 7px;
 `;
 
