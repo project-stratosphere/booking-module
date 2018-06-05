@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import styled, { injectGlobal } from 'styled-components';
 import axios from 'axios';
-import util from 'util';
 import ModOne from './pricing_mod1/ModOne';
 // import ModTwo from "./calendar_mod2/ModTwo";
 // import ModThree from './guestsAndCalc_mod3/ModThree';
@@ -62,6 +61,9 @@ export default class App extends Component {
         this.setState( {
           listingData: response.data,
         } );
+      } )
+      .catch( ( error ) => {
+        console.log( error );
       } );
   }
 
