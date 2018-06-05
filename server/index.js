@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const mysql = require( './mysql' );
+const mysql = require( 'mysql' );
 const path = require( 'path' );
 const parser = require( 'body-parser' );
 const express = require( 'express' );
@@ -17,7 +17,7 @@ app.use( '/:listingID', express.static( path.join( __dirname, '../client/dist/' 
 app.get( '/rooms/:listingID', async ( req, res ) => {
   try {
     const listingResults = await mysql.query( `select * from userListing where id =${ req.params.listingID }` );
-    const calendarResults = await mysql.query( `select * from occupied_dates where listing_id=${ req.params.listingID }` );
+    const calendarResults = await mysql.query( `select * from occupiedDates where listing_id=${ req.params.listingID }` );
     const toSendBack = {};
     const dateArr = [];
 
@@ -35,9 +35,11 @@ app.get( '/rooms/:listingID', async ( req, res ) => {
     } );
 
     toSendBack.datesTaken = dateArr;
+    res.status( 200 );
     res.json( toSendBack );
   } catch ( err ) {
     console.log( err );
+    res.status( 404 );
   }
 } );
 
