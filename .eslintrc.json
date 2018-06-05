@@ -2,7 +2,8 @@
     "env": {
         "browser": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "jest": true
     },
     "extends": "airbnb",
     "parser": "babel-eslint",
@@ -22,6 +23,8 @@
         
         "complexity": [ 1, 5 ],
         
-        "react/prefer-es6-class": 0
+        "react/prefer-es6-class": 0,
+
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
       }
   }

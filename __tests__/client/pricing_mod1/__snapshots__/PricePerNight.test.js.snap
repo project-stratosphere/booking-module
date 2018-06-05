@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Price Per Nights Component does not render if props.price is undefined 1`] = `null`;

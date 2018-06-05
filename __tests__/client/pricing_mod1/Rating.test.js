@@ -1,9 +1,8 @@
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import 'jest-styled-components';
-import { configure, shallow } from 'enzyme';
+import { configure } from 'enzyme';
 import renderer from 'react-test-renderer';
-import ReactStars from 'react-stars';
 import Rating, { Holder, NumReviews } from '../../../client/src/pricing_mod1/Rating';
 
 configure( { adapter: new Adapter() } );

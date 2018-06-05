@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Holder = styled.div`
+export const Holder = styled.div`
   width: inherit;
   justify-content: flex-start;
 `;
-const Price = styled.span`
+export const Price = styled.span`
   font-size: 30px;
 `;
-const Msg = styled.span`
+export const Msg = styled.span`
   margin-left: 5px;
 `;
 
