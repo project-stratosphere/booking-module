@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactStars from 'react-stars';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const Holder = styled.div`
   display: flex;

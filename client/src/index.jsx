@@ -2,11 +2,33 @@
 
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import ModOne from './pricing_mod1/ModOne.jsx';
+import styled, { injectGlobal } from 'styled-components';
+import axios from 'axios';
+import ModOne from './pricing_mod1/ModOne';
 // import ModTwo from "./calendar_mod2/ModTwo";
 // import ModThree from './guestsAndCalc_mod3/ModThree';
 
-const axios = require( 'axios' );
+injectGlobal( [ `
+  html, body{
+    height: 100%;
+    width: 100%
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+` ] );
+
+const Holder = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;  
+  height: 300px;
+  border: 1px solid rgb(172, 172, 172);
+  font-family: Quicksand;
+`;
 
 export default class App extends Component {
   constructor( props ) {
@@ -46,7 +68,7 @@ export default class App extends Component {
   render() {
     if ( this.state.listingData ) {
       return (
-        <div className="holder">
+        <Holder>
           <ModOne
             price={this.state.listingData.pricePerNight}
             rating={this.state.listingData.starRating}
@@ -54,7 +76,7 @@ export default class App extends Component {
           />
           {/* <ModTwo /> */}
           {/* <ModThree listingData={this.state.listingData} /> */}
-        </div>
+        </Holder>
       );
     }
     return null;
