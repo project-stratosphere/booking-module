@@ -15,12 +15,20 @@ app.use( '/', express.static( path.join( __dirname, '../client/dist/' ) ) );
 app.use( '/:listingID', express.static( path.join( __dirname, '../client/dist/' ) ) );
 
 app.get( '/rooms/:listingID/bookingInfo', async ( req, res ) => {
+  const { listingID } = req.params;
+  const listingResultsQuery = `select * from userListing where id =${ listingID }`;
+  const calendarResultsQuery = `select * from occupiedDates where listing_id =${ listingID }`;
+
   try {
-    const listingResults = await mysql.query( `select * from userListing where id =${ req.params.listingID }` );
-    const calendarResults = await mysql.query( `select * from occupiedDates where listing_id=${ req.params.listingID }` );
+    const listingResults = await mysql.query( listingResultsQuery );
+    const calendarResults = await mysql.query( calendarResultsQuery );
     const toSendBack = {};
     const dateArr = [];
 
+    calendarResults.forEach( ( result ) => {
+      dateArr.push( result.date );
+    } );
+    toSendBack.datesTaken = dateArr;
     toSendBack.name = listingResults[ 0 ].name;
     toSendBack.pricePerNight = listingResults[ 0 ].price_per_night;
     toSendBack.starRating = listingResults[ 0 ].star_rating;
@@ -30,13 +38,7 @@ app.get( '/rooms/:listingID/bookingInfo', async ( req, res ) => {
     toSendBack.serviceFee = listingResults[ 0 ].service_fee;
     toSendBack.maxGuests = listingResults[ 0 ].max_guests;
 
-    calendarResults.forEach( ( result ) => {
-      dateArr.push( result.date );
-    } );
-
-    toSendBack.datesTaken = dateArr;
-    res.status( 200 );
-    res.json( toSendBack );
+    res.status( 200 ).json( toSendBack );
   } catch ( err ) {
     console.log( err );
     res.status( 404 );

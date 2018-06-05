@@ -20,9 +20,7 @@
         "no-use-before-define": [ 2, { "functions": false } ],
         
         "prefer-const": 1,
-        
-        "complexity": [ 1, 5 ],
-        
+                
         "react/prefer-es6-class": 0,
 
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
