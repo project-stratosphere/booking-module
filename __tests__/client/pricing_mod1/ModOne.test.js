@@ -27,16 +27,16 @@ describe( 'Holder Component', () => {
   } );
 } );
 describe( 'Mod One Component', () => {
-  // it( 'renders price per night and ratings correctly', () => {
-  //   const wrapper = shallow( <ModOne
-  //     price={props.price}
-  //     rating={props.rating}
-  //     numReviews={props.numReviews}
-  //   /> );
-  //   const tree = renderer
-  //     .create( <Holder /> );
-  //   expect( wrapper.find( tree ) ).to.have.length( 1 );
-  // } );
+  it( 'renders price per night and ratings correctly', () => {
+    const wrapper = shallow( <ModOne
+      price={props.price}
+      rating={props.rating}
+      numReviews={props.numReviews}
+    /> );
+    expect( wrapper.find( 'Holder' ) ).toHaveLength( 1 );
+    expect( wrapper.find( 'Holder' ).dive().find( PricePerNight ) ).toHaveLength( 1 );
+    expect( wrapper.find( 'Holder' ).dive().find( Rating ) ).toHaveLength( 1 );
+  } );
   it( 'does not render if price is undefined', () => {
     const tree = renderer
       .create( <ModOne price={props.priceNull} /> )
