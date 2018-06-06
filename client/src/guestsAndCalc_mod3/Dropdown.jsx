@@ -1,24 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import DropdownContents from './DropdownContents';
 
 const Holder = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const GuestHolder = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const GuestDetails = styled.div`
-`;
-
-const DownButton = styled.button`
-`;
-
-const UpButton = styled.button`
 `;
 
 export default function Dropdown( props ) {
@@ -27,36 +14,25 @@ export default function Dropdown( props ) {
     adults: PropTypes.number,
     childrens: PropTypes.number,
     infants: PropTypes.number,
+    btnClick: PropTypes.func,
   };
   Dropdown.defaultProps = {
     clicked: false,
     adults: 0,
     childrens: 0,
     infants: 0,
+    btnClick: () => null,
   };
   if ( props.clicked ) {
+    console.log( 'I was clicked!' );
     return (
       <Holder>
-        <GuestHolder>
-          <div> Adults </div>
-          <DownButton />
-          <div> {props.adults} </div>
-          <UpButton />
-        </GuestHolder>
-        <GuestHolder>
-          <div> Children </div>
-          <GuestDetails> Ages 2-12 </GuestDetails>
-          <DownButton />
-          <div> {props.childrens} </div>
-          <UpButton />
-        </GuestHolder>
-        <GuestHolder>
-          <div> Infants </div>
-          <GuestDetails> Under 2</GuestDetails>
-          <DownButton />
-          <div> {props.infants} </div>
-          <UpButton />
-        </GuestHolder>
+        <DropdownContents
+          adults={props.adults}
+          childrens={props.childrens}
+          infants={props.infants}
+          btnClick={props.btnClick}
+        />
       </Holder>
     );
   }
