@@ -75,7 +75,6 @@ export default class ModThree extends Component {
   }
 
   render() {
-    console.log();
     if ( this.props.cleaningFee ) {
       return (
         <Holder>

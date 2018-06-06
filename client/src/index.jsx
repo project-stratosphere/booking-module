@@ -48,11 +48,12 @@ export default class App extends Component {
 
   onGuestButtonClick = ( isUpOrDown, guest ) => {
     let guestName = this.state[ guest ];
-    if ( isUpOrDown === 'up' ) {
+    const { maxGuests } = this.state.listingData;
+    if ( isUpOrDown === 'up' && guestName < maxGuests ) {
       this.setState( {
         [ guest ]: guestName += 1,
       } );
-    } else if ( isUpOrDown === 'down' ) {
+    } else if ( isUpOrDown === 'down' && guestName > 0 ) {
       this.setState( {
         [ guest ]: guestName -= 1,
       } );
