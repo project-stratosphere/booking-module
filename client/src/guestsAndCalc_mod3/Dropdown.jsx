@@ -34,14 +34,15 @@ export default function Dropdown( props ) {
     infant: 0,
     btnClick: () => null,
   };
+
   if ( props.clicked ) {
     console.log( 'I was clicked!' );
     return (
       <Holder>
         <DropdownContents
-          adult={props.adult}
-          child={props.child}
-          infant={props.infant}
+          Adult={props.adult}
+          Child={props.child}
+          Infant={props.infant}
           btnClick={props.btnClick}
         />
         <Details> {props.maxGuests } guests maximum. Infants don't count toward the number of guests. </Details>

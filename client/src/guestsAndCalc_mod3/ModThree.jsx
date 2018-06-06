@@ -33,6 +33,7 @@ const Guests = styled.div`
 const Arrow = styled.div`
   content: url(${ arrow });
   height: 17px;
+  transform: rotate(${ props => ( props.clicked ? '0turn' : '0.5turn' ) });
 `;
 
 export default class ModThree extends Component {
@@ -80,7 +81,9 @@ export default class ModThree extends Component {
             <Guests>
             1 guest
             </Guests>
-            <Arrow />
+            <Arrow
+              clicked={this.state.clicked}
+            />
           </GuestHolder>
           <Dropdown
             clicked={this.state.clicked}
