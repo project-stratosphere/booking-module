@@ -81,7 +81,8 @@ export default class ModThree extends Component {
           <Title> Guests </Title>
           <GuestHolder onClick={this.onGuestHolderClick}>
             <Guests>
-            1 guest
+              {this.props.totalGuests} {this.props.totalGuests > 1 ? 'guests' : 'guest'}
+              {this.props.infant > 1 ? `, ${ this.props.infant } infants` : ''}
             </Guests>
             <Arrow
               clicked={this.state.clicked}
@@ -94,7 +95,6 @@ export default class ModThree extends Component {
             child={this.props.child}
             infant={this.props.infant}
             maxGuests={this.props.maxGuests}
-            totalGuests={this.props.totalGuests}
           />
         </Holder>
       );

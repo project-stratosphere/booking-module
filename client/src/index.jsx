@@ -51,6 +51,7 @@ export default class App extends Component {
     let total = this.state.totalGuests;
     const { totalGuests } = this.state;
     const { maxGuests } = this.state.listingData;
+    // infants don't count towards the number of guests, but have a cap of 5
     if ( guest === 'Infants' && isUpOrDown === 'up' && guestName < 5 ) {
       this.setState( {
         [ guest ]: guestName += 1,
@@ -59,16 +60,29 @@ export default class App extends Component {
       this.setState( {
         [ guest ]: guestName -= 1,
       } );
-    } else if ( isUpOrDown === 'up' && guestName < maxGuests && totalGuests < maxGuests ) {
-      this.setState( {
-        [ guest ]: guestName += 1,
-        totalGuests: total += 1,
-      } );
-    } else if ( isUpOrDown === 'down' && guestName > 0 ) {
-      this.setState( {
-        [ guest ]: guestName -= 1,
-        totalGuests: total -= 1,
-      } );
+    // this logic is for adults & children
+    }
+    if ( guest === 'Adults' || guest === 'Children' ) {
+      if ( isUpOrDown === 'up' && guestName < maxGuests && totalGuests < maxGuests ) {
+        this.setState( {
+          [ guest ]: guestName += 1,
+          totalGuests: total += 1,
+        } );
+      // adults cannot go below 1
+      } else if ( isUpOrDown === 'down' ) {
+        if ( guest === 'Adults' && guestName > 1 ) {
+          this.setState( {
+            [ guest ]: guestName -= 1,
+            totalGuests: total -= 1,
+          } );
+        // children can go to 0
+        } else if ( guest === 'Children' && guestName > 0 ) {
+          this.setState( {
+            [ guest ]: guestName -= 1,
+            totalGuests: total -= 1,
+          } );
+        }
+      }
     }
   }
 
