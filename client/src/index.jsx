@@ -33,6 +33,9 @@ export default class App extends Component {
   constructor( props ) {
     super( props );
     this.state = {
+      Adults: 1,
+      Children: 0,
+      Infants: 0,
     };
   }
 
@@ -40,6 +43,25 @@ export default class App extends Component {
     this.getPathname().then( () => {
       this.getListingData();
     } );
+  }
+
+  onGuestButtonClick = ( guest ) => {
+    let guestName = this.state[ guest ];
+    this.setState( {
+      [ guest ]: guestName += 1,
+    } );
+  }
+
+  getListingData = () => {
+    axios.get( `http://127.0.0.1:3002/rooms/${ this.state.pathname }/bookingInfo/` )
+      .then( ( response ) => {
+        this.setState( {
+          listingData: response.data,
+        } );
+      } )
+      .catch( ( error ) => {
+        console.log( error );
+      } );
   }
 
   getPathname = () => new Promise( ( resolve ) => {
@@ -54,18 +76,6 @@ export default class App extends Component {
     } ) );
   } )
 
-  getListingData = () => {
-    axios.get( `http://127.0.0.1:3002/rooms/${ this.state.pathname }/bookingInfo/` )
-      .then( ( response ) => {
-        this.setState( {
-          listingData: response.data,
-        } );
-      } )
-      .catch( ( error ) => {
-        console.log( error );
-      } );
-  }
-
   render() {
     if ( this.state.listingData ) {
       return (
@@ -77,10 +87,14 @@ export default class App extends Component {
           />
           {/* <ModTwo /> */}
           <ModThree
+            adults={this.state.Adults}
+            childrens={this.state.Children}
+            infants={this.state.Infants}
             cleaningFee={this.state.listingData.cleaningFee}
             maxGuests={this.state.listingData.maxGuests}
             minStay={this.state.listingData.minStay}
             serviceFee={this.state.listingData.serviceFee}
+            btnClick={this.onGuestB}
           />
         </Holder>
       );

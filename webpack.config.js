@@ -20,6 +20,10 @@ module.exports = {
           plugins: ['transform-class-properties'],
         },
       },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+          use: [ 'file-loader' ]
+      }
     ],
   },
 };
