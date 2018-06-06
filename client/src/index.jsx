@@ -36,6 +36,7 @@ export default class App extends Component {
       Adults: 1,
       Children: 0,
       Infants: 0,
+      totalGuests: 1,
     };
   }
 
@@ -45,11 +46,17 @@ export default class App extends Component {
     } );
   }
 
-  onGuestButtonClick = ( guest ) => {
+  onGuestButtonClick = ( isUpOrDown, guest ) => {
     let guestName = this.state[ guest ];
-    this.setState( {
-      [ guest ]: guestName += 1,
-    } );
+    if ( isUpOrDown === 'up' ) {
+      this.setState( {
+        [ guest ]: guestName += 1,
+      } );
+    } else if ( isUpOrDown === 'down' ) {
+      this.setState( {
+        [ guest ]: guestName -= 1,
+      } );
+    }
   }
 
   getListingData = () => {
@@ -94,7 +101,8 @@ export default class App extends Component {
             maxGuests={this.state.listingData.maxGuests}
             minStay={this.state.listingData.minStay}
             serviceFee={this.state.listingData.serviceFee}
-            btnClick={this.onGuestB}
+            btnClick={this.onGuestButtonClick}
+            totalGuests={this.state.totalGuests}
           />
         </Holder>
       );

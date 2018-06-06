@@ -48,6 +48,7 @@ export default class ModThree extends Component {
       adult: PropTypes.number,
       child: PropTypes.number,
       infant: PropTypes.number,
+      totalGuests: PropTypes.number,
 
     };
     ModThree.defaultProps = {
@@ -59,6 +60,7 @@ export default class ModThree extends Component {
       adult: 0,
       child: 0,
       infant: 0,
+      totalGuests: 0,
     };
     this.state = {
       clicked: false,
@@ -73,6 +75,7 @@ export default class ModThree extends Component {
   }
 
   render() {
+    console.log();
     if ( this.props.cleaningFee ) {
       return (
         <Holder>
@@ -87,11 +90,12 @@ export default class ModThree extends Component {
           </GuestHolder>
           <Dropdown
             clicked={this.state.clicked}
-            onBtnClick={this.props.btnClick}
+            btnClick={this.props.btnClick}
             adult={this.props.adult}
             child={this.props.child}
             infant={this.props.infant}
             maxGuests={this.props.maxGuests}
+            totalGuests={this.props.totalGuests}
           />
         </Holder>
       );

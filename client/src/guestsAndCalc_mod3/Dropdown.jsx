@@ -36,7 +36,6 @@ export default function Dropdown( props ) {
   };
 
   if ( props.clicked ) {
-    console.log( 'I was clicked!' );
     return (
       <Holder>
         <DropdownContents

@@ -13,17 +13,14 @@ const GuestDetails = styled.div`
   font-size: 12px;
 `;
 
-const ButtonHolder = styled.div`
-  display: flex;  
-  flex-direction: row;
-`;
-
 const FeatureHolder = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${ props => ( ( props.button ) ? 'row' : 'column' ) };
 `;
 
 const Button = styled.button`
+  id: props.id;
+  name: props.name;
   border-radius: 50%;
   height: 20px;
   width: 20px;
@@ -50,10 +47,9 @@ export default function DropdownContents( props ) {
     btnClick: () => null,
   };
 
-  function clickHandler( event ) {
-    console.log( event.target );
-    this.btnClick();
-  }
+  const clickHandler = ( event ) => {
+    props.btnClick( event.target.id, event.target.name );
+  };
 
   const list = [ 'Adults', 'Children', 'Infants' ];
   const desc = [ '\n', 'Ages 2-12', 'Under 2' ];
@@ -65,11 +61,21 @@ export default function DropdownContents( props ) {
           <div> {propName} </div>
           <GuestDetails> {desc[ index ]} </GuestDetails>
         </FeatureHolder>
-        <ButtonHolder>
-          <Button> - </Button>
+        <FeatureHolder button>
+          <Button
+            onClick={clickHandler}
+            id="down"
+            name={propName}
+          >-
+          </Button>
           <div> {props[ toPlugIn ]} </div>
-          <Button> + </Button>
-        </ButtonHolder>
+          <Button
+            onClick={clickHandler}
+            id="up"
+            name={propName}
+          >+
+          </Button>
+        </FeatureHolder>
       </Holder>
     );
   } );
