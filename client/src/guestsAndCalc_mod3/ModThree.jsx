@@ -44,9 +44,9 @@ export default class ModThree extends Component {
       minStay: PropTypes.number,
       serviceFee: PropTypes.number,
       btnClick: PropTypes.func,
-      adults: PropTypes.number,
-      childrens: PropTypes.number,
-      infants: PropTypes.number,
+      adult: PropTypes.number,
+      child: PropTypes.number,
+      infant: PropTypes.number,
 
     };
     ModThree.defaultProps = {
@@ -55,9 +55,9 @@ export default class ModThree extends Component {
       minStay: 0,
       serviceFee: 0,
       btnClick: () => null,
-      adults: 0,
-      childrens: 0,
-      infants: 0,
+      adult: 0,
+      child: 0,
+      infant: 0,
     };
     this.state = {
       clicked: false,
@@ -85,9 +85,10 @@ export default class ModThree extends Component {
           <Dropdown
             clicked={this.state.clicked}
             onBtnClick={this.props.btnClick}
-            adults={this.props.adults}
-            childrens={this.props.childrens}
-            infants={this.props.infants}
+            adult={this.props.adult}
+            child={this.props.child}
+            infant={this.props.infant}
+            maxGuests={this.props.maxGuests}
           />
         </Holder>
       );
@@ -97,6 +98,5 @@ export default class ModThree extends Component {
 }
 
 // cleaningFee={this.props.cleaningFee}
-// maxGuests={this.props.maxGuests}
 // minStay={this.props.minStay}
 // serviceFee={this.props.serviceFee}

@@ -87,9 +87,9 @@ export default class App extends Component {
           />
           {/* <ModTwo /> */}
           <ModThree
-            adults={this.state.Adults}
-            childrens={this.state.Children}
-            infants={this.state.Infants}
+            adult={this.state.Adults}
+            child={this.state.Children}
+            infant={this.state.Infants}
             cleaningFee={this.state.listingData.cleaningFee}
             maxGuests={this.state.listingData.maxGuests}
             minStay={this.state.listingData.minStay}

@@ -5,38 +5,36 @@ import styled from 'styled-components';
 const GuestHolder = styled.div`
   display: flex;
   flex-direction: row;
+  margin-top: 10px;
 `;
 
 const GuestDetails = styled.div`
 `;
 
-const DownButton = styled.button`
-`;
-
-const UpButton = styled.button`
+const Button = styled.button`
 `;
 
 export default function DropdownContents( props ) {
   DropdownContents.propTypes = {
-    adults: PropTypes.number,
-    childrens: PropTypes.number,
-    infants: PropTypes.number,
+    adult: PropTypes.number,
+    child: PropTypes.number,
+    infant: PropTypes.number,
     btnClick: PropTypes.func,
   };
   DropdownContents.defaultProps = {
-    adults: 0,
-    childrens: 0,
-    infants: 0,
+    adult: 0,
+    child: 0,
+    infant: 0,
     btnClick: () => null,
   };
 
   const thingsToRender = [ 'adults', 'children', 'infants' ];
   const toRender = thingsToRender.map( thing =>
-    ( <GuestHolder>
+    ( <GuestHolder key={thing}>
       <div> {thing} </div>
-      <DownButton />
-      <div> {props.adults} </div>
-      <UpButton />
+      <Button> - </Button>
+      <div> {props[ thing ]} </div>
+      <Button> + </Button>
       </GuestHolder> ) );
 
   return (
