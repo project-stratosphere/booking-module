@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import arrow from '../images/arrow.png';
 import styled from 'styled-components';
+import arrow from '../images/arrow.png';
+import Dropdown from './Dropdown';
 
 export const Holder = styled.div`
   display: flex;
@@ -55,7 +56,6 @@ export default class ModTwo extends Component {
   }
 
   render() {
-    console.log( this.state );
     return (
       <Holder>
         <Title> Dates </Title>
@@ -64,6 +64,11 @@ export default class ModTwo extends Component {
           <Arrow />
           <Date onClick={() => this.dateClick( 'checkOutClicked' )}> Check Out </Date>
         </DateHolder>
+        <Dropdown
+          dates={this.props.dates}
+          checkInClicked={this.state.checkInClicked}
+          checkOutClicked={this.state.checkOutClicked}
+        />
       </Holder>
     );
   }
