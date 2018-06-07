@@ -7,7 +7,6 @@ import Dropdown from './Dropdown';
 const Holder = styled.div`
   display: flex;
   flex-direction: column;
-  width: inherit;
   width: 250px;
   padding-top: 10px;
 `;
@@ -27,9 +26,6 @@ const GuestHolder = styled.div`
   padding: 5px;
 `;
 
-const Guests = styled.div`
-`;
-
 const Arrow = styled.div`
   content: url(${ arrow });
   height: 17px;
@@ -39,45 +35,33 @@ const Arrow = styled.div`
 export default class ModThree extends Component {
   constructor( props ) {
     super( props );
-    ModThree.propTypes = {
-      btnClick: PropTypes.func,
-      adult: PropTypes.number,
-      child: PropTypes.number,
-      infant: PropTypes.number,
-      totalGuests: PropTypes.number,
-      maxGuests: PropTypes.number,
-
-    };
-    ModThree.defaultProps = {
-      btnClick: () => null,
-      adult: 0,
-      child: 0,
-      infant: 0,
-      totalGuests: 0,
-      maxGuests: 0,
-    };
     this.state = {
       clicked: false,
     };
   }
 
   onGuestHolderClick = () => {
-    const isClicked = this.state.clicked;
     this.setState( {
-      clicked: !isClicked,
+      clicked: !this.state.clicked,
     } );
   }
 
   render() {
+    let infantStatement;
+    if ( this.props.infant > 1 ) {
+      infantStatement = `, ${ this.props.infant } infants`;
+    } else if ( this.props.infant === 1 ) {
+      infantStatement = ', 1 infant';
+    }
     if ( this.props.adult ) {
       return (
         <Holder>
           <Title> Guests </Title>
           <GuestHolder onClick={this.onGuestHolderClick}>
-            <Guests>
+            <div>
               {this.props.totalGuests} {this.props.totalGuests > 1 ? 'guests' : 'guest'}
-              {this.props.infant > 1 ? `, ${ this.props.infant } infants` : ''}
-            </Guests>
+              {infantStatement}
+            </div>
             <Arrow
               clicked={this.state.clicked}
             />
@@ -96,6 +80,24 @@ export default class ModThree extends Component {
     return null;
   }
 }
+
+ModThree.propTypes = {
+  btnClick: PropTypes.func,
+  adult: PropTypes.number,
+  child: PropTypes.number,
+  infant: PropTypes.number,
+  totalGuests: PropTypes.number,
+  maxGuests: PropTypes.number,
+
+};
+ModThree.defaultProps = {
+  btnClick: () => null,
+  adult: 0,
+  child: 0,
+  infant: 0,
+  totalGuests: 0,
+  maxGuests: 0,
+};
 
 // cleaningFee={this.props.cleaningFee}
 // minStay={this.props.minStay}

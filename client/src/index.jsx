@@ -37,6 +37,7 @@ export default class App extends Component {
       children: 0,
       infants: 0,
       totalGuests: 1,
+      listingData: null,
     };
   }
 
@@ -52,6 +53,7 @@ export default class App extends Component {
     // infants don't count towards the number of guests, but have a cap of 5
     if ( guest === 'infants' && ( val > 5 || val < 0 ) ) {
       return;
+    // there is a minimum of 1 adult guest
     } else if ( guest === 'adults' && ( val > maxGuests || val < 1 || total > maxGuests ) ) {
       return;
     } else if ( guest === 'children' && ( val > maxGuests || val < 0 || total > maxGuests ) ) {
@@ -95,8 +97,8 @@ export default class App extends Component {
             adult={this.state.adults}
             child={this.state.children}
             infant={this.state.infants}
-            btnClick={this.onGuestButtonClick}
             totalGuests={this.state.totalGuests}
+            btnClick={this.onGuestButtonClick}
             maxGuests={this.state.listingData.maxGuests}
           />
         </Holder>
