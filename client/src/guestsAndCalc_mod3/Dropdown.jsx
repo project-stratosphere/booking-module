@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DropdownContents from './DropdownContents';
 
-const Holder = styled.div`
+export const Holder = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -15,12 +15,12 @@ const Holder = styled.div`
   background-color: white;
 `;
 
-const Details = styled.div`
+export const Details = styled.div`
   font-size: 12px;
   margin-top: 10px;
 `;
 
-const Close = styled.button`
+export const Close = styled.button`
   margin-top: 8px;
   border: none;
   align-self: flex-end;

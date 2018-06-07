@@ -4,20 +4,20 @@ import styled from 'styled-components';
 import arrow from '../images/arrowLogo.png';
 import Dropdown from './Dropdown';
 
-const Holder = styled.div`
+export const Holder = styled.div`
   display: flex;
   flex-direction: column;
   width: 250px;
   padding-top: 10px;
 `;
 
-const Title = styled.div`
+export const Title = styled.div`
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 3px;
 `;
 
-const GuestHolder = styled.div`
+export const GuestHolder = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -27,7 +27,7 @@ const GuestHolder = styled.div`
   padding-left: 20px;
 `;
 
-const Arrow = styled.div`
+export const Arrow = styled.div`
   content: url(${ arrow });
   height: 17px;
   width: 25px;

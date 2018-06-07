@@ -2,35 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Holder = styled.div`
+export const Holder = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 10px;
   justify-content: space-between;
 `;
 
-const Guest = styled.div`
+export const Guest = styled.div`
   text-transform: capitalize;
   margin-top: ${ props => ( props.guest === 'adults' ? '6px' : '0px' ) };
   font-weight: bold;
 `;
 
-const GuestDetails = styled.div`
+export const GuestDetails = styled.div`
   font-size: 12px;
   min-height: 12px;
 `;
 
-const FeatureHolder = styled.div`
+export const FeatureHolder = styled.div`
   display: flex;
   flex-direction: ${ props => ( ( props.button ) ? 'row' : 'column' ) };
   margin-top: ${ props => ( props.guest === 'adults' ? '4px' : '0px' ) }
 `;
 
-const Number = styled.div`
+export const Number = styled.div`
   min-width: 9px;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   border-radius: 50%;
   height: 20px;
   width: 20px;
@@ -42,7 +42,7 @@ const Button = styled.button`
     }
 `;
 
-const ButtonDown = Button.extend`
+export const ButtonDown = Button.extend`
   border: ${ ( props ) => {
     if ( props.number > 0 && ( props.guest === 'infants' || props.guest === 'children' ) ) {
       return '1px solid #007D8C';
@@ -53,7 +53,7 @@ const ButtonDown = Button.extend`
   } };
 `;
 
-const ButtonUp = Button.extend`
+export const ButtonUp = Button.extend`
   border: ${ ( props ) => {
     if ( props.total < props.max && ( props.guest === 'adults' || props.guest === 'children' ) ) {
       return '1px solid #007D8C';
@@ -69,6 +69,7 @@ export default function DropdownContents( props ) {
   const desc = [ '', 'Ages 2-12', 'Under 2' ];
   const toRender = list.map( ( propName, index ) => {
     const guest = propName.replace( /s|ren/g, '' );
+    const guestNum = props[ guest ];
     return (
       <Holder key={propName}>
         <FeatureHolder>
@@ -77,17 +78,17 @@ export default function DropdownContents( props ) {
         </FeatureHolder>
         <FeatureHolder button guest={propName}>
           <ButtonDown
-            disabled={( guest === 'adult' && props[ guest ] === 1 ) || props[ guest ] === 0}
+            disabled={( guest === 'adult' && guestNum === 1 ) || guestNum === 0}
             onClick={() => props.btnClick( propName, -1 )}
-            number={props[ guest ]}
+            number={guestNum}
             guest={propName}
           >-
           </ButtonDown>
-          <Number> {props[ guest ]} </Number>
+          <Number> {guestNum} </Number>
           <ButtonUp
-            disabled={( guest === 'infant' && props[ guest ] === 5 ) || ( props.totalGuests === props.maxGuests && ( guest === 'adult' || guest === 'child' ) )}
+            disabled={( guest === 'infant' && guestNum === 5 ) || ( props.totalGuests === props.maxGuests && ( guest === 'adult' || guest === 'child' ) )}
             onClick={() => props.btnClick( propName, 1 )}
-            number={props[ guest ]}
+            number={guestNum}
             total={props.totalGuests}
             max={props.maxGuests}
             guest={propName}
@@ -107,19 +108,19 @@ export default function DropdownContents( props ) {
 }
 
 DropdownContents.propTypes = {
-  btnClick: PropTypes.func,
-  adult: PropTypes.number,
-  child: PropTypes.number,
-  infant: PropTypes.number,
+  // btnClick: PropTypes.func,
+  // adult: PropTypes.number,
+  // child: PropTypes.number,
+  // infant: PropTypes.number,
   totalGuests: PropTypes.number,
   maxGuests: PropTypes.number,
 
 };
 DropdownContents.defaultProps = {
-  btnClick: () => null,
-  adult: 0,
-  child: 0,
-  infant: 0,
+  // btnClick: () => null,
+  // adult: 0,
+  // child: 0,
+  // infant: 0,
   totalGuests: 0,
   maxGuests: 0,
 };
