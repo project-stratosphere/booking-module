@@ -20,6 +20,21 @@ const Details = styled.div`
   margin-top: 10px;
 `;
 
+const Close = styled.button`
+  margin-top: 8px;
+  border: none;
+  align-self: flex-end;
+  font-size: 14px;
+  color: #007D8C;
+  &:hover{
+    text-decoration: underline;
+    outline: none;
+  }
+  &:active{
+    color: #FD5C63;
+  }
+`;
+
 export default function Dropdown( props ) {
   if ( props.clicked ) {
     return (
@@ -31,6 +46,7 @@ export default function Dropdown( props ) {
           {props.maxGuests } guests maximum.
           Infants don’t count toward the number of guests.
         </Details>
+        <Close onClick={() => props.close()}> Close </Close>
       </Holder>
     );
   }
@@ -40,6 +56,7 @@ export default function Dropdown( props ) {
 Dropdown.propTypes = {
   clicked: PropTypes.bool,
   btnClick: PropTypes.func,
+  close: PropTypes.func,
   adult: PropTypes.number,
   child: PropTypes.number,
   infant: PropTypes.number,
@@ -50,6 +67,7 @@ Dropdown.propTypes = {
 Dropdown.defaultProps = {
   clicked: false,
   btnClick: () => null,
+  close: () => null,
   adult: 0,
   child: 0,
   infant: 0,

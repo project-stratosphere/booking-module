@@ -9,6 +9,11 @@ const Holder = styled.div`
   justify-content: space-between;
 `;
 
+const Guest = styled.div`
+  text-transform: capitalize;
+  margin-top: ${ props => ( props.guest === 'adults' ? '6px' : '0px' ) }
+`;
+
 const GuestDetails = styled.div`
   font-size: 12px;
   min-height: 12px;
@@ -17,6 +22,7 @@ const GuestDetails = styled.div`
 const FeatureHolder = styled.div`
   display: flex;
   flex-direction: ${ props => ( ( props.button ) ? 'row' : 'column' ) };
+  margin-top: ${ props => ( props.guest === 'adults' ? '4px' : '0px' ) }
 `;
 
 const Number = styled.div`
@@ -30,9 +36,9 @@ const Button = styled.button`
   margin-left: 7px;
   margin-right: 7px;
   outline: none;
-  &:active{
-    background-color: #007D8C;
-  }
+    &:active{
+      background-color: #007D8C;
+    }
 `;
 
 const ButtonDown = Button.extend`
@@ -65,11 +71,12 @@ export default function DropdownContents( props ) {
     return (
       <Holder key={propName}>
         <FeatureHolder>
-          <div> {propName} </div>
+          <Guest guest={propName}> {propName} </Guest>
           <GuestDetails> {desc[ index ]} </GuestDetails>
         </FeatureHolder>
-        <FeatureHolder button>
+        <FeatureHolder button guest={propName}>
           <ButtonDown
+            disabled={props[ toPlugIn ] === 0}
             onClick={() => props.btnClick( propName, -1 )}
             number={props[ toPlugIn ]}
             guest={propName}

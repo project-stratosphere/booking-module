@@ -21,14 +21,16 @@ const GuestHolder = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 240px;
+  width: 225px;
   border: 1px solid rgb(172, 172, 172);
   padding: 5px;
+  padding-left: 20px;
 `;
 
 const Arrow = styled.div`
   content: url(${ arrow });
   height: 17px;
+  width: 25px;
   transform: rotate(${ props => ( props.clicked ? '0turn' : '0.5turn' ) });
 `;
 
@@ -68,8 +70,10 @@ export default class ModThree extends Component {
           </GuestHolder>
           <Dropdown
             clicked={this.state.clicked}
+            close={this.onGuestHolderClick}
             {...this.props}
           />
+
         </Holder>
       );
     }
