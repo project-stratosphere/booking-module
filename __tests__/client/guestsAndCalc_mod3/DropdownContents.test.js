@@ -1,7 +1,7 @@
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import 'jest-styled-components';
-import { configure } from 'enzyme';
+import { configure, shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import DropdownContents, { Holder } from '../../../client/src/guestsAndCalc_mod3/DropdownContents';
 
@@ -26,12 +26,8 @@ describe( 'Holder Component', () => {
   } );
 } );
 describe( 'Dropdown Component', () => {
-  it( 'renders the right amount of children', () => {
-    const wrapper = shallow( <DropdownContents {...props}>
-      {props.numReviews}
-    </DropdownContents> );
-    const expected = [ ' ', `${ props.numReviews }` ];
-    expect( tree.children )
-      .toEqual( expect.arrayContaining( expected ) );
+  it( 'renders the right styled components', () => {
+    const wrapper = shallow( <DropdownContents {...props} /> );
+    expect( wrapper.find( renderer.create( <Holder /> ).toJSON() ) );
   } );
 } );
