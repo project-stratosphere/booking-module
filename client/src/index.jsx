@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import styled, { injectGlobal } from 'styled-components';
 import axios from 'axios';
 import ModOne from './pricing_mod1/ModOne';
-// import ModTwo from "./calendar_mod2/ModTwo";
+import ModTwo from './calendar_mod2/ModTwo';
 import ModThree from './guestsAndCalc_mod3/ModThree';
 
 injectGlobal( [ `
@@ -92,7 +92,7 @@ export default class App extends Component {
             rating={this.state.listingData.starRating}
             numReviews={this.state.listingData.custRevNum}
           />
-          {/* <ModTwo /> */}
+          <ModTwo dates={this.state.listingData.datesTaken} />
           <ModThree
             adult={this.state.adults}
             child={this.state.children}
