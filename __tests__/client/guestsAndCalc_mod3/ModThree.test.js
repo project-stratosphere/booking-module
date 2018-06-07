@@ -3,17 +3,21 @@ import React from 'react';
 import 'jest-styled-components';
 import { configure, shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
-import DropdownContents, { Holder } from '../../../client/src/guestsAndCalc_mod3/DropdownContents';
+import Dropdown, { Holder } from '../../../client/src/guestsAndCalc_mod3/Dropdown';
+import DropdownContents from '../../../client/src/guestsAndCalc_mod3/DropdownContents';
+import ModThree from '../../../client/src/guestsAndCalc_mod3/ModThree';
 
 configure( { adapter: new Adapter() } );
 
 const props = {
+  clicked: false,
   btnClick: () => null,
-  adult: 1,
+  close: () => null,
+  adult: 0,
   child: 0,
   infant: 0,
-  totalGuests: 1,
-  maxGuests: 6,
+  totalGuests: 0,
+  maxGuests: 0,
 };
 
 describe( 'Holder Component', () => {
@@ -25,9 +29,9 @@ describe( 'Holder Component', () => {
     expect( tree ).toMatchSnapshot();
   } );
 } );
-describe( 'Dropdown Contents Component', () => {
-  it( 'renders the right styled components', () => {
-    const wrapper = shallow( <DropdownContents {...props} /> );
-    expect( wrapper.find( renderer.create( <Holder /> ).toJSON() ) );
+describe( 'ModThree Component', () => {
+  it( 'renders the right amount of children', () => {
+    const wrapper = shallow( <ModThree {...props} /> );
+    expect( wrapper.find( renderer.create( <ModThree /> ) ).children() ).toHaveLength( 1 );
   } );
 } );
