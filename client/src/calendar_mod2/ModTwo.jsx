@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import arrow from '../images/arrow.png';
 import Dropdown from './Dropdown';
 
@@ -21,7 +22,7 @@ export const DateHolder = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 240px;
-  height: 17px;
+  height: 22px;
   border: 1px solid rgb(172, 172, 172);
   padding: 5px;
 `;
@@ -40,6 +41,8 @@ export default class ModTwo extends Component {
     this.state = {
       checkInClicked: false,
       checkOutClicked: false,
+      month: 'June',
+      year: '2018',
     };
   }
 
@@ -66,10 +69,17 @@ export default class ModTwo extends Component {
         </DateHolder>
         <Dropdown
           dates={this.props.dates}
-          checkInClicked={this.state.checkInClicked}
-          checkOutClicked={this.state.checkOutClicked}
+          {...this.state}
         />
       </Holder>
     );
   }
 }
+
+ModTwo.propTypes = {
+  dates: PropTypes.array,
+
+};
+ModTwo.defaultProps = {
+  dates: [],
+};
