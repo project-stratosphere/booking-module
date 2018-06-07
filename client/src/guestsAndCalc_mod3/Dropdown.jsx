@@ -4,12 +4,15 @@ import styled from 'styled-components';
 import DropdownContents from './DropdownContents';
 
 const Holder = styled.div`
+  position: absolute;
   display: flex;
   flex-direction: column;
   width: 230px;
   border: 1px solid rgb(172, 172, 172);
+  margin-top: 50px;
   padding: 10px;
   padding-top: 0px;
+  background-color: white;
 `;
 
 const Details = styled.div`
@@ -22,12 +25,12 @@ export default function Dropdown( props ) {
     return (
       <Holder>
         <DropdownContents
-          adult={props.adult}
-          child={props.child}
-          infant={props.infant}
-          btnClick={props.btnClick}
+          {...props}
         />
-        <Details> {props.maxGuests } guests maximum. Infants don't count toward the number of guests. </Details>
+        <Details>
+          {props.maxGuests } guests maximum.
+          Infants don’t count toward the number of guests.
+        </Details>
       </Holder>
     );
   }
@@ -36,17 +39,20 @@ export default function Dropdown( props ) {
 
 Dropdown.propTypes = {
   clicked: PropTypes.bool,
-  maxGuests: PropTypes.number,
+  btnClick: PropTypes.func,
   adult: PropTypes.number,
   child: PropTypes.number,
   infant: PropTypes.number,
-  btnClick: PropTypes.func,
+  totalGuests: PropTypes.number,
+  maxGuests: PropTypes.number,
+
 };
 Dropdown.defaultProps = {
   clicked: false,
-  maxGuests: 0,
+  btnClick: () => null,
   adult: 0,
   child: 0,
   infant: 0,
-  btnClick: () => null,
+  totalGuests: 0,
+  maxGuests: 0,
 };
