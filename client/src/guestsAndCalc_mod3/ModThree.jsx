@@ -40,27 +40,21 @@ export default class ModThree extends Component {
   constructor( props ) {
     super( props );
     ModThree.propTypes = {
-      cleaningFee: PropTypes.number,
-      maxGuests: PropTypes.number,
-      minStay: PropTypes.number,
-      serviceFee: PropTypes.number,
       btnClick: PropTypes.func,
       adult: PropTypes.number,
       child: PropTypes.number,
       infant: PropTypes.number,
       totalGuests: PropTypes.number,
+      maxGuests: PropTypes.number,
 
     };
     ModThree.defaultProps = {
-      cleaningFee: 0,
-      maxGuests: 0,
-      minStay: 0,
-      serviceFee: 0,
       btnClick: () => null,
       adult: 0,
       child: 0,
       infant: 0,
       totalGuests: 0,
+      maxGuests: 0,
     };
     this.state = {
       clicked: false,
@@ -75,7 +69,7 @@ export default class ModThree extends Component {
   }
 
   render() {
-    if ( this.props.cleaningFee ) {
+    if ( this.props.adult ) {
       return (
         <Holder>
           <Title> Guests </Title>

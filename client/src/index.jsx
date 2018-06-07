@@ -33,61 +33,44 @@ export default class App extends Component {
   constructor( props ) {
     super( props );
     this.state = {
-      Adults: 1,
-      Children: 0,
-      Infants: 0,
+      adults: 1,
+      children: 0,
+      infants: 0,
       totalGuests: 1,
     };
   }
 
   componentDidMount() {
-    this.getPathname().then( () => {
-      this.getListingData();
+    this.getListingData();
+  }
+
+  onGuestButtonClick = ( guest, increment ) => {
+    const val = this.state[ guest ] + increment;
+    const { totalGuests } = this.state;
+    const total = totalGuests + increment;
+    const { maxGuests } = this.state.listingData;
+    // infants don't count towards the number of guests, but have a cap of 5
+    if ( guest === 'infants' && ( val > 5 || val < 0 ) ) {
+      return;
+    } else if ( guest === 'adults' && ( val > maxGuests || val < 1 || total > maxGuests ) ) {
+      return;
+    } else if ( guest === 'children' && ( val > maxGuests || val < 0 || total > maxGuests ) ) {
+      return;
+    }
+    this.setState( {
+      [ guest ]: val,
+      totalGuests: guest === 'infants' ? totalGuests : total,
     } );
   }
 
-  onGuestButtonClick = ( isUpOrDown, guest ) => {
-    let guestName = this.state[ guest ];
-    let total = this.state.totalGuests;
-    const { totalGuests } = this.state;
-    const { maxGuests } = this.state.listingData;
-    // infants don't count towards the number of guests, but have a cap of 5
-    if ( guest === 'Infants' && isUpOrDown === 'up' && guestName < 5 ) {
-      this.setState( {
-        [ guest ]: guestName += 1,
-      } );
-    } else if ( guest === 'Infants' && isUpOrDown === 'down' && guestName > 0 ) {
-      this.setState( {
-        [ guest ]: guestName -= 1,
-      } );
-    // this logic is for adults & children
-    }
-    if ( guest === 'Adults' || guest === 'Children' ) {
-      if ( isUpOrDown === 'up' && guestName < maxGuests && totalGuests < maxGuests ) {
-        this.setState( {
-          [ guest ]: guestName += 1,
-          totalGuests: total += 1,
-        } );
-      // adults cannot go below 1
-      } else if ( isUpOrDown === 'down' ) {
-        if ( guest === 'Adults' && guestName > 1 ) {
-          this.setState( {
-            [ guest ]: guestName -= 1,
-            totalGuests: total -= 1,
-          } );
-        // children can go to 0
-        } else if ( guest === 'Children' && guestName > 0 ) {
-          this.setState( {
-            [ guest ]: guestName -= 1,
-            totalGuests: total -= 1,
-          } );
-        }
-      }
-    }
-  }
-
   getListingData = () => {
-    axios.get( `http://127.0.0.1:3002/rooms/${ this.state.pathname }/bookingInfo/` )
+    let id = window.location.pathname;
+    if ( id === '/' ) {
+      id = 1;
+    } else {
+      id = id.replace( /\//g, '' );
+    }
+    axios.get( `http://127.0.0.1:3002/rooms/${ id }/bookingInfo/` )
       .then( ( response ) => {
         this.setState( {
           listingData: response.data,
@@ -97,18 +80,6 @@ export default class App extends Component {
         console.log( error );
       } );
   }
-
-  getPathname = () => new Promise( ( resolve ) => {
-    let id = window.location.pathname;
-    if ( id === '/' ) {
-      id = 1;
-    } else {
-      id = id.replace( /\//g, '' );
-    }
-    resolve( this.setState( {
-      pathname: id,
-    } ) );
-  } )
 
   render() {
     if ( this.state.listingData ) {
@@ -121,15 +92,12 @@ export default class App extends Component {
           />
           {/* <ModTwo /> */}
           <ModThree
-            adult={this.state.Adults}
-            child={this.state.Children}
-            infant={this.state.Infants}
-            cleaningFee={this.state.listingData.cleaningFee}
-            maxGuests={this.state.listingData.maxGuests}
-            minStay={this.state.listingData.minStay}
-            serviceFee={this.state.listingData.serviceFee}
+            adult={this.state.adults}
+            child={this.state.children}
+            infant={this.state.infants}
             btnClick={this.onGuestButtonClick}
             totalGuests={this.state.totalGuests}
+            maxGuests={this.state.listingData.maxGuests}
           />
         </Holder>
       );
@@ -139,3 +107,8 @@ export default class App extends Component {
 }
 
 render( <App />, document.getElementById( 'root' ) );
+
+// cleaningFee={this.state.listingData.cleaningFee}
+// maxGuests={this.state.listingData.maxGuests}
+// minStay={this.state.listingData.minStay}
+// serviceFee={this.state.listingData.serviceFee}

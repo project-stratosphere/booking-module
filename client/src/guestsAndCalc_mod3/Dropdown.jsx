@@ -39,9 +39,9 @@ export default function Dropdown( props ) {
     return (
       <Holder>
         <DropdownContents
-          Adult={props.adult}
-          Child={props.child}
-          Infant={props.infant}
+          adult={props.adult}
+          child={props.child}
+          infant={props.infant}
           btnClick={props.btnClick}
         />
         <Details> {props.maxGuests } guests maximum. Infants don't count toward the number of guests. </Details>

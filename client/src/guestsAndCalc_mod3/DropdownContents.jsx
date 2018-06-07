@@ -19,18 +19,25 @@ const FeatureHolder = styled.div`
 `;
 
 const Button = styled.button`
-  id: props.id;
-  name: props.name;
   border-radius: 50%;
   height: 20px;
   width: 20px;
   margin-left: 7px;
   margin-right: 7px;
   outline: none;
-  border: 1px solid #007D8C;
   &:active{
     background-color: #007D8C;
   }
+`;
+
+const ButtonDown = Button.extend`
+  border: ${ props => ( ( props.number === 0 ) ? '1px solid rgb(172, 172, 172)' : '1px solid #007D8C' ) };
+  class: 'btn-down';
+`;
+
+const ButtonUp = Button.extend`
+  border: ${ props => ( ( props.number === 8 ) ? '1px solid rgb(172, 172, 172)' : '1px solid #007D8C' ) };
+  class: 'btn-up';
 `;
 
 export default function DropdownContents( props ) {
@@ -47,12 +54,8 @@ export default function DropdownContents( props ) {
     btnClick: () => null,
   };
 
-  const clickHandler = ( event ) => {
-    props.btnClick( event.target.id, event.target.name );
-  };
-
-  const list = [ 'Adults', 'Children', 'Infants' ];
-  const desc = [ '\n', 'Ages 2-12', 'Under 2' ];
+  const list = [ 'adults', 'children', 'infants' ];
+  const desc = [ 'maybe I should use gridz', 'Ages 2-12', 'Under 2' ];
   const toRender = list.map( ( propName, index ) => {
     const toPlugIn = propName.replace( /s|ren/g, '' );
     return (
@@ -62,19 +65,15 @@ export default function DropdownContents( props ) {
           <GuestDetails> {desc[ index ]} </GuestDetails>
         </FeatureHolder>
         <FeatureHolder button>
-          <Button
-            onClick={clickHandler}
-            id="down"
-            name={propName}
+          <ButtonDown
+            onClick={() => props.btnClick( propName, -1 )}
           >-
-          </Button>
+          </ButtonDown>
           <div> {props[ toPlugIn ]} </div>
-          <Button
-            onClick={clickHandler}
-            id="up"
-            name={propName}
+          <ButtonUp
+            onClick={() => props.btnClick( propName, 1 )}
           >+
-          </Button>
+          </ButtonUp>
         </FeatureHolder>
       </Holder>
     );
