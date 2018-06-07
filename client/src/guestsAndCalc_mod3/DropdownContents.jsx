@@ -11,7 +11,7 @@ export const Holder = styled.div`
 
 export const Guest = styled.div`
   text-transform: capitalize;
-  margin-top: ${ props => ( props.guest === 'adults' ? '6px' : '0px' ) };
+  margin-top: ${ props => ( props.guest === 'adults' ? '10px' : '0px' ) };
   font-weight: bold;
 `;
 
@@ -28,14 +28,17 @@ export const FeatureHolder = styled.div`
 
 export const Number = styled.div`
   min-width: 9px;
+  font-size: 17px;
+  margin-top: 2px;
 `;
 
 export const Button = styled.button`
   border-radius: 50%;
-  height: 20px;
-  width: 20px;
+  height: 25px;
+  width: 25px;
   margin-left: 7px;
   margin-right: 7px;
+  margin-top: 1px;
   outline: none;
     &:active{
       background-color: #007D8C;

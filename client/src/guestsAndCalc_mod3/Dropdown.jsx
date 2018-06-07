@@ -17,7 +17,7 @@ export const Holder = styled.div`
 
 export const Details = styled.div`
   font-size: 12px;
-  margin-top: 10px;
+  margin-top: 12px;
 `;
 
 export const Close = styled.button`
