@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Calendar from './Calendar';
-import WeekNames from './WeekNames';
 import arrow from '../images/arrow.png';
 
 export const Holder = styled.div`
@@ -11,7 +10,6 @@ export const Holder = styled.div`
   flex-direction: column;
   width: 230px;
   border: 1px solid rgb(172, 172, 172);
-  margin-top: 50px;
   padding: 10px;
   padding-top: 0px;
   background-color: white;
@@ -43,19 +41,23 @@ export const SectionOne = styled.div`
 export default function Dropdown( props ) {
   if ( props.checkInClicked ) {
     return (
-      <Holder>
-        <SectionOne>
-          <Arrow left />
-          <div> {props.month} {props.year} </div>
-          <Arrow />
-        </SectionOne>
-        <WeekNames />
-        <Calendar />
-        <Details>
-          <div> Minimum stay varies </div>
-          <div> Updated 2 days ago </div>
-        </Details>
-      </Holder>
+      <div>
+        <svg height="10" width="250" fill="rgb(172, 172, 172)" stroke="rgb(172, 172, 172)">
+          <path d="M 15,25 35, 25 25, 0 Z" height="0px" />
+        </svg>
+        <Holder>
+          <SectionOne>
+            <Arrow left />
+            <div> {props.month} {props.year} </div>
+            <Arrow />
+          </SectionOne>
+          <Calendar />
+          <Details>
+            <div> Minimum stay varies </div>
+            <div> Updated 2 days ago </div>
+          </Details>
+        </Holder>
+      </div>
     );
   } else if ( props.checkOutClicked ) {
     return (
@@ -65,8 +67,11 @@ export default function Dropdown( props ) {
           <div> Month Year </div>
           <Arrow />
         </SectionOne>
-        <WeekNames />
-        <Calendar dates={props.dates} />
+        <Calendar
+          dates={props.dates}
+          month={props.month}
+          year={props.year}
+        />
         <Details>
           <div> Minimum stay varies </div>
           <div> Updated 2 days ago </div>
@@ -81,10 +86,10 @@ Dropdown.propTypes = {
   checkInClicked: PropTypes.bool,
   checkOutClicked: PropTypes.bool,
   month: PropTypes.string,
-  year: PropTypes.number,
-  dates: PropTypes.arrayOf( PropTypes.shape( {
-    date: PropTypes.date,
-  } ) ),
+  year: PropTypes.string,
+  // dates: PropTypes.arrayOf( PropTypes.shape( {
+  //   date: PropTypes.date,
+  // } ) ),
 
 };
 Dropdown.defaultProps = {
@@ -92,5 +97,5 @@ Dropdown.defaultProps = {
   checkOutClicked: false,
   month: 'June',
   year: '2018',
-  dates: [],
+  // dates: [],
 };
