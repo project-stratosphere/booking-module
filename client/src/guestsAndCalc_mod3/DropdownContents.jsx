@@ -67,7 +67,7 @@ export default function DropdownContents( props ) {
   const list = [ 'adults', 'children', 'infants' ];
   const desc = [ '', 'Ages 2-12', 'Under 2' ];
   const toRender = list.map( ( propName, index ) => {
-    const toPlugIn = propName.replace( /s|ren/g, '' );
+    const guest = propName.replace( /s|ren/g, '' );
     return (
       <Holder key={propName}>
         <FeatureHolder>
@@ -76,16 +76,17 @@ export default function DropdownContents( props ) {
         </FeatureHolder>
         <FeatureHolder button guest={propName}>
           <ButtonDown
-            disabled={props[ toPlugIn ] === 0}
+            disabled={( guest === 'adult' && props[ guest ] === 1 ) || props[ guest ] === 0}
             onClick={() => props.btnClick( propName, -1 )}
-            number={props[ toPlugIn ]}
+            number={props[ guest ]}
             guest={propName}
           >-
           </ButtonDown>
-          <Number> {props[ toPlugIn ]} </Number>
+          <Number> {props[ guest ]} </Number>
           <ButtonUp
+            disabled={( guest === 'infant' && props[ guest ] === 5 ) || ( props.totalGuests === props.maxGuests && ( guest === 'adult' || guest === 'child' ) )}
             onClick={() => props.btnClick( propName, 1 )}
-            number={props[ toPlugIn ]}
+            number={props[ guest ]}
             total={props.totalGuests}
             max={props.maxGuests}
             guest={propName}
