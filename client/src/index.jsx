@@ -78,8 +78,8 @@ export default class App extends Component {
           listingData: response.data,
         } );
       } )
-      .catch( ( error ) => {
-        console.log( error );
+      .catch( () => {
+        console.log( 'there was an error!' );
       } );
   }
 

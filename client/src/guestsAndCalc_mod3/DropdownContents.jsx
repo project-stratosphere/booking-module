@@ -11,7 +11,8 @@ const Holder = styled.div`
 
 const Guest = styled.div`
   text-transform: capitalize;
-  margin-top: ${ props => ( props.guest === 'adults' ? '6px' : '0px' ) }
+  margin-top: ${ props => ( props.guest === 'adults' ? '6px' : '0px' ) };
+  font-weight: bold;
 `;
 
 const GuestDetails = styled.div`
