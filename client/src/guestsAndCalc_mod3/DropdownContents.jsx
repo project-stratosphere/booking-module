@@ -67,9 +67,10 @@ export const ButtonUp = Button.extend`
   } };
 `;
 
+const list = [ 'adults', 'children', 'infants' ];
+const desc = [ '', 'Ages 2-12', 'Under 2' ];
+
 export default function DropdownContents( props ) {
-  const list = [ 'adults', 'children', 'infants' ];
-  const desc = [ '', 'Ages 2-12', 'Under 2' ];
   const toRender = list.map( ( propName, index ) => {
     const guest = propName.replace( /s|ren/g, '' );
     const guestNum = props[ guest ];

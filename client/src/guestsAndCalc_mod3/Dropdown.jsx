@@ -46,7 +46,7 @@ export default function Dropdown( props ) {
           {props.maxGuests } guests maximum.
           Infants don’t count toward the number of guests.
         </Details>
-        <Close onClick={() => props.close()}> Close </Close>
+        <Close onClick={props.close}> Close </Close>
       </Holder>
     );
   }
