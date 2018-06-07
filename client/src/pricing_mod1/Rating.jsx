@@ -15,15 +15,6 @@ export const NumReviews = styled.div`
 `;
 
 export default function Rating( props ) {
-  Rating.propTypes = {
-    rating: PropTypes.number,
-    numReviews: PropTypes.number,
-  };
-  Rating.defaultProps = {
-    rating: 0,
-    numReviews: 0,
-  };
-
   if ( props.rating ) {
     return (
       <Holder>
@@ -36,3 +27,12 @@ export default function Rating( props ) {
   }
   return null;
 }
+
+Rating.propTypes = {
+  rating: PropTypes.number,
+  numReviews: PropTypes.number,
+};
+Rating.defaultProps = {
+  rating: 0,
+  numReviews: 0,
+};
