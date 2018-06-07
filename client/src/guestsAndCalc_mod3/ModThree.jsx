@@ -68,11 +68,7 @@ export default class ModThree extends Component {
           </GuestHolder>
           <Dropdown
             clicked={this.state.clicked}
-            btnClick={this.props.btnClick}
-            adult={this.props.adult}
-            child={this.props.child}
-            infant={this.props.infant}
-            maxGuests={this.props.maxGuests}
+            {...this.props}
           />
         </Holder>
       );

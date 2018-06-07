@@ -41,19 +41,6 @@ const ButtonUp = Button.extend`
 `;
 
 export default function DropdownContents( props ) {
-  DropdownContents.propTypes = {
-    adult: PropTypes.number,
-    child: PropTypes.number,
-    infant: PropTypes.number,
-    btnClick: PropTypes.func,
-  };
-  DropdownContents.defaultProps = {
-    adult: 0,
-    child: 0,
-    infant: 0,
-    btnClick: () => null,
-  };
-
   const list = [ 'adults', 'children', 'infants' ];
   const desc = [ 'maybe I should use gridz', 'Ages 2-12', 'Under 2' ];
   const toRender = list.map( ( propName, index ) => {
@@ -86,3 +73,16 @@ export default function DropdownContents( props ) {
 
   );
 }
+
+DropdownContents.propTypes = {
+  adult: PropTypes.number,
+  child: PropTypes.number,
+  infant: PropTypes.number,
+  btnClick: PropTypes.func,
+};
+DropdownContents.defaultProps = {
+  adult: 0,
+  child: 0,
+  infant: 0,
+  btnClick: () => null,
+};

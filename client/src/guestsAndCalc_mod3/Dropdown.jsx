@@ -18,23 +18,6 @@ const Details = styled.div`
 `;
 
 export default function Dropdown( props ) {
-  Dropdown.propTypes = {
-    clicked: PropTypes.bool,
-    maxGuests: PropTypes.number,
-    adult: PropTypes.number,
-    child: PropTypes.number,
-    infant: PropTypes.number,
-    btnClick: PropTypes.func,
-  };
-  Dropdown.defaultProps = {
-    clicked: false,
-    maxGuests: 0,
-    adult: 0,
-    child: 0,
-    infant: 0,
-    btnClick: () => null,
-  };
-
   if ( props.clicked ) {
     return (
       <Holder>
@@ -50,3 +33,20 @@ export default function Dropdown( props ) {
   }
   return null;
 }
+
+Dropdown.propTypes = {
+  clicked: PropTypes.bool,
+  maxGuests: PropTypes.number,
+  adult: PropTypes.number,
+  child: PropTypes.number,
+  infant: PropTypes.number,
+  btnClick: PropTypes.func,
+};
+Dropdown.defaultProps = {
+  clicked: false,
+  maxGuests: 0,
+  adult: 0,
+  child: 0,
+  infant: 0,
+  btnClick: () => null,
+};

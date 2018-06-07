@@ -17,17 +17,6 @@ export const Holder = styled.div`
 Holder.displayName = 'Holder';
 
 export default function ModOne( props ) {
-  ModOne.propTypes = {
-    price: PropTypes.number,
-    rating: PropTypes.number,
-    numReviews: PropTypes.number,
-
-  };
-  ModOne.defaultProps = {
-    price: 0,
-    rating: 0,
-    numReviews: 0,
-  };
   if ( props.price ) {
     return (
       <div>
@@ -40,3 +29,15 @@ export default function ModOne( props ) {
   }
   return null;
 }
+
+ModOne.propTypes = {
+  price: PropTypes.number,
+  rating: PropTypes.number,
+  numReviews: PropTypes.number,
+
+};
+ModOne.defaultProps = {
+  price: 0,
+  rating: 0,
+  numReviews: 0,
+};

@@ -14,12 +14,6 @@ export const Msg = styled.span`
 `;
 
 export default function PricePerNight( props ) {
-  PricePerNight.propTypes = {
-    price: PropTypes.number,
-  };
-  PricePerNight.defaultProps = {
-    price: 0,
-  };
   if ( props.price ) {
     return (
       <Holder>
@@ -34,3 +28,10 @@ export default function PricePerNight( props ) {
   }
   return null;
 }
+
+PricePerNight.propTypes = {
+  price: PropTypes.number,
+};
+PricePerNight.defaultProps = {
+  price: 0,
+};
