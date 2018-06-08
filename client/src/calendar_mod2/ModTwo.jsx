@@ -39,23 +39,22 @@ export default class ModTwo extends Component {
   constructor( props ) {
     super( props );
     this.state = {
-      checkInClicked: false,
-      checkOutClicked: false,
+      clicked: 0,
       month: 'June',
       year: '2018',
     };
   }
 
   dateClick = ( holderName ) => {
-    const otherHolder = ( holderName === 'checkInClicked' ) ? 'checkOutClicked' : 'checkInClicked';
-    if ( this.state[ otherHolder ] ) {
+    if ( holderName === 'checkInClicked' ) {
       this.setState( {
-        [ otherHolder ]: !this.state[ otherHolder ],
+        clicked: 1,
+      } );
+    } else if ( holderName === 'checkOutClicked' ) {
+      this.setState( {
+        clicked: -1,
       } );
     }
-    this.setState( {
-      [ holderName ]: !this.state[ holderName ],
-    } );
   }
 
   render() {
