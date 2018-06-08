@@ -45,13 +45,17 @@ export default class ModTwo extends Component {
   }
 
   dateClick = ( holderName ) => {
-    if ( holderName === 'checkInClicked' ) {
+    if ( holderName === 'checkInClicked' && this.state.clicked !== 1 ) {
       this.setState( {
         clicked: 1,
       } );
-    } else if ( holderName === 'checkOutClicked' ) {
+    } else if ( holderName === 'checkOutClicked' && this.state.clicked !== -1 ) {
       this.setState( {
         clicked: -1,
+      } );
+    } else {
+      this.setState( {
+        clicked: 0,
       } );
     }
   }
