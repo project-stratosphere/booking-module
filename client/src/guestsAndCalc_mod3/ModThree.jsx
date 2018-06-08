@@ -24,37 +24,40 @@ export const GuestHolder = styled.div`
   border: 1px solid rgb(172, 172, 172);
   padding: 5px;
   padding-left: 20px;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 export const Arrow = styled.div`
-  content: url(${ arrow });
+  content: url(${arrow});
   height: 17px;
   width: 25px;
-  transform: rotate(${ props => ( props.clicked ? '0turn' : '0.5turn' ) });
+  transform: rotate(${props => (props.clicked ? '0turn' : '0.5turn')});
 `;
 
 export default class ModThree extends Component {
-  constructor( props ) {
-    super( props );
+  constructor(props) {
+    super(props);
     this.state = {
       clicked: false,
     };
   }
 
   onGuestHolderClick = () => {
-    this.setState( {
+    this.setState({
       clicked: !this.state.clicked,
-    } );
+    });
   }
 
   render() {
     let infantStatement;
-    if ( this.props.infant > 1 ) {
-      infantStatement = `, ${ this.props.infant } infants`;
-    } else if ( this.props.infant === 1 ) {
+    if (this.props.infant > 1) {
+      infantStatement = `, ${this.props.infant} infants`;
+    } else if (this.props.infant === 1) {
       infantStatement = ', 1 infant';
     }
-    if ( this.props.adult ) {
+    if (this.props.adult) {
       return (
         <Holder>
           <Title> Guests </Title>

@@ -70,7 +70,7 @@ export default class ModTwo extends Component {
           <Date onClick={() => this.dateClick('checkOutClicked')}> Check Out </Date>
         </DateHolder>
         <Dropdown
-          dates={this.props.dates}
+          {...this.props}
           {...this.state}
         />
       </Holder>
@@ -80,8 +80,15 @@ export default class ModTwo extends Component {
 
 ModTwo.propTypes = {
   dates: PropTypes.array,
-
+  minstay: PropTypes.number,
+  startDate: PropTypes.number,
+  endDate: PropTypes.number,
+  dateClick: PropTypes.func,
 };
 ModTwo.defaultProps = {
   dates: [],
+  minstay: 0,
+  startDate: null,
+  endDate: null,
+  dateClick: () => null,
 };

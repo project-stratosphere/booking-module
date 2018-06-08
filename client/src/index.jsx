@@ -49,7 +49,7 @@ export default class App extends Component {
   }
 
   onGuestButtonClick = (guest, increment) => {
-    const val = this.state[ guest ] + increment;
+    const val = this.state[guest] + increment;
     const { totalGuests } = this.state;
     const total = totalGuests + increment;
     const { maxGuests } = this.state.listingData;
@@ -63,8 +63,14 @@ export default class App extends Component {
       return;
     }
     this.setState({
-      [ guest ]: val,
+      [guest]: val,
       totalGuests: guest === 'infants' ? totalGuests : total,
+    });
+  }
+
+  onCalendarDateStartClick = (type, day) => {
+    this.setState({
+      [type]: day,
     });
   }
 
@@ -95,7 +101,13 @@ export default class App extends Component {
             rating={this.state.listingData.starRating}
             numReviews={this.state.listingData.custRevNum}
           />
-          <ModTwo dates={this.state.listingData.datesTaken} />
+          <ModTwo
+            dates={this.state.listingData.datesTaken}
+            minStay={this.state.listingData.minStay}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            dateClick={this.onCalendarDateStartClick}
+          />
           <ModThree
             adult={this.state.adults}
             child={this.state.children}
@@ -115,5 +127,4 @@ render(<App />, document.getElementById('root'));
 
 // cleaningFee={this.state.listingData.cleaningFee}
 // maxGuests={this.state.listingData.maxGuests}
-// minStay={this.state.listingData.minStay}
 // serviceFee={this.state.listingData.serviceFee}

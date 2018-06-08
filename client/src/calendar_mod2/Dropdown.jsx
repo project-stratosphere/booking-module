@@ -23,11 +23,14 @@ export const Arrow = styled.div`
   height: 20px;
   border: 1px solid rgb(172, 172, 172);
   border-radius: 10%;
-  padding: 2px;
+  padding: 3px;
   transform: ${props => (props.left ? 'rotate(0.5turn)' : '')};
-  &:active{
-    background-color: #007D8C;
-  }
+    &:active{
+      background-color: #79CCCD;
+    }
+    &:hover {
+      cursor: pointer;
+    }
 `;
 
 export const SectionOne = styled.div`
@@ -56,13 +59,12 @@ export default function Dropdown(props) {
   let holderArrow;
   if (props.clicked === 1) {
     calendar = (<CheckInCalendar
-      dates={props.dates}
-      month={props.month}
-      year={props.year}
+      {...props}
+
     />);
     holderArrow = (
-      <svg height="10" width="250" fill="rgb(172, 172, 172)" stroke="rgb(172, 172, 172)">
-        <path d="M 15,25 35, 25 25, 0 Z" height="0px" />
+      <svg height="10" width="250" fill="rgb(172, 172, 172)" stroke="rgb(172, 172, 172)" position="absolute">
+        <path d="M 15,25 35, 25 25, 0 Z" height="0px" position="absolute" />
       </svg>);
   } else if (props.clicked === -1) {
     calendar = (<CheckOutCalendar
@@ -89,7 +91,7 @@ export default function Dropdown(props) {
             {calendar}
           </SectionTwo>
           <SectionThree>
-            <div> Minimum stay varies </div>
+            <div> {props.minStay} day minimum. </div>
             <div> Updated 2 days ago </div>
           </SectionThree>
         </Holder>
@@ -104,6 +106,7 @@ Dropdown.propTypes = {
   checkOutClicked: PropTypes.bool,
   month: PropTypes.string,
   year: PropTypes.number,
+  dateClick: PropTypes.func,
   // dates: PropTypes.arrayOf( PropTypes.shape( {
   //   date: PropTypes.date,
   // } ) ),
@@ -114,5 +117,6 @@ Dropdown.defaultProps = {
   checkOutClicked: false,
   month: 'June',
   year: 2018,
+  dateClick: () => null,
   // dates: [],
 };

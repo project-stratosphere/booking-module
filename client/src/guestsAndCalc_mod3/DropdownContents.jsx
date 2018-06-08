@@ -11,7 +11,7 @@ export const Holder = styled.div`
 
 export const Guest = styled.div`
   text-transform: capitalize;
-  margin-top: ${ props => ( props.guest === 'adults' ? '10px' : '0px' ) };
+  margin-top: ${props => (props.guest === 'adults' ? '10px' : '0px')};
   font-weight: bold;
 `;
 
@@ -22,8 +22,8 @@ export const GuestDetails = styled.div`
 
 export const FeatureHolder = styled.div`
   display: flex;
-  flex-direction: ${ props => ( ( props.button ) ? 'row' : 'column' ) };
-  margin-top: ${ props => ( props.guest === 'adults' ? '4px' : '0px' ) }
+  flex-direction: ${props => ((props.button) ? 'row' : 'column')};
+  margin-top: ${props => (props.guest === 'adults' ? '4px' : '0px')}
 `;
 
 export const Number = styled.div`
@@ -43,55 +43,58 @@ export const Button = styled.button`
     &:active{
       background-color: #007D8C;
     }
+    &:hover:enabled{
+      cursor: pointer;
+    }
 `;
 
 export const ButtonDown = Button.extend`
-  border: ${ ( props ) => {
-    if ( props.number > 0 && ( props.guest === 'infants' || props.guest === 'children' ) ) {
+  border: ${(props) => {
+    if (props.number > 0 && (props.guest === 'infants' || props.guest === 'children')) {
       return '1px solid #007D8C';
-    } else if ( props.guest === 'adults' && props.number > 1 ) {
+    } else if (props.guest === 'adults' && props.number > 1) {
       return '1px solid #007D8C';
     }
     return '1px solid rgb(172, 172, 172)';
-  } };
+  }};
 `;
 
 export const ButtonUp = Button.extend`
-  border: ${ ( props ) => {
-    if ( props.total < props.max && ( props.guest === 'adults' || props.guest === 'children' ) ) {
+  border: ${(props) => {
+    if (props.total < props.max && (props.guest === 'adults' || props.guest === 'children')) {
       return '1px solid #007D8C';
-    } else if ( props.guest === 'infants' && props.number < 5 ) {
+    } else if (props.guest === 'infants' && props.number < 5) {
       return '1px solid #007D8C';
     }
     return '1px solid rgb(172, 172, 172)';
-  } };
+  }};
 `;
 
-const list = [ 'adults', 'children', 'infants' ];
-const desc = [ '', 'Ages 2-12', 'Under 2' ];
+const list = ['adults', 'children', 'infants'];
+const desc = ['', 'Ages 2-12', 'Under 2'];
 
-export default function DropdownContents( props ) {
-  const toRender = list.map( ( propName, index ) => {
-    const guest = propName.replace( /s|ren/g, '' );
-    const guestNum = props[ guest ];
+export default function DropdownContents(props) {
+  const toRender = list.map((propName, index) => {
+    const guest = propName.replace(/s|ren/g, '');
+    const guestNum = props[guest];
     return (
       <Holder key={propName}>
         <FeatureHolder>
           <Guest guest={propName}> {propName} </Guest>
-          <GuestDetails> {desc[ index ]} </GuestDetails>
+          <GuestDetails> {desc[index]} </GuestDetails>
         </FeatureHolder>
         <FeatureHolder button guest={propName}>
           <ButtonDown
-            disabled={( guest === 'adult' && guestNum === 1 ) || guestNum === 0}
-            onClick={() => props.btnClick( propName, -1 )}
+            disabled={(guest === 'adult' && guestNum === 1) || guestNum === 0}
+            onClick={() => props.btnClick(propName, -1)}
             number={guestNum}
             guest={propName}
           >-
           </ButtonDown>
           <Number> {guestNum} </Number>
           <ButtonUp
-            disabled={( guest === 'infant' && guestNum === 5 ) || ( props.totalGuests === props.maxGuests && ( guest === 'adult' || guest === 'child' ) )}
-            onClick={() => props.btnClick( propName, 1 )}
+            disabled={(guest === 'infant' && guestNum === 5) || (props.totalGuests === props.maxGuests && (guest === 'adult' || guest === 'child'))}
+            onClick={() => props.btnClick(propName, 1)}
             number={guestNum}
             total={props.totalGuests}
             max={props.maxGuests}
@@ -101,7 +104,7 @@ export default function DropdownContents( props ) {
         </FeatureHolder>
       </Holder>
     );
-  } );
+  });
 
   return (
     <div>

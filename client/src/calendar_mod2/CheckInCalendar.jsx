@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -24,85 +24,128 @@ const Button = styled.button`
   padding-bottom: 5px;
   font-size: 12px;
   color: ${props => (props.date ? 'rgb(172,172,172)' : 'black')};
+  text-decoration: ${props => (props.date ? 'line-through' : '')};
+  background-color: ${(props) => {
+    if (props.week) { return ''; }
+    return props.bgColorStart === props.day ? 'green' : 'white';
+  }}
   &:hover:enabled{
-    background-color: rgb(172, 172, 172);
+    background-color: #F0F0F0;
+    cursor: pointer;
   }
   &:active:enabled{
-    background-color: #007D8C;
+    background-color: #79CCCD;
   }
 `;
+export default class CheckInCalendar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      occupiedDates: null,
+      daysInMonthArr: null,
+    };
+  }
 
-export default function CheckInCalendar(props) {
-  const createDayArr = () => {
-    const firstDayOfTheMonth = moment().year(props.year).month(props.month).date(1)
+  componentDidMount = () => {
+    this.findOccupiedDatesInMonth();
+    this.createDaysArr();
+  }
+
+  createDaysArr = () => {
+    const firstDayOfTheMonth = moment().year(this.props.year).month(this.props.month).date(1)
       .day();
-    const daysInMonth = moment(`${props.year}-${props.month}`, 'YYYY-MMM').daysInMonth();
+    const daysInMonth = moment(`${this.props.year}-${this.props.month}`, 'YYYY-MMM').daysInMonth();
 
-    const dayArr = [];
+    const daysInMonthArr = [];
     for (let i = 0; i < firstDayOfTheMonth; i += 1) {
-      dayArr.push('');
+      daysInMonthArr.push('');
     }
     for (let i = 1; i < daysInMonth; i += 1) {
-      dayArr.push(i);
+      daysInMonthArr.push(i);
     }
-    return dayArr;
+    this.setState({
+      daysInMonthArr,
+    });
   };
 
-  const findOccupiedDatesInMonth = () => {
+  findOccupiedDatesInMonth = () => {
     const targetDates = [];
-    props.dates.forEach((date) => {
+    this.props.dates.forEach((date) => {
       const day = moment.utc(date).format('DD');
       const month = moment.utc(date).format('MMMM');
       const year = moment.utc(date).format('YYYY');
-      if (month === props.month && Number(year) === props.year) {
+      if (month === this.props.month && Number(year) === this.props.year) {
         targetDates.push(Number(day));
       }
     });
-    return targetDates;
+    this.setState({
+      occupiedDates: targetDates,
+    });
   };
-  const occupiedDates = findOccupiedDatesInMonth();
 
-  const weekDayNames = moment.weekdaysMin().map(day => (
-    <Button key={day} disabled> {day} </Button>
-  ));
-  const calendar = createDayArr().map((day, i) => {
-    let isOccupied = false;
-    if (occupiedDates.includes(day) || day === '') {
-      isOccupied = true;
+  render() {
+    console.log(this.props);
+    if (this.state.daysInMonthArr) {
+      const weekDayNames = moment.weekdaysMin().map(day => (
+        <Button week key={day} disabled> {day} </Button>
+      ));
+
+      const calendar = this.state.daysInMonthArr.map((day, i) => {
+        let isOccupied = false;
+        if (this.state.occupiedDates.includes(day) || day === '') {
+          isOccupied = true;
+        }
+        return (
+          <Button
+            day={day}
+            key={i}
+            date={isOccupied}
+            disabled={isOccupied || (day === this.props.startDate)}
+            onClick={() => this.props.dateClick('startDate', day)}
+            bgColorStart={this.props.startDate}
+            bgColorEnd={this.props.endDate}
+          > {day}
+          </Button>
+        );
+      });
+
+      return (
+        <Table>
+          <thead>
+            <tr>
+              <td>
+                {weekDayNames}
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                {calendar}
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      );
     }
-    return (
-      <Button key={i} date={isOccupied} disabled={isOccupied}> {day} </Button>
-    );
-  });
-
-  return (
-    <Table>
-      <thead>
-        <tr>
-          <td>
-            {weekDayNames}
-          </td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            {calendar}
-          </td>
-        </tr>
-      </tbody>
-    </Table>
-  );
+    return null;
+  }
 }
 
 CheckInCalendar.propTypes = {
   dates: PropTypes.array,
   month: PropTypes.string,
   year: PropTypes.number,
+  startDate: PropTypes.number,
+  endDate: PropTypes.number,
+  dateClick: PropTypes.func,
 
 };
 CheckInCalendar.defaultProps = {
   dates: [],
   month: null,
   year: null,
+  startDate: null,
+  endDate: null,
+  dateClick: () => null,
 };
