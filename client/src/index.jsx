@@ -6,7 +6,7 @@ import ModOne from './pricing_mod1/ModOne';
 import ModTwo from './calendar_mod2/ModTwo';
 import ModThree from './guestsAndCalc_mod3/ModThree';
 
-injectGlobal( [ `
+injectGlobal([`
   html, body{
     height: 100%;
     width: 100%
@@ -16,7 +16,7 @@ injectGlobal( [ `
     justify-content: center;
     align-items: center;
   }
-` ] );
+`]);
 
 export const Holder = styled.div`
   display: flex;
@@ -31,8 +31,8 @@ export const Holder = styled.div`
 `;
 
 export default class App extends Component {
-  constructor( props ) {
-    super( props );
+  constructor(props) {
+    super(props);
     this.state = {
       adults: 1,
       children: 0,
@@ -48,46 +48,46 @@ export default class App extends Component {
     this.getListingData();
   }
 
-  onGuestButtonClick = ( guest, increment ) => {
+  onGuestButtonClick = (guest, increment) => {
     const val = this.state[ guest ] + increment;
     const { totalGuests } = this.state;
     const total = totalGuests + increment;
     const { maxGuests } = this.state.listingData;
     // infants don't count towards the number of guests, but have a cap of 5
-    if ( guest === 'infants' && ( val > 5 || val < 0 ) ) {
+    if (guest === 'infants' && (val > 5 || val < 0)) {
       return;
     // there is a minimum of 1 adult guest
-    } else if ( guest === 'adults' && ( val > maxGuests || val < 1 || total > maxGuests ) ) {
+    } else if (guest === 'adults' && (val > maxGuests || val < 1 || total > maxGuests)) {
       return;
-    } else if ( guest === 'children' && ( val > maxGuests || val < 0 || total > maxGuests ) ) {
+    } else if (guest === 'children' && (val > maxGuests || val < 0 || total > maxGuests)) {
       return;
     }
-    this.setState( {
+    this.setState({
       [ guest ]: val,
       totalGuests: guest === 'infants' ? totalGuests : total,
-    } );
+    });
   }
 
   getListingData = () => {
     let id = window.location.pathname;
-    if ( id === '/' ) {
+    if (id === '/') {
       id = 1;
     } else {
-      id = id.replace( /\//g, '' );
+      id = id.replace(/\//g, '');
     }
-    axios.get( `http://127.0.0.1:3002/rooms/${ id }/bookingInfo/` )
-      .then( ( response ) => {
-        this.setState( {
+    axios.get(`http://127.0.0.1:3002/rooms/${id}/bookingInfo/`)
+      .then((response) => {
+        this.setState({
           listingData: response.data,
-        } );
-      } )
-      .catch( () => {
-        console.log( 'there was an error!' );
-      } );
+        });
+      })
+      .catch(() => {
+        console.log('there was an error!');
+      });
   }
 
   render() {
-    if ( this.state.listingData ) {
+    if (this.state.listingData) {
       return (
         <Holder>
           <ModOne
@@ -111,7 +111,7 @@ export default class App extends Component {
   }
 }
 
-render( <App />, document.getElementById( 'root' ) );
+render(<App />, document.getElementById('root'));
 
 // cleaningFee={this.state.listingData.cleaningFee}
 // maxGuests={this.state.listingData.maxGuests}

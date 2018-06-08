@@ -18,7 +18,7 @@ export const Holder = styled.div`
 
 export const Arrow = styled.button`
   border-radius: 10%;
-  background-image: url(${ arrow });
+  background-image: url(${arrow});
   outline: none;
 `;
 
@@ -43,31 +43,31 @@ export const SectionThree = styled.div`
   flex-direction: column;
 `;
 
-export default function Dropdown( props ) {
+export default function Dropdown(props) {
   let calendar;
   let holderArrow;
-  if ( props.clicked === 1 ) {
-    calendar = ( <CheckInCalendar
+  if (props.clicked === 1) {
+    calendar = (<CheckInCalendar
       dates={props.dates}
       month={props.month}
       year={props.year}
-    /> );
+    />);
     holderArrow = (
       <svg height="10" width="250" fill="rgb(172, 172, 172)" stroke="rgb(172, 172, 172)">
         <path d="M 15,25 35, 25 25, 0 Z" height="0px" />
-      </svg> );
-  } else if ( props.clicked === -1 ) {
-    calendar = ( <CheckOutCalendar
+      </svg>);
+  } else if (props.clicked === -1) {
+    calendar = (<CheckOutCalendar
       dates={props.dates}
       month={props.month}
       year={props.year}
-    /> );
+    />);
     holderArrow = (
       <svg height="10" width="250" fill="rgb(172, 172, 172)" stroke="rgb(172, 172, 172)">
         <path d="M 0,25 35, 25 25, 15 Z" height="0px" />
-      </svg> );
+      </svg>);
   }
-  if ( props.clicked === 1 || props.clicked === -1 ) {
+  if (props.clicked === 1 || props.clicked === -1) {
     return (
       <div>
         {holderArrow}
@@ -95,7 +95,7 @@ Dropdown.propTypes = {
   checkInClicked: PropTypes.bool,
   checkOutClicked: PropTypes.bool,
   month: PropTypes.string,
-  year: PropTypes.string,
+  year: PropTypes.number,
   // dates: PropTypes.arrayOf( PropTypes.shape( {
   //   date: PropTypes.date,
   // } ) ),
@@ -105,6 +105,6 @@ Dropdown.defaultProps = {
   checkInClicked: false,
   checkOutClicked: false,
   month: 'June',
-  year: '2018',
+  year: 2018,
   // dates: [],
 };

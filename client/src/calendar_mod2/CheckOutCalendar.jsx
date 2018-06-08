@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const days = [ 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa' ];
-export default function CheckInCalendar( props ) {
-  const week = days.map( day => (
+const days = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+export default function CheckInCalendar(props) {
+  const week = days.map(day => (
     <th key={day}> {day} </th>
-  ) );
+  ));
   return (
     <table>
       <thead>

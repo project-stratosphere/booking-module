@@ -16,48 +16,46 @@ const Tr = styled.tr`
 `;
 const Td = styled.td`
   border-collapse: collapse;
-  // border: 1px solid rgb(172, 172, 172);
   min-width: 40px;
   text-align: center;
   padding-bottom: 5px
 `;
 
 const days = moment.weekdaysMin();
-export default function CheckInCalendar( props ) {
+export default function CheckInCalendar(props) {
   const createDayArr = () => {
-    const firstDayOfTheMonth = moment().year( props.year ).month( props.month ).date( 1 )
+    const firstDayOfTheMonth = moment().year(props.year).month(props.month).date(1)
       .day();
-    const daysInMonth = moment( `${ props.year }-${ props.month }`, 'YYYY-MMM' ).daysInMonth();
+    const daysInMonth = moment(`${props.year}-${props.month}`, 'YYYY-MMM').daysInMonth();
 
     const dayArr = [];
-    for ( let i = 0; i < firstDayOfTheMonth; i += 1 ) {
-      dayArr.push( '' );
+    for (let i = 0; i < firstDayOfTheMonth; i += 1) {
+      dayArr.push('');
     }
-    for ( let i = 1; i < daysInMonth; i += 1 ) {
-      dayArr.push( i );
+    for (let i = 1; i < daysInMonth; i += 1) {
+      dayArr.push(i);
     }
     return dayArr;
   };
 
   const findDatesInMonth = () => {
     const targetDates = [];
-    props.dates.forEach( ( date ) => {
-      const day = moment.utc( date ).format( 'DD' );
-      const month = moment.utc( date ).format( 'MMMM' );
-      const year = moment.utc( date ).format( 'YYYY' );
-      if ( month === props.month && year === props.year ) {
-        targetDates.push( day );
+    props.dates.forEach((date) => {
+      const day = moment.utc(date).format('DD');
+      const month = moment.utc(date).format('MMMM');
+      const year = moment.utc(date).format('YYYY');
+      if (month === props.month && year === props.year) {
+        targetDates.push(day);
       }
-    } );
+    });
     return targetDates;
   };
 
-  const weekDayNames = days.map( day => (
+  const weekDayNames = days.map(day => (
     <Td key={day}> {day} </Td>
-  ) );
-  const daysInMonth = createDayArr();
-  const calendar = daysInMonth.map( ( day, i ) =>
-    <Td key={i}> {day} </Td> );
+  ));
+  const calendar = createDayArr().map((day, i) =>
+    <Td key={i}> {day} </Td>);
 
   return (
     <Table>
@@ -74,3 +72,15 @@ export default function CheckInCalendar( props ) {
     </Table>
   );
 }
+
+CheckInCalendar.propTypes = {
+  dates: PropTypes.array,
+  month: PropTypes.string,
+  year: PropTypes.number,
+
+};
+CheckInCalendar.defaultProps = {
+  dates: [],
+  month: null,
+  year: null,
+};

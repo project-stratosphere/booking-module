@@ -30,33 +30,33 @@ export const Date = styled.div`
 `;
 
 export const Arrow = styled.div`
-  content: url(${ arrow });
+  content: url(${arrow});
   height: 17px;
 `;
 
 export default class ModTwo extends Component {
-  constructor( props ) {
-    super( props );
+  constructor(props) {
+    super(props);
     this.state = {
       clicked: 0,
       month: 'June',
-      year: '2018',
+      year: 2018,
     };
   }
 
-  dateClick = ( holderName ) => {
-    if ( holderName === 'checkInClicked' && this.state.clicked !== 1 ) {
-      this.setState( {
+  dateClick = (holderName) => {
+    if (holderName === 'checkInClicked' && this.state.clicked !== 1) {
+      this.setState({
         clicked: 1,
-      } );
-    } else if ( holderName === 'checkOutClicked' && this.state.clicked !== -1 ) {
-      this.setState( {
+      });
+    } else if (holderName === 'checkOutClicked' && this.state.clicked !== -1) {
+      this.setState({
         clicked: -1,
-      } );
+      });
     } else {
-      this.setState( {
+      this.setState({
         clicked: 0,
-      } );
+      });
     }
   }
 
@@ -65,9 +65,9 @@ export default class ModTwo extends Component {
       <Holder>
         <Title> Dates </Title>
         <DateHolder>
-          <Date onClick={() => this.dateClick( 'checkInClicked' )}> Check In </Date>
+          <Date onClick={() => this.dateClick('checkInClicked')}> Check In </Date>
           <Arrow />
-          <Date onClick={() => this.dateClick( 'checkOutClicked' )}> Check Out </Date>
+          <Date onClick={() => this.dateClick('checkOutClicked')}> Check Out </Date>
         </DateHolder>
         <Dropdown
           dates={this.props.dates}
