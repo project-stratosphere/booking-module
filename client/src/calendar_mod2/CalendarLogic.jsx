@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const createDaysArr = (currMonth, currYear) => {
+export function createDaysArr(currMonth, currYear) {
   const firstDayOfTheMonth = moment().year(currYear).month(currMonth).date(1)
     .day();
   const daysInMonth = moment(`${currYear}-${currMonth}`, 'YYYY-MMM').daysInMonth();
@@ -15,9 +15,9 @@ export const createDaysArr = (currMonth, currYear) => {
   this.setState({
     daysInMonthArr,
   });
-};
+}
 
-export const findOccupiedDatesInMonth = (dates, currMonth, currYear, startDay) => {
+export function findOccupiedDatesInMonth(dates, currMonth, currYear, startDay) {
   const targetDates = [];
   dates.forEach((date) => {
     const day = moment.utc(date).format('DD');
@@ -35,4 +35,4 @@ export const findOccupiedDatesInMonth = (dates, currMonth, currYear, startDay) =
   this.setState({
     occupiedDates: targetDates,
   });
-};
+}

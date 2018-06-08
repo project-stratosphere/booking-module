@@ -11,15 +11,18 @@ export default class CheckOutCalendar extends Component {
       occupiedDates: null,
       daysInMonthArr: null,
     };
+    this.createDaysArr = createDaysArr.bind(this);
+    this.findOccupiedDatesInMonth = findOccupiedDatesInMonth.bind(this);
   }
 
   componentDidMount = () => {
-    findOccupiedDatesInMonth(this.props.dates, this.props.month, this.props.year);
-    createDaysArr(this.props.month, this.props.year);
+    this.findOccupiedDatesInMonth(this.props.dates, this.props.month, this.props.year, this.props.startDate);
+    this.createDaysArr(this.props.month, this.props.year);
   }
 
   onEndDateClick = (day) => {
     this.props.dateClick('endDate', day);
+    this.props.calendarChange();
   }
 
   render() {
@@ -38,8 +41,9 @@ export default class CheckOutCalendar extends Component {
             key={i}
             day={day}
             date={isOccupied}
-            onClick={() => this.onStartDateClick(day)}
+            onClick={() => this.onEndDateClick(day)}
             startDate={this.props.startDate}
+            endDate={this.props.startDate}
             disabled={isOccupied || (day === this.props.startDate)}
           > {day}
           </Button>
@@ -76,6 +80,7 @@ CheckOutCalendar.propTypes = {
   startDate: PropTypes.number,
   endDate: PropTypes.number,
   dateClick: PropTypes.func,
+  calendarChange: PropTypes.func,
 
 };
 CheckOutCalendar.defaultProps = {
@@ -85,4 +90,5 @@ CheckOutCalendar.defaultProps = {
   startDate: null,
   endDate: null,
   dateClick: () => null,
+  calendarChange: () => null,
 };

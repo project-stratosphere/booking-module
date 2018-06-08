@@ -11,11 +11,13 @@ export default class CheckInCalendar extends Component {
       occupiedDates: null,
       daysInMonthArr: null,
     };
+    this.createDaysArr = createDaysArr.bind(this);
+    this.findOccupiedDatesInMonth = findOccupiedDatesInMonth.bind(this);
   }
 
   componentDidMount = () => {
-    findOccupiedDatesInMonth(this.props.dates, this.props.month, this.props.year);
-    createDaysArr(this.props.month, this.props.year);
+    this.findOccupiedDatesInMonth(this.props.dates, this.props.month, this.props.year);
+    this.createDaysArr(this.props.month, this.props.year);
   }
 
   onStartDateClick = (day) => {

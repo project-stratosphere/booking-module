@@ -12,6 +12,7 @@ display: flex;
 flex-direction: row;
 flex-wrap: wrap;
 `;
+
 export const Button = styled.button`
 border:none;
 outline: none;
@@ -24,7 +25,9 @@ color: ${props => (props.date ? 'rgb(172,172,172)' : 'black')};
 text-decoration: ${props => (props.date ? 'line-through' : '')};
 background-color: ${(props) => {
     if (props.week) { return ''; }
-    return props.startDate === props.day ? '#00a699' : 'white';
+    return (
+      props.startDate === props.day ? '#00a699' : 'white'
+    );
   }}
 &:hover:enabled{
   background-color: #F0F0F0;
