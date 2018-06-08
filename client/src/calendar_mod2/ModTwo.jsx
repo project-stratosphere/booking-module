@@ -7,7 +7,7 @@ import Dropdown from './Dropdown';
 export const Holder = styled.div`
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: inherit;
   padding-top: 10px;
 `;
 
@@ -21,7 +21,6 @@ export const DateHolder = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 240px;
   height: 22px;
   border: 1px solid rgb(172, 172, 172);
   padding: 5px;

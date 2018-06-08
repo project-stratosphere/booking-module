@@ -9,7 +9,7 @@ export const Holder = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 230px;
+  width: 300px;
   border: 1px solid rgb(172, 172, 172);
   padding: 20px;
   padding-top: 0px;
@@ -17,23 +17,23 @@ export const Holder = styled.div`
 `;
 
 export const Arrow = styled.button`
-border-radius: 10%;
-background-image: url(${ arrow });
-outline: none;
+  border-radius: 10%;
+  background-image: url(${ arrow });
+  outline: none;
 `;
 
 export const SectionOne = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-margin-top: 10px;
-font-size: 16px;
-font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
 `;
 
 export const SectionTwo = styled.div`
-display: flex;
-justify-content: center;
+  display: flex;
+  align-items: center;
 `;
 
 export const SectionThree = styled.div`
@@ -80,10 +80,10 @@ export default function Dropdown( props ) {
           <SectionTwo>
             {calendar}
           </SectionTwo>
-          <Details>
+          <SectionThree>
             <div> Minimum stay varies </div>
             <div> Updated 2 days ago </div>
-          </Details>
+          </SectionThree>
         </Holder>
       </div>
     );

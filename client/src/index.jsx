@@ -23,10 +23,11 @@ export const Holder = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 300px;  
+  width: 328px;  
   height: 300px;
   border: 1px solid rgb(172, 172, 172);
   font-family: Quicksand;
+  padding: 24px;
 `;
 
 export default class App extends Component {

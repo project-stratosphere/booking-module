@@ -10,7 +10,6 @@ export const Holder = styled.div`
   align-items: center;
   flex-direction: column;
   width: inherit;
-  width: 250px;
   border-bottom: 1px solid rgb(172, 172, 172);
   font-weight: bold;
 `;
@@ -19,12 +18,10 @@ Holder.displayName = 'Holder';
 export default function ModOne( props ) {
   if ( props.price ) {
     return (
-      <div>
-        <Holder>
-          <PricePerNight price={props.price} />
-          <Rating rating={props.rating} numReviews={props.numReviews} />
-        </Holder>
-      </div>
+      <Holder>
+        <PricePerNight price={props.price} />
+        <Rating rating={props.rating} numReviews={props.numReviews} />
+      </Holder>
     );
   }
   return null;

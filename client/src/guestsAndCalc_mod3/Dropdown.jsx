@@ -7,10 +7,10 @@ export const Holder = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 230px;
+  width: 286px;
   border: 1px solid rgb(172, 172, 172);
   margin-top: 50px;
-  padding: 10px;
+  padding: 20px;
   padding-top: 0px;
   background-color: white;
 `;

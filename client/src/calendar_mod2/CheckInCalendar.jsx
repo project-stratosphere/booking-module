@@ -15,7 +15,8 @@ const Tr = styled.tr`
 `;
 const Td = styled.td`
   min-width: 27px;
-  border: 1px solid rgb(172, 172, 172);
+  // border: 0.5px solid rgb(172, 172, 172);
+  text-align: center;
 `;
 
 const months = {

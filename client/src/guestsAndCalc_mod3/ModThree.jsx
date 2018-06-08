@@ -7,7 +7,7 @@ import Dropdown from './Dropdown';
 export const Holder = styled.div`
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: inherit;
   padding-top: 10px;
 `;
 
@@ -21,7 +21,6 @@ export const GuestHolder = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 225px;
   border: 1px solid rgb(172, 172, 172);
   padding: 5px;
   padding-left: 20px;
