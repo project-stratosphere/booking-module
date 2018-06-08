@@ -24,7 +24,6 @@ const Td = styled.td`
 
 const days = moment.weekdaysMin();
 export default function CheckInCalendar( props ) {
-  console.log( props.dates );
   const createDayArr = () => {
     const firstDayOfTheMonth = moment().year( props.year ).month( props.month ).date( 1 )
       .day();
@@ -40,20 +39,25 @@ export default function CheckInCalendar( props ) {
     return dayArr;
   };
 
-  const getOccupiedDatesForMonth = () => {
-    const occupiedDates = [];
+  const findDatesInMonth = () => {
+    const targetDates = [];
     props.dates.forEach( ( date ) => {
-
+      const day = moment.utc( date ).format( 'DD' );
+      const month = moment.utc( date ).format( 'MMMM' );
+      const year = moment.utc( date ).format( 'YYYY' );
+      if ( month === props.month && year === props.year ) {
+        targetDates.push( day );
+      }
     } );
+    return targetDates;
   };
 
   const weekDayNames = days.map( day => (
     <Td key={day}> {day} </Td>
   ) );
-
   const daysInMonth = createDayArr();
-  const calendar = daysInMonth.map( day =>
-    <Td key={day}> {day} </Td> );
+  const calendar = daysInMonth.map( ( day, i ) =>
+    <Td key={i}> {day} </Td> );
 
   return (
     <Table>
