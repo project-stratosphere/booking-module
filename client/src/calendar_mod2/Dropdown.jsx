@@ -7,19 +7,27 @@ import arrow from '../images/arrow.png';
 
 export const Holder = styled.div`
   position: absolute;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 286px;
   border: 1px solid rgb(172, 172, 172);
+  border-radius: 1%;
   padding: 20px;
-  padding-top: 0px;
   background-color: white;
 `;
 
-export const Arrow = styled.button`
+export const Arrow = styled.div`
   border-radius: 10%;
-  background-image: url(${arrow});
-  outline: none;
+  content: url(${arrow});
+  height: 20px;
+  border: 1px solid rgb(172, 172, 172);
+  border-radius: 10%;
+  padding: 2px;
+  transform: ${props => (props.left ? 'rotate(0.5turn)' : '')};
+  &:active{
+    background-color: #007D8C;
+  }
 `;
 
 export const SectionOne = styled.div`
@@ -27,7 +35,7 @@ export const SectionOne = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
 `;
 
