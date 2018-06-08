@@ -39,6 +39,8 @@ export default class App extends Component {
       infants: 0,
       totalGuests: 1,
       listingData: null,
+      startDate: null,
+      endDate: null,
     };
   }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 
 const Table = styled.table`
   margin-top: 20px;
@@ -14,30 +15,20 @@ const Tr = styled.tr`
   flex-wrap: wrap;
 `;
 const Td = styled.td`
-  min-width: 27px;
-  // border: 0.5px solid rgb(172, 172, 172);
+  border-collapse: collapse;
+  // border: 1px solid rgb(172, 172, 172);
+  min-width: 40px;
   text-align: center;
+  padding-bottom: 5px
 `;
 
-const months = {
-  January: 0,
-  February: 1,
-  March: 2,
-  April: 3,
-  May: 4,
-  June: 5,
-  July: 6,
-  August: 7,
-  September: 8,
-  October: 9,
-  November: 10,
-  December: 11,
-};
-const days = [ 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa' ];
+const days = moment.weekdaysMin();
 export default function CheckInCalendar( props ) {
+  console.log( props.dates );
   const createDayArr = () => {
-    const firstDayOfTheMonth = new Date( `${ props.month } 1, ${ props.year }` ).getDay();
-    const daysInMonth = new Date( props.year, months[ props.month ], 0 ).getDate();
+    const firstDayOfTheMonth = moment().year( props.year ).month( props.month ).date( 1 )
+      .day();
+    const daysInMonth = moment( `${ props.year }-${ props.month }`, 'YYYY-MMM' ).daysInMonth();
 
     const dayArr = [];
     for ( let i = 0; i < firstDayOfTheMonth; i += 1 ) {
@@ -47,6 +38,13 @@ export default function CheckInCalendar( props ) {
       dayArr.push( i );
     }
     return dayArr;
+  };
+
+  const getOccupiedDatesForMonth = () => {
+    const occupiedDates = [];
+    props.dates.forEach( ( date ) => {
+
+    } );
   };
 
   const weekDayNames = days.map( day => (
