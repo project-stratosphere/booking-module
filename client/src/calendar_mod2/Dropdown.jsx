@@ -58,20 +58,13 @@ export default function Dropdown(props) {
   let calendar;
   let holderArrow;
   if (props.clicked === 1) {
-    calendar = (<CheckInCalendar
-      {...props}
-
-    />);
+    calendar = (<CheckInCalendar {...props} />);
     holderArrow = (
       <svg height="10" width="250" fill="rgb(172, 172, 172)" stroke="rgb(172, 172, 172)" position="absolute">
         <path d="M 15,25 35, 25 25, 0 Z" height="0px" position="absolute" />
       </svg>);
   } else if (props.clicked === -1) {
-    calendar = (<CheckOutCalendar
-      dates={props.dates}
-      month={props.month}
-      year={props.year}
-    />);
+    calendar = (<CheckOutCalendar {...props} />);
     holderArrow = (
       <svg height="10" width="250" fill="rgb(172, 172, 172)" stroke="rgb(172, 172, 172)">
         <path d="M 0,25 35, 25 25, 15 Z" height="0px" />
@@ -102,8 +95,7 @@ export default function Dropdown(props) {
 }
 
 Dropdown.propTypes = {
-  checkInClicked: PropTypes.bool,
-  checkOutClicked: PropTypes.bool,
+  clicked: PropTypes.number,
   month: PropTypes.string,
   year: PropTypes.number,
   dateClick: PropTypes.func,
@@ -113,8 +105,7 @@ Dropdown.propTypes = {
 
 };
 Dropdown.defaultProps = {
-  checkInClicked: false,
-  checkOutClicked: false,
+  clicked: 0,
   month: 'June',
   year: 2018,
   dateClick: () => null,

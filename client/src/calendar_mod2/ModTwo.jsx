@@ -65,11 +65,18 @@ export default class ModTwo extends Component {
       <Holder>
         <Title> Dates </Title>
         <DateHolder>
-          <Date onClick={() => this.dateClick('checkInClicked')}> Check In </Date>
+          <Date
+            onClick={() => this.dateClick('checkInClicked')}
+          > Check In
+          </Date>
           <Arrow />
-          <Date onClick={() => this.dateClick('checkOutClicked')}> Check Out </Date>
+          <Date
+            onClick={() => this.dateClick('checkOutClicked')}
+          > Check Out
+          </Date>
         </DateHolder>
         <Dropdown
+          calendarChange={this.dateClick}
           {...this.props}
           {...this.state}
         />
