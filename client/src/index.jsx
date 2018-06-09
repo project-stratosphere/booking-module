@@ -5,7 +5,7 @@ import axios from 'axios';
 import ModOne from './pricing_mod1/ModOne';
 import ModTwo from './calendar_mod2/ModTwo';
 import ModThree from './guestsAndCalc_mod3/ModThree';
-import { onCalendarDateClick } from './calendar_mod2/CalendarLogic';
+import { onCalendarDateClick, clearDates } from './calendar_mod2/CalendarLogic';
 
 injectGlobal([`
   html, body{
@@ -44,6 +44,7 @@ export default class App extends Component {
       endDate: null,
     };
     this.onCalendarDateClick = onCalendarDateClick.bind(this);
+    this.clearDates = clearDates.bind(this);
   }
 
   componentDidMount() {
@@ -103,6 +104,7 @@ export default class App extends Component {
             startDate={this.state.startDate}
             endDate={this.state.endDate}
             dateClick={this.onCalendarDateClick}
+            clearDates={this.clearDates}
           />
           <ModThree
             adult={this.state.adults}

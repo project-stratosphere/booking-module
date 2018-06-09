@@ -1,11 +1,14 @@
 import moment from 'moment';
+//* = uses a binding
 
+// *export into index, used inside calendar
 export function onCalendarDateClick(type, day) {
   this.setState({
     [type]: day,
   });
 }
 
+// *export into mod2, used inside dropdown
 export function onArrowClick(date, increment) {
   const next = date.add(increment, 'month');
   const month = next.format('MMMM-YYYY').split('-')[0];
@@ -15,8 +18,10 @@ export function onArrowClick(date, increment) {
     month,
     year,
   });
+  this.props.clearDates();
 }
 
+// export & used in mod2
 export function dateConverter(date, day) {
   if (day !== null) {
     const currDate = date.format('MM-YYYY').split('-');
@@ -27,6 +32,15 @@ export function dateConverter(date, day) {
   return null;
 }
 
+// *export into index, used inside onArrowClick
+export function clearDates() {
+  this.setState({
+    startDate: null,
+    endDate: null,
+  });
+}
+
+// *export & used in mod2
 export function calendarChange(holderName) {
   if (holderName === 'checkInClicked' && this.state.clicked !== 1) {
     this.setState({
@@ -43,6 +57,7 @@ export function calendarChange(holderName) {
   }
 }
 
+// export & used in calendar
 export function createDaysArr({ month, year }) {
   const firstDayOfTheMonth = moment(`${year}-${month}`, 'YYYY-MMM').date(1).day();
   const daysInMonth = moment(`${year}-${month}`, 'YYYY-MMM').daysInMonth();
@@ -57,6 +72,7 @@ export function createDaysArr({ month, year }) {
   return daysInMonthArr;
 }
 
+// export & used in calendar
 export function findOccupiedDatesInMonth({
   startDate, month, year, minStay, dates,
 }) {
