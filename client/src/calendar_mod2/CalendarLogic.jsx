@@ -55,24 +55,18 @@ export function findOccupiedDatesInMonth(startDay) {
       targetDates.push(i);
     }
     // for getting the days for the minimum stay
-    const toBlockOut = startDay + this.props.minStay;
+    let toBlockOut = startDay + this.props.minStay;
     for (let i = startDay + 1; i < toBlockOut; i += 1) {
+      targetDates.push(i);
+    }
+    // for blocking off the days after an occupied date
+    const daysInMonth = moment(`${this.props.year}-${this.props.month}`, 'YYYY-MMM').daysInMonth();
+    toBlockOut = targetDates.sort((a, b) => a - b).findIndex(num => num > startDay + this.props.minStay);
+    for (let i = targetDates[toBlockOut]; i <= daysInMonth; i += 1) {
       targetDates.push(i);
     }
   }
   this.setState({
     occupiedDates: targetDates,
   });
-}
-
-export function afterEndDateEstablished(day) {
-  const daysInMonth = moment(`${this.props.year}-${this.props.month}`, 'YYYY-MMM').daysInMonth();
-  const targetDates = this.state.occupiedDates.slice();
-  const toBlockOut = targetDates.sort((a, b) => a - b).findIndex(num => num > day);
-  for (let i = targetDates[toBlockOut]; i <= daysInMonth; i += 1) {
-    targetDates.push(i);
-  }
-  this.setState({
-    occupiedDates: targetDates,
-  }, () => console.log('is this being called'));
 }

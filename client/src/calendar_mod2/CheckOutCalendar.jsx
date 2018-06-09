@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Table, Tr, Button } from './CalendarStyling';
-import { createDaysArr, findOccupiedDatesInMonth, afterEndDateEstablished } from './CalendarLogic';
+import { createDaysArr, findOccupiedDatesInMonth } from './CalendarLogic';
 
 export default class CheckOutCalendar extends Component {
   constructor(props) {
@@ -13,7 +13,6 @@ export default class CheckOutCalendar extends Component {
     };
     this.createDaysArr = createDaysArr.bind(this);
     this.findOccupiedDatesInMonth = findOccupiedDatesInMonth.bind(this);
-    this.afterEndDateEstablished = afterEndDateEstablished.bind(this);
   }
 
   componentDidMount = () => {
@@ -23,7 +22,6 @@ export default class CheckOutCalendar extends Component {
 
   onEndDateClick = (day) => {
     this.props.dateClick('endDate', day);
-    this.afterEndDateEstablished(day);
     this.props.calendarChange();
   }
 
