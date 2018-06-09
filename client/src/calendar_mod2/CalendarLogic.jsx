@@ -6,6 +6,27 @@ export function onCalendarDateClick(type, day) {
   });
 }
 
+export function onArrowClick(date, increment) {
+  const next = date.add(increment, 'month');
+  const month = next.format('MMMM-YYYY').split('-')[0];
+  const year = Number(next.format('MMMM-YYYY').split('-')[1]);
+  this.setState({
+    currDate: next,
+    month,
+    year,
+  });
+}
+
+export function dateConverter(date, day) {
+  if (day !== null) {
+    const currDate = date.format('MM-YYYY').split('-');
+    const currMonth = currDate[0];
+    const currYear = Number(currDate[1]);
+    return `${currMonth}/${day}/${currYear}`;
+  }
+  return null;
+}
+
 export function calendarChange(holderName) {
   if (holderName === 'checkInClicked' && this.state.clicked !== 1) {
     this.setState({
@@ -31,7 +52,7 @@ export function createDaysArr() {
   for (let i = 0; i < firstDayOfTheMonth; i += 1) {
     daysInMonthArr.push('');
   }
-  for (let i = 1; i < daysInMonth; i += 1) {
+  for (let i = 1; i <= daysInMonth; i += 1) {
     daysInMonthArr.push(i);
   }
   this.setState({
@@ -61,7 +82,9 @@ export function findOccupiedDatesInMonth(startDay) {
     }
     // for blocking off the days after an occupied date
     const daysInMonth = moment(`${this.props.year}-${this.props.month}`, 'YYYY-MMM').daysInMonth();
-    toBlockOut = targetDates.sort((a, b) => a - b).findIndex(num => num > startDay + this.props.minStay);
+    toBlockOut = targetDates
+      .sort((a, b) => a - b)
+      .findIndex(num => num > startDay + this.props.minStay);
     for (let i = targetDates[toBlockOut]; i <= daysInMonth; i += 1) {
       targetDates.push(i);
     }

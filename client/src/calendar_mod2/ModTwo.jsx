@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import arrow from '../images/arrow.png';
 import Dropdown from './Dropdown';
-import { calendarChange } from './CalendarLogic';
+import { calendarChange, onArrowClick, dateConverter } from './CalendarLogic';
 
 export const Holder = styled.div`
   display: flex;
@@ -40,29 +41,34 @@ export default class ModTwo extends Component {
     super(props);
     this.state = {
       clicked: 0,
-      month: 'June',
-      year: 2018,
+      currDate: moment(),
+      month: moment().format('MMMM-YYYY').split('-')[0],
+      year: Number(moment().format('MMMM-YYYY').split('-')[1]),
     };
     this.calendarChange = calendarChange.bind(this);
+    this.onArrowClick = onArrowClick.bind(this);
   }
 
   render() {
+    const startDate = dateConverter(this.state.currDate, this.props.startDate);
+    const endDate = dateConverter(this.state.currDate, this.props.endDate);
     return (
       <Holder>
         <Title> Dates </Title>
         <DateHolder>
           <Date
             onClick={() => this.calendarChange('checkInClicked')}
-          > {this.props.startDate || 'Check In'}
+          > {startDate || 'Check In'}
           </Date>
           <Arrow />
           <Date
             onClick={() => this.calendarChange('checkOutClicked')}
-          > {this.props.endDate || 'Check Out'}
+          > {endDate || 'Check Out'}
           </Date>
         </DateHolder>
         <Dropdown
           calendarChange={this.calendarChange}
+          arrowClick={this.onArrowClick}
           {...this.props}
           {...this.state}
         />

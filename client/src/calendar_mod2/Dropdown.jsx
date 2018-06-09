@@ -76,9 +76,9 @@ export default function Dropdown(props) {
         {holderArrow}
         <Holder>
           <SectionOne>
-            <Arrow left />
+            <Arrow left onClick={() => props.arrowClick(props.currDate, -1)} />
             <div> {props.month} {props.year} </div>
-            <Arrow />
+            <Arrow onClick={() => props.arrowClick(props.currDate, 1)} />
           </SectionOne>
           <SectionTwo>
             {calendar}

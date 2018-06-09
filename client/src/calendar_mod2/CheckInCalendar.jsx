@@ -15,7 +15,7 @@ export default class CheckInCalendar extends Component {
     this.findOccupiedDatesInMonth = findOccupiedDatesInMonth.bind(this);
   }
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     this.findOccupiedDatesInMonth();
     this.createDaysArr();
   }
@@ -26,50 +26,47 @@ export default class CheckInCalendar extends Component {
   }
 
   render() {
-    if (this.state.daysInMonthArr) {
-      const weekDayNames = moment.weekdaysMin().map(day => (
-        <Button week key={day} disabled> {day} </Button>
-      ));
+    const weekDayNames = moment.weekdaysMin().map(day => (
+      <Button week key={day} disabled> {day} </Button>
+    ));
 
-      const calendar = this.state.daysInMonthArr.map((day, i) => {
-        let isOccupied = false;
-        if (this.state.occupiedDates.includes(day) || day === '') {
-          isOccupied = true;
-        }
-        return (
-          <Button
-            key={i}
-            day={day}
-            date={isOccupied}
-            onClick={() => this.onStartDateClick(day)}
-            startDate={this.props.startDate}
-            endDate={this.props.endDate}
-            disabled={isOccupied || (day === this.props.startDate)}
-          > {day}
-          </Button>
-        );
-      });
-
+    const calendar = this.state.daysInMonthArr.map((day, i) => {
+      let isOccupied = false;
+      if (this.state.occupiedDates.includes(day) || day === '') {
+        isOccupied = true;
+      }
       return (
-        <Table>
-          <thead>
-            <Tr>
-              <td>
-                {weekDayNames}
-              </td>
-            </Tr>
-          </thead>
-          <tbody>
-            <Tr>
-              <td>
-                {calendar}
-              </td>
-            </Tr>
-          </tbody>
-        </Table>
+        <Button
+          key={i}
+          day={day}
+          date={isOccupied}
+          onClick={() => this.onStartDateClick(day)}
+          startDate={this.props.startDate}
+          endDate={this.props.endDate}
+          disabled={isOccupied || (day === this.props.startDate)}
+        > {day}
+        </Button>
       );
-    }
-    return null;
+    });
+
+    return (
+      <Table>
+        <thead>
+          <Tr>
+            <td>
+              {weekDayNames}
+            </td>
+          </Tr>
+        </thead>
+        <tbody>
+          <Tr>
+            <td>
+              {calendar}
+            </td>
+          </Tr>
+        </tbody>
+      </Table>
+    );
   }
 }
 
