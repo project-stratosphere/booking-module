@@ -43,10 +43,9 @@ export function calendarChange(holderName) {
   }
 }
 
-export function createDaysArr() {
-  const firstDayOfTheMonth = moment().year(this.props.year).month(this.props.month).date(1)
-    .day();
-  const daysInMonth = moment(`${this.props.year}-${this.props.month}`, 'YYYY-MMM').daysInMonth();
+export function createDaysArr({ month, year }) {
+  const firstDayOfTheMonth = moment(`${year}-${month}`, 'YYYY-MMM').date(1).day();
+  const daysInMonth = moment(`${year}-${month}`, 'YYYY-MMM').daysInMonth();
 
   const daysInMonthArr = [];
   for (let i = 0; i < firstDayOfTheMonth; i += 1) {
@@ -55,41 +54,39 @@ export function createDaysArr() {
   for (let i = 1; i <= daysInMonth; i += 1) {
     daysInMonthArr.push(i);
   }
-  this.setState({
-    daysInMonthArr,
-  });
+  return daysInMonthArr;
 }
 
-export function findOccupiedDatesInMonth(startDay) {
+export function findOccupiedDatesInMonth({
+  startDate, month, year, minStay, dates,
+}) {
   const targetDates = [];
-  this.props.dates.forEach((date) => {
-    const day = moment.utc(date).format('DD');
-    const month = moment.utc(date).format('MMMM');
-    const year = moment.utc(date).format('YYYY');
-    if (month === this.props.month && Number(year) === this.props.year) {
-      targetDates.push(Number(day));
+  dates.forEach((date) => {
+    const dateDay = Number(moment.utc(date).format('DD'));
+    const dateMonth = moment.utc(date).format('MMMM');
+    const dateYear = Number(moment.utc(date).format('YYYY'));
+    if (dateMonth === month && dateYear === year) {
+      targetDates.push(dateDay);
     }
   });
-  if (startDay) {
+  if (startDate) {
     // for getting the days before the start date
-    for (let i = 1; i < startDay; i += 1) {
+    for (let i = 1; i < startDate; i += 1) {
       targetDates.push(i);
     }
     // for getting the days for the minimum stay
-    let toBlockOut = startDay + this.props.minStay;
-    for (let i = startDay + 1; i < toBlockOut; i += 1) {
+    let toBlockOut = startDate + minStay;
+    for (let i = startDate + 1; i < toBlockOut; i += 1) {
       targetDates.push(i);
     }
     // for blocking off the days after an occupied date
-    const daysInMonth = moment(`${this.props.year}-${this.props.month}`, 'YYYY-MMM').daysInMonth();
+    const daysInMonth = moment(`${year}-${month}`, 'YYYY-MMM').daysInMonth();
     toBlockOut = targetDates
       .sort((a, b) => a - b)
-      .findIndex(num => num > startDay + this.props.minStay);
+      .findIndex(num => num > startDate + minStay);
     for (let i = targetDates[toBlockOut]; i <= daysInMonth; i += 1) {
       targetDates.push(i);
     }
   }
-  this.setState({
-    occupiedDates: targetDates,
-  });
+  return targetDates;
 }

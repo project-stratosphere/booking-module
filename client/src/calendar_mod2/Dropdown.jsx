@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import CheckInCalendar from './CheckInCalendar';
-import CheckOutCalendar from './CheckOutCalendar';
+import Calendar from './Calendar';
 import arrow from '../images/arrow.png';
 
 export const Holder = styled.div`
@@ -57,19 +56,6 @@ export const SectionThree = styled.div`
 export default function Dropdown(props) {
   let calendar;
   let holderArrow;
-  if (props.clicked === 1) {
-    calendar = (<CheckInCalendar {...props} />);
-    holderArrow = (
-      <svg height="10" width="250" fill="rgb(172, 172, 172)" stroke="rgb(172, 172, 172)" position="absolute">
-        <path d="M 15,25 35, 25 25, 0 Z" height="0px" position="absolute" />
-      </svg>);
-  } else if (props.clicked === -1) {
-    calendar = (<CheckOutCalendar {...props} />);
-    holderArrow = (
-      <svg height="10" width="250" fill="rgb(172, 172, 172)" stroke="rgb(172, 172, 172)">
-        <path d="M 0,25 35, 25 25, 15 Z" height="0px" />
-      </svg>);
-  }
   if (props.clicked === 1 || props.clicked === -1) {
     return (
       <div>
@@ -81,7 +67,7 @@ export default function Dropdown(props) {
             <Arrow onClick={() => props.arrowClick(props.currDate, 1)} />
           </SectionOne>
           <SectionTwo>
-            {calendar}
+            <Calendar {...props} />
           </SectionTwo>
           <SectionThree>
             <div> {props.minStay} day minimum. </div>
