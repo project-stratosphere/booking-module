@@ -41,9 +41,6 @@ export default function Calendar(props) {
       dates: props.dates,
     });
   }
-  const weekDayNames = moment.weekdaysMin().map(day => (
-    <Button week key={day} disabled> {day} </Button>
-  ));
 
   const calendar = daysArr.map((day, i) => {
     let isOccupied = false;
@@ -65,6 +62,10 @@ export default function Calendar(props) {
       </Button>
     );
   });
+
+  const weekDayNames = moment.weekdaysMin().map(day => (
+    <Button week key={day} disabled> {day} </Button>
+  ));
 
   return (
     <Table>
@@ -107,7 +108,7 @@ Calendar.defaultProps = {
   startDate: null,
   endDate: null,
   dateClick: () => null,
-  // clearDates: () => null,
+  clearDates: () => null,
   calendarChange: () => null,
   // arrowClick: () => null,
   clicked: 0,

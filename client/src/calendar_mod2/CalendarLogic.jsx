@@ -90,17 +90,17 @@ export function findOccupiedDatesInMonth({
     for (let i = 1; i < startDate; i += 1) {
       targetDates.push(i);
     }
-    // for getting the days for the minimum stay
-    let toBlockOut = startDate + (minStay - 1);
-    for (let i = startDate + 1; i < toBlockOut; i += 1) {
-      targetDates.push(i);
-    }
     // for blocking off the days after an occupied date
     const daysInMonth = moment(`${year}-${month}`, 'YYYY-MMM').daysInMonth();
-    toBlockOut = targetDates
+    let toBlockOut = targetDates
       .sort((a, b) => a - b)
-      .findIndex(num => num > startDate + minStay);
+      .findIndex(num => num > startDate);
     for (let i = targetDates[toBlockOut]; i <= daysInMonth; i += 1) {
+      targetDates.push(i);
+    }
+    // for getting the days for the minimum stay
+    toBlockOut = startDate + (minStay - 1);
+    for (let i = startDate + 1; i < toBlockOut; i += 1) {
       targetDates.push(i);
     }
   }
