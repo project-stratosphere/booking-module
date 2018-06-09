@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import momentPropTypes from 'react-moment-proptypes';
 import moment from 'moment';
 import { Table, Tr, Button } from './CalendarStyling';
 import { createDaysArr, findOccupiedDatesInMonth } from './CalendarLogic';
 
-export default function CheckOutCalendar(props) {
+export default function Calendar(props) {
   const onDateClick = (day) => {
     if (props.clicked === 1) {
       props.dateClick('startDate', day);
@@ -79,3 +80,33 @@ export default function CheckOutCalendar(props) {
     </Table>
   );
 }
+
+Calendar.propTypes = {
+  dates: PropTypes.arrayOf(PropTypes.string),
+  minStay: PropTypes.number,
+  startDate: PropTypes.number,
+  endDate: PropTypes.number,
+  dateClick: PropTypes.func,
+  clearDates: PropTypes.func,
+  calendarChange: PropTypes.func,
+  arrowClick: PropTypes.func,
+  clicked: PropTypes.number,
+  currDate: momentPropTypes.momentObj,
+  month: PropTypes.string,
+  year: PropTypes.number,
+};
+
+Calendar.defaultProps = {
+  dates: [],
+  minStay: 0,
+  startDate: null,
+  endDate: null,
+  dateClick: () => null,
+  clearDates: () => null,
+  calendarChange: () => null,
+  arrowClick: () => null,
+  clicked: 0,
+  currDate: null,
+  month: null,
+  year: null,
+};

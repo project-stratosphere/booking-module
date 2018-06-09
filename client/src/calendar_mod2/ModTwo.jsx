@@ -2,38 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import arrow from '../images/arrow.png';
 import Dropdown from './Dropdown';
 import { calendarChange, onArrowClick, dateConverter } from './CalendarLogic';
-
-export const Holder = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: inherit;
-  padding-top: 10px;
-`;
-
-export const Title = styled.div`
-  font-size: 12px;
-  font-weight: bold;
-  margin-bottom: 3px;
-`;
-
-export const DateHolder = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 22px;
-  border: 1px solid rgb(172, 172, 172);
-  padding: 5px;
-`;
+import { Holder, InputHolder, Title, Arrow } from '../ModStylings';
 
 export const Date = styled.div`
-`;
-
-export const Arrow = styled.div`
-  content: url(${arrow});
-  height: 17px;
 `;
 
 export default class ModTwo extends Component {
@@ -55,7 +28,7 @@ export default class ModTwo extends Component {
     return (
       <Holder>
         <Title> Dates </Title>
-        <DateHolder>
+        <InputHolder>
           <Date
             onClick={() => this.calendarChange('checkInClicked')}
           > {startDate || 'Check In'}
@@ -65,7 +38,7 @@ export default class ModTwo extends Component {
             onClick={() => this.calendarChange('checkOutClicked')}
           > {endDate || 'Check Out'}
           </Date>
-        </DateHolder>
+        </InputHolder>
         <Dropdown
           calendarChange={this.calendarChange}
           arrowClick={this.onArrowClick}

@@ -4,18 +4,7 @@ import PropTypes from 'prop-types';
 import momentPropTypes from 'react-moment-proptypes';
 import Calendar from './Calendar';
 import arrow from '../images/arrow.png';
-
-export const Holder = styled.div`
-  position: absolute;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  width: 286px;
-  border: 1px solid rgb(172, 172, 172);
-  border-radius: 1%;
-  padding: 20px;
-  background-color: white;
-`;
+import { DropdownHolder, Close } from '../ModStylings';
 
 export const Arrow = styled.div`
   border-radius: 10%;
@@ -60,7 +49,7 @@ export default function Dropdown(props) {
     return (
       <div>
         {holderArrow}
-        <Holder>
+        <DropdownHolder>
           <SectionOne>
             <Arrow left onClick={() => props.arrowClick(props.currDate, -1)} />
             <div> {props.month} {props.year} </div>
@@ -73,7 +62,8 @@ export default function Dropdown(props) {
             <div> {props.minStay} day minimum. </div>
             <div> Updated 2 days ago </div>
           </SectionThree>
-        </Holder>
+          <Close onClick={props.clearDates}> Clear Dates </Close>
+        </DropdownHolder>
       </div>
     );
   }
