@@ -12,7 +12,7 @@ export const Details = styled.div`
 export default function Dropdown(props) {
   if (props.clicked) {
     return (
-      <DropdownHolder>
+      <DropdownHolder guest>
         <DropdownContents
           {...props}
         />

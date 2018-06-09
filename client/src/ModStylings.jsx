@@ -44,6 +44,7 @@ export const DropdownHolder = styled.div`
   position: absolute;
   z-index: 2;
   display: flex;
+  margin-top: ${props => (props.guest ? '50px' : '')};
   flex-direction: column;
   width: 286px;
   border: 1px solid rgb(172, 172, 172);
