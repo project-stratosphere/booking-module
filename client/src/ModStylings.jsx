@@ -16,7 +16,7 @@ export const InputHolder = styled.div`
   border: 1px solid rgb(172, 172, 172);
   padding: 5px;
   padding-left: 15px;
-  padding-right: 10px;
+  padding-right: 15px;
   &:hover{
     cursor: pointer;
   }

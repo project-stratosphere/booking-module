@@ -91,7 +91,7 @@ export function findOccupiedDatesInMonth({
       targetDates.push(i);
     }
     // for getting the days for the minimum stay
-    let toBlockOut = startDate + minStay;
+    let toBlockOut = startDate + (minStay - 1);
     for (let i = startDate + 1; i < toBlockOut; i += 1) {
       targetDates.push(i);
     }

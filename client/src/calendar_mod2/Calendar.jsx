@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import momentPropTypes from 'react-moment-proptypes';
 import moment from 'moment';
 import { Table, Tr, Button } from './CalendarStyling';
 import { createDaysArr, findOccupiedDatesInMonth } from './CalendarLogic';
@@ -8,6 +7,11 @@ import { createDaysArr, findOccupiedDatesInMonth } from './CalendarLogic';
 export default function Calendar(props) {
   const onDateClick = (day) => {
     if (props.clicked === 1) {
+      if (props.endDate) {
+        if (day > props.endDate || day + props.minStay > props.endDate) {
+          props.clearDates();
+        }
+      }
       props.dateClick('startDate', day);
       props.calendarChange('checkOutClicked');
     } else if (props.clicked === -1) {
@@ -52,9 +56,10 @@ export default function Calendar(props) {
         day={day}
         date={isOccupied}
         onClick={() => onDateClick(day)}
+        minStay={props.minStay}
         startDate={props.startDate}
         endDate={props.endDate}
-        disabled={isOccupied || (day === props.startDate)}
+        disabled={isOccupied || (props.startDate === day)}
       >
         {day}
       </Button>
@@ -89,9 +94,9 @@ Calendar.propTypes = {
   dateClick: PropTypes.func,
   clearDates: PropTypes.func,
   calendarChange: PropTypes.func,
-  arrowClick: PropTypes.func,
+  // arrowClick: PropTypes.func,
   clicked: PropTypes.number,
-  currDate: momentPropTypes.momentObj,
+  // currDate: momentPropTypes.momentObj,
   month: PropTypes.string,
   year: PropTypes.number,
 };
@@ -102,11 +107,11 @@ Calendar.defaultProps = {
   startDate: null,
   endDate: null,
   dateClick: () => null,
-  clearDates: () => null,
+  // clearDates: () => null,
   calendarChange: () => null,
-  arrowClick: () => null,
+  // arrowClick: () => null,
   clicked: 0,
-  currDate: null,
+  // currDate: null,
   month: null,
   year: null,
 };

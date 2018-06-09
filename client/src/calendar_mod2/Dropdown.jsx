@@ -22,6 +22,16 @@ export const Arrow = styled.div`
     }
 `;
 
+// top right bottom left
+export const Triangle = styled.div`
+    border-color: #ffffff #ffffff #acacac #ffffff;
+    border-style: solid;
+    border-width: 0px 8px 12px 8px;
+    height: 5px;
+    width: 0px;
+    margin-left: ${props => ((props.left === 1) ? '20px' : '290px')}
+`;
+
 export const SectionOne = styled.div`
   display: flex;
   flex-direction: row;
@@ -44,11 +54,10 @@ export const SectionThree = styled.div`
 `;
 
 export default function Dropdown(props) {
-  let holderArrow;
   if (props.clicked === 1 || props.clicked === -1) {
     return (
       <div>
-        {holderArrow}
+        <Triangle left={props.clicked} />
         <DropdownHolder>
           <SectionOne>
             <Arrow left onClick={() => props.arrowClick(props.currDate, -1)} />
