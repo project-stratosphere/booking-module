@@ -78,16 +78,18 @@ export default class ModTwo extends Component {
 }
 
 ModTwo.propTypes = {
-  dates: PropTypes.array,
-  minstay: PropTypes.number,
+  dates: PropTypes.arrayOf(PropTypes.string),
+  minStay: PropTypes.number,
   startDate: PropTypes.number,
   endDate: PropTypes.number,
   dateClick: PropTypes.func,
+  clearDates: PropTypes.func,
 };
 ModTwo.defaultProps = {
   dates: [],
-  minstay: 0,
+  minStay: 0,
   startDate: null,
   endDate: null,
   dateClick: () => null,
+  clearDates: () => null,
 };

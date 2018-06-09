@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import momentPropTypes from 'react-moment-proptypes';
 import Calendar from './Calendar';
 import arrow from '../images/arrow.png';
 
@@ -54,7 +55,6 @@ export const SectionThree = styled.div`
 `;
 
 export default function Dropdown(props) {
-  let calendar;
   let holderArrow;
   if (props.clicked === 1 || props.clicked === -1) {
     return (
@@ -81,19 +81,31 @@ export default function Dropdown(props) {
 }
 
 Dropdown.propTypes = {
+  dates: PropTypes.arrayOf(PropTypes.string),
+  minStay: PropTypes.number,
+  startDate: PropTypes.number,
+  endDate: PropTypes.number,
+  dateClick: PropTypes.func,
+  clearDates: PropTypes.func,
+  calendarChange: PropTypes.func,
+  arrowClick: PropTypes.func,
   clicked: PropTypes.number,
+  currDate: momentPropTypes.momentObj,
   month: PropTypes.string,
   year: PropTypes.number,
-  dateClick: PropTypes.func,
-  // dates: PropTypes.arrayOf( PropTypes.shape( {
-  //   date: PropTypes.date,
-  // } ) ),
-
 };
+
 Dropdown.defaultProps = {
-  clicked: 0,
-  month: 'June',
-  year: 2018,
+  dates: [],
+  minStay: 0,
+  startDate: null,
+  endDate: null,
   dateClick: () => null,
-  // dates: [],
+  clearDates: () => null,
+  calendarChange: () => null,
+  arrowClick: () => null,
+  clicked: 0,
+  currDate: null,
+  month: null,
+  year: null,
 };

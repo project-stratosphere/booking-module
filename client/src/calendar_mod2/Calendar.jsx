@@ -79,23 +79,3 @@ export default function CheckOutCalendar(props) {
     </Table>
   );
 }
-
-CheckOutCalendar.propTypes = {
-  dates: PropTypes.array,
-  month: PropTypes.string,
-  year: PropTypes.number,
-  startDate: PropTypes.number,
-  endDate: PropTypes.number,
-  dateClick: PropTypes.func,
-  calendarChange: PropTypes.func,
-
-};
-CheckOutCalendar.defaultProps = {
-  dates: [],
-  month: null,
-  year: null,
-  startDate: null,
-  endDate: null,
-  dateClick: () => null,
-  calendarChange: () => null,
-};
