@@ -5,6 +5,7 @@ import axios from 'axios';
 import ModOne from './pricing_mod1/ModOne';
 import ModTwo from './calendar_mod2/ModTwo';
 import ModThree from './guestsAndCalc_mod3/ModThree';
+import { onCalendarDateClick } from './calendar_mod2/CalendarLogic';
 
 injectGlobal([`
   html, body{
@@ -42,6 +43,7 @@ export default class App extends Component {
       startDate: null,
       endDate: null,
     };
+    this.onCalendarDateClick = onCalendarDateClick.bind(this);
   }
 
   componentDidMount() {
@@ -65,12 +67,6 @@ export default class App extends Component {
     this.setState({
       [guest]: val,
       totalGuests: guest === 'infants' ? totalGuests : total,
-    });
-  }
-
-  onCalendarDateStartClick = (type, day) => {
-    this.setState({
-      [type]: day,
     });
   }
 
@@ -106,7 +102,7 @@ export default class App extends Component {
             minStay={this.state.listingData.minStay}
             startDate={this.state.startDate}
             endDate={this.state.endDate}
-            dateClick={this.onCalendarDateStartClick}
+            dateClick={this.onCalendarDateClick}
           />
           <ModThree
             adult={this.state.adults}

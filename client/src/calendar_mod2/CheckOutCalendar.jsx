@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Table, Tr, Button } from './CalendarStyling';
-import { createDaysArr, findOccupiedDatesInMonth } from './CalendarLogic';
+import { createDaysArr, findOccupiedDatesInMonth, afterEndDateEstablished } from './CalendarLogic';
 
 export default class CheckOutCalendar extends Component {
   constructor(props) {
@@ -13,15 +13,17 @@ export default class CheckOutCalendar extends Component {
     };
     this.createDaysArr = createDaysArr.bind(this);
     this.findOccupiedDatesInMonth = findOccupiedDatesInMonth.bind(this);
+    this.afterEndDateEstablished = afterEndDateEstablished.bind(this);
   }
 
   componentDidMount = () => {
-    this.findOccupiedDatesInMonth(this.props.dates, this.props.month, this.props.year, this.props.startDate);
-    this.createDaysArr(this.props.month, this.props.year);
+    this.findOccupiedDatesInMonth(this.props.startDate);
+    this.createDaysArr();
   }
 
   onEndDateClick = (day) => {
     this.props.dateClick('endDate', day);
+    this.afterEndDateEstablished(day);
     this.props.calendarChange();
   }
 
@@ -43,7 +45,7 @@ export default class CheckOutCalendar extends Component {
             date={isOccupied}
             onClick={() => this.onEndDateClick(day)}
             startDate={this.props.startDate}
-            endDate={this.props.startDate}
+            endDate={this.props.endDate}
             disabled={isOccupied || (day === this.props.startDate)}
           > {day}
           </Button>

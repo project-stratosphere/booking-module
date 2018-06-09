@@ -25,9 +25,10 @@ color: ${props => (props.date ? 'rgb(172,172,172)' : 'black')};
 text-decoration: ${props => (props.date ? 'line-through' : '')};
 background-color: ${(props) => {
     if (props.week) { return ''; }
-    return (
-      props.startDate === props.day ? '#00a699' : 'white'
-    );
+    if (props.startDate === props.day || props.endDate === props.day) {
+      return '#00a699';
+    }
+    return 'white';
   }}
 &:hover:enabled{
   background-color: #F0F0F0;

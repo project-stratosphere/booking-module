@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import arrow from '../images/arrow.png';
 import Dropdown from './Dropdown';
+import { calendarChange } from './CalendarLogic';
 
 export const Holder = styled.div`
   display: flex;
@@ -42,22 +43,7 @@ export default class ModTwo extends Component {
       month: 'June',
       year: 2018,
     };
-  }
-
-  dateClick = (holderName) => {
-    if (holderName === 'checkInClicked' && this.state.clicked !== 1) {
-      this.setState({
-        clicked: 1,
-      });
-    } else if (holderName === 'checkOutClicked' && this.state.clicked !== -1) {
-      this.setState({
-        clicked: -1,
-      });
-    } else {
-      this.setState({
-        clicked: 0,
-      });
-    }
+    this.calendarChange = calendarChange.bind(this);
   }
 
   render() {
@@ -66,17 +52,17 @@ export default class ModTwo extends Component {
         <Title> Dates </Title>
         <DateHolder>
           <Date
-            onClick={() => this.dateClick('checkInClicked')}
-          > Check In
+            onClick={() => this.calendarChange('checkInClicked')}
+          > {this.props.startDate || 'Check In'}
           </Date>
           <Arrow />
           <Date
-            onClick={() => this.dateClick('checkOutClicked')}
-          > Check Out
+            onClick={() => this.calendarChange('checkOutClicked')}
+          > {this.props.endDate || 'Check Out'}
           </Date>
         </DateHolder>
         <Dropdown
-          calendarChange={this.dateClick}
+          calendarChange={this.calendarChange}
           {...this.props}
           {...this.state}
         />

@@ -16,8 +16,8 @@ export default class CheckInCalendar extends Component {
   }
 
   componentDidMount = () => {
-    this.findOccupiedDatesInMonth(this.props.dates, this.props.month, this.props.year);
-    this.createDaysArr(this.props.month, this.props.year);
+    this.findOccupiedDatesInMonth();
+    this.createDaysArr();
   }
 
   onStartDateClick = (day) => {
@@ -43,6 +43,7 @@ export default class CheckInCalendar extends Component {
             date={isOccupied}
             onClick={() => this.onStartDateClick(day)}
             startDate={this.props.startDate}
+            endDate={this.props.endDate}
             disabled={isOccupied || (day === this.props.startDate)}
           > {day}
           </Button>
