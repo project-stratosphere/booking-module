@@ -1,57 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Dropdown from './Dropdown';
 import { Holder, InputHolder, Title, Logo } from '../ModStylings';
 
-export default class ModThree extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      clicked: false,
-    };
+export default function ModThree(props) {
+  let infantStatement;
+  if (props.infant > 1) {
+    infantStatement = `, ${props.infant} infants`;
+  } else if (props.infant === 1) {
+    infantStatement = ', 1 infant';
   }
 
-  onGuestHolderClick = () => {
-    this.setState({
-      clicked: !this.state.clicked,
-    });
-  }
+  return (
+    <Holder>
+      <Title> Guests </Title>
+      <InputHolder onClick={props.close}>
+        <div>
+          {props.totalGuests} {props.totalGuests > 1 ? 'guests' : 'guest'}
+          {infantStatement}
+        </div>
+        <Logo
+          clicked={props.clicked}
+        />
+      </InputHolder>
+      <Dropdown
+        clicked={props.clicked}
+        {...props}
+      />
 
-  render() {
-    let infantStatement;
-    if (this.props.infant > 1) {
-      infantStatement = `, ${this.props.infant} infants`;
-    } else if (this.props.infant === 1) {
-      infantStatement = ', 1 infant';
-    }
-    if (this.props.adult) {
-      return (
-        <Holder>
-          <Title> Guests </Title>
-          <InputHolder onClick={this.onGuestHolderClick}>
-            <div>
-              {this.props.totalGuests} {this.props.totalGuests > 1 ? 'guests' : 'guest'}
-              {infantStatement}
-            </div>
-            <Logo
-              clicked={this.state.clicked}
-            />
-          </InputHolder>
-          <Dropdown
-            clicked={this.state.clicked}
-            close={this.onGuestHolderClick}
-            {...this.props}
-          />
-
-        </Holder>
-      );
-    }
-    return null;
-  }
+    </Holder>
+  );
 }
 
 ModThree.propTypes = {
   btnClick: PropTypes.func,
+  close: PropTypes.func,
+  clicked: PropTypes.bool,
   adult: PropTypes.number,
   child: PropTypes.number,
   infant: PropTypes.number,
@@ -61,6 +45,8 @@ ModThree.propTypes = {
 };
 ModThree.defaultProps = {
   btnClick: () => null,
+  close: () => null,
+  clicked: false,
   adult: 0,
   child: 0,
   infant: 0,

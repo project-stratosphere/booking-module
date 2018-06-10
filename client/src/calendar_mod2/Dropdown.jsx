@@ -22,14 +22,13 @@ export const Arrow = styled.div`
     }
 `;
 
-// top right bottom left
 export const Triangle = styled.div`
     border-color: #ffffff #ffffff #acacac #ffffff;
     border-style: solid;
     border-width: 0px 8px 12px 8px;
     height: 5px;
     width: 0px;
-    margin-left: ${props => ((props.left === 1) ? '20px' : '290px')}
+    margin-left: ${props => ((props.left === 'checkIn') ? '20px' : '290px')}
 `;
 
 export const SectionOne = styled.div`
@@ -54,7 +53,7 @@ export const SectionThree = styled.div`
 `;
 
 export default function Dropdown(props) {
-  if (props.clicked === 1 || props.clicked === -1) {
+  if (props.clicked === 'checkIn' || props.clicked === 'checkOut') {
     return (
       <div>
         <Triangle left={props.clicked} />
@@ -84,11 +83,11 @@ Dropdown.propTypes = {
   minStay: PropTypes.number,
   startDate: PropTypes.number,
   endDate: PropTypes.number,
-  dateClick: PropTypes.func,
+  setDate: PropTypes.func,
   clearDates: PropTypes.func,
   calendarChange: PropTypes.func,
   arrowClick: PropTypes.func,
-  clicked: PropTypes.number,
+  clicked: PropTypes.string,
   currDate: momentPropTypes.momentObj,
   month: PropTypes.string,
   year: PropTypes.number,
@@ -99,11 +98,11 @@ Dropdown.defaultProps = {
   minStay: 0,
   startDate: null,
   endDate: null,
-  dateClick: () => null,
+  setDate: () => null,
   clearDates: () => null,
   calendarChange: () => null,
   arrowClick: () => null,
-  clicked: 0,
+  clicked: '',
   currDate: null,
   month: null,
   year: null,

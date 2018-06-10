@@ -15,12 +15,15 @@ export const Holder = styled.div`
 `;
 Holder.displayName = 'Holder';
 
-export default function ModOne( props ) {
-  if ( props.price ) {
+export default function ModOne(props) {
+  if (props.price) {
     return (
       <Holder>
         <PricePerNight price={props.price} />
-        <Rating rating={props.rating} numReviews={props.numReviews} />
+        <Rating
+          rating={props.rating}
+          numReviews={props.numReviews}
+        />
       </Holder>
     );
   }

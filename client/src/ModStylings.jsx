@@ -3,10 +3,10 @@ import logo from './images/arrowLogo.png';
 import arrow from './images/arrow.png';
 
 export const Holder = styled.div`
-display: flex;
-flex-direction: column;
-width: inherit;
-padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  padding-top: 10px;
 `;
 
 export const InputHolder = styled.div`

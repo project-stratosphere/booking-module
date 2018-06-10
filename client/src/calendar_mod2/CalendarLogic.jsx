@@ -2,7 +2,7 @@ import moment from 'moment';
 //* = uses a binding
 
 // *export into index, used inside calendar
-export function onCalendarDateClick(type, day) {
+export function setStartOrEndDate(type, day) {
   this.setState({
     [type]: day,
   });
@@ -21,6 +21,14 @@ export function onArrowClick(date, increment) {
   this.props.clearDates();
 }
 
+// *export into index, used inside onArrowClick
+export function clearDates() {
+  this.setState({
+    startDate: null,
+    endDate: null,
+  });
+}
+
 // export & used in mod2
 export function dateConverter(date, day) {
   if (day !== null) {
@@ -32,30 +40,40 @@ export function dateConverter(date, day) {
   return null;
 }
 
-// *export into index, used inside onArrowClick
-export function clearDates() {
-  this.setState({
-    startDate: null,
-    endDate: null,
-  });
-}
-
 // *export & used in mod2
 export function calendarChange(holderName) {
-  if (holderName === 'checkInClicked' && this.state.clicked !== 1) {
+  if (holderName === 'checkInClicked' && this.state.mod2Clicked !== 'checkIn') {
     this.setState({
-      clicked: 1,
+      mod2Clicked: 'checkIn',
     });
-  } else if (holderName === 'checkOutClicked' && this.state.clicked !== -1) {
+  } else if (holderName === 'checkOutClicked' && this.state.mod2Clicked !== 'checkOut') {
     this.setState({
-      clicked: -1,
+      mod2Clicked: 'checkOut',
     });
   } else {
     this.setState({
-      clicked: 0,
+      mod2Clicked: 'closed',
     });
   }
 }
+
+// export & used in calendar
+export const onDateClick = ({
+  day, props,
+}) => {
+  if (props.clicked === 'checkIn') {
+    if (props.endDate) {
+      if (day > props.endDate || day + props.minStay > props.endDate) {
+        props.clearDates();
+      }
+    }
+    props.setDate('startDate', day);
+    props.calendarChange('checkOutClicked');
+  } else if (props.clicked === 'checkOut') {
+    props.setDate('endDate', day);
+    props.calendarChange();
+  }
+};
 
 // export & used in calendar
 export function createDaysArr({ month, year }) {

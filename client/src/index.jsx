@@ -4,8 +4,8 @@ import styled, { injectGlobal } from 'styled-components';
 import axios from 'axios';
 import ModOne from './pricing_mod1/ModOne';
 import ModTwo from './calendar_mod2/ModTwo';
-import ModThree from './guestsAndCalc_mod3/ModThree';
-import { onCalendarDateClick, clearDates } from './calendar_mod2/CalendarLogic';
+import ModThree from './guests_mod3/ModThree';
+import { setStartOrEndDate, clearDates, calendarChange } from './calendar_mod2/CalendarLogic';
 
 injectGlobal([`
   html, body{
@@ -42,9 +42,12 @@ export default class App extends Component {
       listingData: null,
       startDate: null,
       endDate: null,
+      mod2Clicked: 'closed',
+      mod3Clicked: false,
     };
-    this.onCalendarDateClick = onCalendarDateClick.bind(this);
+    this.setStartOrEndDate = setStartOrEndDate.bind(this);
     this.clearDates = clearDates.bind(this);
+    this.calendarChange = calendarChange.bind(this);
   }
 
   componentDidMount() {
@@ -68,6 +71,12 @@ export default class App extends Component {
     this.setState({
       [guest]: val,
       totalGuests: guest === 'infants' ? totalGuests : total,
+    });
+  }
+
+  onMod3InputHolderClick = () => {
+    this.setState({
+      mod3Clicked: !this.state.mod3Clicked,
     });
   }
 
@@ -103,7 +112,9 @@ export default class App extends Component {
             minStay={this.state.listingData.minStay}
             startDate={this.state.startDate}
             endDate={this.state.endDate}
-            dateClick={this.onCalendarDateClick}
+            setDate={this.setStartOrEndDate}
+            calendarChange={this.calendarChange}
+            clicked={this.state.mod2Clicked}
             clearDates={this.clearDates}
           />
           <ModThree
@@ -113,6 +124,8 @@ export default class App extends Component {
             totalGuests={this.state.totalGuests}
             btnClick={this.onGuestButtonClick}
             maxGuests={this.state.listingData.maxGuests}
+            clicked={this.state.mod3Clicked}
+            close={this.onMod3InputHolderClick}
           />
           {/* <ModFour /> */}
         </Holder>
