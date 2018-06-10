@@ -5,6 +5,7 @@ import axios from 'axios';
 import ModOne from './pricing_mod1/ModOne';
 import ModTwo from './calendar_mod2/ModTwo';
 import ModThree from './guests_mod3/ModThree';
+import ModFour from './calculator_mod4/ModFour';
 import { setStartOrEndDate, clearDates, calendarChange } from './calendar_mod2/CalendarLogic';
 
 injectGlobal([`
@@ -25,10 +26,28 @@ export const Holder = styled.div`
   align-items: center;
   flex-direction: column;
   width: 328px;  
-  height: 300px;
+  height: ${props => ((props.startDate && props.endDate) ? '400px' : '300px')};
   border: 1px solid rgb(172, 172, 172);
   font-family: Quicksand;
   padding: 24px;
+`;
+
+export const Button = styled.button`
+  width: inherit;
+  margin-top: 20px;
+  height: 40px;
+  border-radius: 7px;
+  outline: none;
+  background-color: #F16664;
+  font-weight: bold;
+  color: white;
+`;
+
+export const Details = styled.div`
+  font-size: 12px;
+  font-weight: bold;
+  align-self: center;
+  margin-top: 7px;
 `;
 
 export default class App extends Component {
@@ -101,7 +120,10 @@ export default class App extends Component {
   render() {
     if (this.state.listingData) {
       return (
-        <Holder>
+        <Holder
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+        >
           <ModOne
             price={this.state.listingData.pricePerNight}
             rating={this.state.listingData.starRating}
@@ -127,7 +149,16 @@ export default class App extends Component {
             clicked={this.state.mod3Clicked}
             close={this.onMod3InputHolderClick}
           />
-          {/* <ModFour /> */}
+          <ModFour
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            price={this.state.listingData.pricePerNight}
+            cleaningFee={this.state.listingData.cleaningFee}
+            maxGuests={this.state.listingData.maxGuests}
+            serviceFee={this.state.listingData.serviceFee}
+          />
+          <Button> REQUEST TO BOOK </Button>
+          <Details> You won’t be charged yet </Details>
         </Holder>
       );
     }
@@ -136,7 +167,3 @@ export default class App extends Component {
 }
 
 render(<App />, document.getElementById('root'));
-
-// cleaningFee={this.state.listingData.cleaningFee}
-// maxGuests={this.state.listingData.maxGuests}
-// serviceFee={this.state.listingData.serviceFee}
