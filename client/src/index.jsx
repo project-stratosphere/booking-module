@@ -5,7 +5,6 @@ import ModOne from './pricing_mod1/ModOne';
 import ModTwo from './calendar_mod2/ModTwo';
 import ModThree from './guests_mod3/ModThree';
 import ModFour from './calculator_mod4/ModFour';
-import { setStartOrEndDate, clearDates, calendarChange } from './calendar_mod2/CalendarLogic';
 import { Holder, Button, Details } from './IndexStylings';
 
 export default class App extends Component {
@@ -22,9 +21,6 @@ export default class App extends Component {
       mod2Clicked: 'closed',
       mod3Clicked: false,
     };
-    this.setStartOrEndDate = setStartOrEndDate.bind(this);
-    this.clearDates = clearDates.bind(this);
-    this.calendarChange = calendarChange.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +53,12 @@ export default class App extends Component {
     });
   }
 
+  setStartOrEndDate = (type, day) => {
+    this.setState({
+      [type]: day,
+    });
+  }
+
   getListingData = () => {
     let id = window.location.pathname;
     if (id === '/') {
@@ -73,6 +75,34 @@ export default class App extends Component {
       .catch(() => {
         console.log('there was an error!');
       });
+  }
+
+  calendarChange = (holderName) => {
+    if (holderName === 'checkInClicked' && this.state.mod2Clicked !== 'checkIn') {
+      this.setState({
+        mod2Clicked: 'checkIn',
+      });
+    } else if (holderName === 'checkOutClicked' && this.state.mod2Clicked !== 'checkOut') {
+      this.setState({
+        mod2Clicked: 'checkOut',
+      });
+    } else {
+      this.setState({
+        mod2Clicked: 'closed',
+      });
+    }
+  }
+
+  clearDates = () => {
+    this.setState({
+      startDate: null,
+      endDate: null,
+    });
+    if (this.state.mod2Clicked === 'checkOut') {
+      this.setState({
+        mod2Clicked: 'checkIn',
+      });
+    }
   }
 
   render() {

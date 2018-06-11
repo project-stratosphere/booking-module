@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import Dropdown from './Dropdown';
-import { onArrowClick, dateConverter } from './CalendarLogic';
 import { Holder, InputHolder, Title, Arrow } from '../ModStylings';
 
 export const Date = styled.div`
@@ -17,12 +16,33 @@ export default class ModTwo extends Component {
       month: moment().format('MMMM-YYYY').split('-')[0],
       year: Number(moment().format('MMMM-YYYY').split('-')[1]),
     };
-    this.onArrowClick = onArrowClick.bind(this);
+  }
+
+  onArrowClick = (date, increment) => {
+    const next = date.add(increment, 'month');
+    const month = next.format('MMMM-YYYY').split('-')[0];
+    const year = Number(next.format('MMMM-YYYY').split('-')[1]);
+    this.setState({
+      currDate: next,
+      month,
+      year,
+    });
+    this.props.clearDates();
+  }
+
+  dateConverter = (date, day) => {
+    if (day !== null) {
+      const currDate = date.format('MM-YYYY').split('-');
+      const currMonth = currDate[0];
+      const currYear = Number(currDate[1]);
+      return `${currMonth}/${day}/${currYear}`;
+    }
+    return null;
   }
 
   render() {
-    const startDate = dateConverter(this.state.currDate, this.props.startDate);
-    const endDate = dateConverter(this.state.currDate, this.props.endDate);
+    const startDate = this.dateConverter(this.state.currDate, this.props.startDate);
+    const endDate = this.dateConverter(this.state.currDate, this.props.endDate);
     return (
       <Holder>
         <Title> Dates </Title>

@@ -15,7 +15,9 @@ export default class Calendar extends Component {
   onDateClick = (day) => {
     if (this.props.clicked === 'checkIn') {
       if (this.props.endDate) {
-        if (day > this.props.endDate || day + (this.props.minStay - 1) > this.props.endDate || day < this.props.startDate) {
+        if (day > this.props.endDate
+          || day + (this.props.minStay - 1) > this.props.endDate
+          || day < this.props.startDate) {
           this.props.clearDates();
         }
         this.setState({
@@ -42,6 +44,49 @@ export default class Calendar extends Component {
     return null;
   };
 
+  createDaysArr = ({ month, year }) => {
+    const firstDayOfTheMonth = moment(`${year}-${month}`, 'YYYY-MMM').date(1).day();
+    const daysInMonth = moment(`${year}-${month}`, 'YYYY-MMM').daysInMonth();
+
+    const daysInMonthArr = [];
+    for (let i = 0; i < firstDayOfTheMonth; i += 1) {
+      daysInMonthArr.push('');
+    }
+    for (let i = 1; i <= daysInMonth; i += 1) {
+      daysInMonthArr.push(i);
+    }
+    return daysInMonthArr;
+  }
+
+  findOccupiedDatesInMonth = ({
+    startDate, month, year, dates,
+  }) => {
+    const targetDates = [];
+    dates.forEach((date) => {
+      const dateDay = Number(moment.utc(date).format('DD'));
+      const dateMonth = moment.utc(date).format('MMMM');
+      const dateYear = Number(moment.utc(date).format('YYYY'));
+      if (dateMonth === month && dateYear === year) {
+        targetDates.push(dateDay);
+      }
+    });
+    if (startDate) {
+      // for getting the days before the start date
+      for (let i = 1; i < startDate; i += 1) {
+        targetDates.push(i);
+      }
+      // for blocking off the days after an occupied date
+      const daysInMonth = moment(`${year}-${month}`, 'YYYY-MMM').daysInMonth();
+      const toBlockOut = targetDates
+        .sort((a, b) => a - b)
+        .findIndex(num => num > startDate);
+      for (let i = targetDates[toBlockOut]; i <= daysInMonth; i += 1) {
+        targetDates.push(i);
+      }
+    }
+    return targetDates;
+  }
+
   createCalendar = () => {
     // find the days in the month and create an array
     const daysArr = createDaysArr({
@@ -62,7 +107,6 @@ export default class Calendar extends Component {
         startDate: this.props.startDate,
         month: this.props.month,
         year: this.props.year,
-        minStay: this.props.minStay,
         dates: this.props.dates,
       });
     }
