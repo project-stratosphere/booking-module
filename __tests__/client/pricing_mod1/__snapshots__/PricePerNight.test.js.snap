@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Price Per Nights Component does not render if props.price is undefined 1`] = `null`;
+
+exports[`Rating component holder contains price per night 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  width: inherit;
+}
+
+<div
+  className="c0"
+>
+   things inside 
+</div>
+`;

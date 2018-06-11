@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 export const Holder = styled.div`
-  width: inherit;
+  display: flex;
   justify-content: flex-start;
+  width: inherit;
 `;
 
 export default function PricePerNight(props) {
