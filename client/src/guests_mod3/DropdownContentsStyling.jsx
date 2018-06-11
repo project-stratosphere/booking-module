@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { abnbGrey, abnbDarkBlue } from '../ModStylings';
 
 export const Holder = styled.div`
   display: flex;
@@ -39,7 +40,7 @@ export const Button = styled.button`
   margin-top: 1px;
   outline: none;
     &:active{
-      background-color: #007D8C;
+      background-color: ${abnbDarkBlue};
     }
     &:hover:enabled{
       cursor: pointer;
@@ -49,21 +50,21 @@ export const Button = styled.button`
 export const ButtonDown = Button.extend`
   border: ${(props) => {
     if (props.number > 0 && (props.guest === 'infants' || props.guest === 'children')) {
-      return '1px solid #007D8C';
+      return `1px solid ${abnbDarkBlue}`;
     } else if (props.guest === 'adults' && props.number > 1) {
-      return '1px solid #007D8C';
+      return `1px solid ${abnbDarkBlue}`;
     }
-    return '1px solid rgb(172, 172, 172)';
+    return `1px solid ${abnbGrey}`;
   }};
 `;
 
 export const ButtonUp = Button.extend`
   border: ${(props) => {
     if (props.total < props.max && (props.guest === 'adults' || props.guest === 'children')) {
-      return '1px solid #007D8C';
+      return `1px solid ${abnbDarkBlue}`;
     } else if (props.guest === 'infants' && props.number < 5) {
-      return '1px solid #007D8C';
+      return `1px solid ${abnbDarkBlue}`;
     }
-    return '1px solid rgb(172, 172, 172)';
+    return `1px solid ${abnbGrey}`;
   }};
 `;

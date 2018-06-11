@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { abnbLightGrey, abnbGrey, abnbLightBlue, abnbBlue, abnbCalendarBlue } from '../ModStylings';
 
 export const Table = styled.table`
   margin-top: 20px;
@@ -13,14 +14,6 @@ export const Tr = styled.tr`
   flex-wrap: wrap;
 `;
 
-function findBetweenStartAndMinStay(props, whatToReturn) {
-  for (let i = 1; i < props.minStay - 1; i += 1) {
-    if (props.day === props.startDate + i) {
-      return whatToReturn;
-    }
-  }
-}
-
 export const Button = styled.button`
   border:none;
   outline: none;
@@ -31,25 +24,33 @@ export const Button = styled.button`
   font-size: 12px;
   color: ${(props) => {
     if (props.startDate && props.endDate) {
-      findBetweenStartAndMinStay(props, 'black');
+      for (let i = 1; i < props.minStay - 1; i += 1) {
+        if (props.day === props.startDate + i) {
+          return 'black';
+        }
+      }
     }
-    return props.date ? 'rgb(172,172,172)' : 'black';
+    return props.date ? abnbGrey : 'black';
   }};
   text-decoration: ${(props) => {
     if (props.startDate && props.endDate) {
-      findBetweenStartAndMinStay(props, 'none');
+      for (let i = 1; i < props.minStay - 1; i += 1) {
+        if (props.day === props.startDate + i) {
+          return 'none';
+        }
+      }
     }
     return props.date ? 'line-through' : '';
   }};
   background-color: ${(props) => {
     if (props.week) { return ''; }
     if (props.startDate === props.day || props.endDate === props.day) {
-      return '#00a699';
+      return abnbCalendarBlue;
     }
     if (props.startDate && props.endDate) {
       for (let i = props.startDate; i < props.endDate; i += 1) {
         if (props.day === i) {
-          return '#33dacd';
+          return abnbBlue;
         }
       }
     }
@@ -58,22 +59,26 @@ export const Button = styled.button`
   &:hover:enabled{
     background-color: ${(props) => {
     if (props.startDate && !props.date) {
-      return '#33dacd';
+      return abnbLightBlue;
     }
-    return '#F0F0F0';
+    return abnbLightGrey;
   }}
     cursor: pointer;
   }
-    &:hover:disabled{
+  &:hover:disabled{
       background-color: ${(props) => {
     if (props.startDate) {
-      findBetweenStartAndMinStay(props, 'rgb(172,172,172)');
-      return '33dacd';
+      for (let i = 1; i < props.minStay - 1; i += 1) {
+        if (props.day === props.startDate + i) {
+          return abnbGrey;
+        }
+      }
+      return abnbLightBlue;
     }
     return 'white';
   }}
-    }
-    &:active:enabled{
-      background-color: #79CCCD;
-    }
+  }
+  &:active:enabled{
+      background-color: ${abnbLightBlue};
+  }
 `;

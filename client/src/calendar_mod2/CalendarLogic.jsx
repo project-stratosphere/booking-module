@@ -8,6 +8,14 @@ export function setStartOrEndDate(type, day) {
   });
 }
 
+// *export into index, used inside onArrowClick
+export function clearDates() {
+  this.setState({
+    startDate: null,
+    endDate: null,
+  });
+}
+
 // *export into mod2, used inside dropdown
 export function onArrowClick(date, increment) {
   const next = date.add(increment, 'month');
@@ -19,14 +27,6 @@ export function onArrowClick(date, increment) {
     year,
   });
   this.props.clearDates();
-}
-
-// *export into index, used inside onArrowClick
-export function clearDates() {
-  this.setState({
-    startDate: null,
-    endDate: null,
-  });
 }
 
 // export & used in mod2

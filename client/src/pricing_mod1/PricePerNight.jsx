@@ -6,23 +6,17 @@ export const Holder = styled.div`
   width: inherit;
   justify-content: flex-start;
 `;
-export const Price = styled.span`
-  font-size: 30px;
-`;
-export const Msg = styled.span`
-  margin-left: 5px;
-`;
 
-export default function PricePerNight( props ) {
-  if ( props.price ) {
+export default function PricePerNight(props) {
+  if (props.price) {
     return (
       <Holder>
-        <Price>
+        <span style={{ fontSize: '30px' }}>
           ${props.price}
-        </Price>
-        <Msg>
+        </span>
+        <span style={{ marginLeft: '5px' }}>
           per night
-        </Msg>
+        </span>
       </Holder>
     );
   }

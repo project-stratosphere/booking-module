@@ -6,7 +6,7 @@ const list = ['adults', 'children', 'infants'];
 const desc = ['', 'Ages 2-12', 'Under 2'];
 
 export default function DropdownContents(props) {
-  const toRender = list.map((propName, index) => {
+  return list.map((propName, index) => {
     const guest = propName.replace(/s|ren/g, '');
     const guestNum = props[guest];
     return (
@@ -37,13 +37,6 @@ export default function DropdownContents(props) {
       </Holder>
     );
   });
-
-  return (
-    <div>
-      {toRender}
-    </div>
-
-  );
 }
 
 DropdownContents.propTypes = {
