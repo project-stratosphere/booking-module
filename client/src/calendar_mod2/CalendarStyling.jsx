@@ -23,6 +23,13 @@ export const Button = styled.button`
   padding-bottom: 5px;
   font-size: 12px;
   color: ${(props) => {
+    if (props.startDate && props.endDate) {
+      for (let i = 1; i < props.minStay - 1; i += 1) {
+        if (props.day === props.startDate + i) {
+          return 'black';
+        }
+      }
+    }
     if (props.startDate) {
       for (let i = 1; i < props.minStay - 1; i += 1) {
         if (props.day === props.startDate + i) {

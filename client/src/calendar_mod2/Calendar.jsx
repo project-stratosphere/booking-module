@@ -53,6 +53,7 @@ export default class Calendar extends Component {
           onClick={() => onDateClick({ day, props: this.props })}
           onFocus={() => null}
           onMouseOver={() => this.setState({ hoveredDate: day })}
+          onMouseLeave={() => this.setState({ hoveredDate: null })}
           hoveredDate={this.state.hoveredDate}
           minStay={this.props.minStay}
           startDate={this.props.startDate}
