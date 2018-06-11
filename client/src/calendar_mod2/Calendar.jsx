@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { Table, Tr, Button } from './CalendarStyling';
+import { Table, Tr, Td, Button } from './CalendarStyling';
 
 export default class Calendar extends Component {
   constructor(props) {
@@ -142,7 +142,7 @@ export default class Calendar extends Component {
 
   render() {
     const weekDayNames = moment.weekdaysMin().map(day => (
-      <Button week key={day} disabled> {day} </Button>
+      <Td><div week key={day}> {day} </div></Td>
     ));
     const calendar = this.createCalendar();
 
@@ -150,9 +150,7 @@ export default class Calendar extends Component {
       <Table>
         <thead>
           <Tr>
-            <td>
-              {weekDayNames}
-            </td>
+            {weekDayNames}
           </Tr>
         </thead>
         <tbody>

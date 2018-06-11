@@ -14,6 +14,13 @@ export const Tr = styled.tr`
   flex-wrap: wrap;
 `;
 
+export const Td = styled.td`
+  min-width: 38px;
+  min-height: 25px;
+  font-size: 13px;
+  text-align: center;
+`;
+
 function startThruMinStay({
   day, minStay, startDate, endDate, calendar, toReturn,
 }) {
