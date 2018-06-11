@@ -1,7 +1,7 @@
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import 'jest-styled-components';
-import { configure, shallow } from 'enzyme';
+import { configure, shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import ModOne from '../../../client/src/pricing_mod1/ModOne';
 import PricePerNight from '../../../client/src/pricing_mod1/PricePerNight';
@@ -29,14 +29,14 @@ describe('Holder Component', () => {
 });
 describe('Mod One Component', () => {
   it('renders price per night and ratings correctly', () => {
-    const wrapper = shallow(<ModOne
+    const wrapper = mount(<ModOne
       price={props.price}
       rating={props.rating}
       numReviews={props.numReviews}
     />);
-    expect(wrapper.find('HolderMod1'));
-    expect(wrapper.find('HolderMod1').find(PricePerNight));
-    expect(wrapper.find('HolderMod1').find(Rating));
+    expect(wrapper.find(HolderMod1)).toHaveLength(1);
+    expect(wrapper.find('PricePerNight').length).toEqual(1);
+    expect(wrapper.find(Rating).length).toEqual(1);
   });
   it('does not render if price is undefined', () => {
     const tree = renderer

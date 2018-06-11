@@ -11,7 +11,7 @@
     "start": "nodemon server/index.js",
     "watch": "webpack -d --watch",
     "test": "jest",
-    "updateJest": "jest --updateSnapshot",
+    "update": "jest --updateSnapshot",
     "coverage": "jest --coverage"
   },
   "dependencies": {
