@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Table, Tr, Button } from './CalendarStyling';
-import { createDaysArr, findOccupiedDatesInMonth } from './CalendarLogic';
 
 export default class Calendar extends Component {
   constructor(props) {
@@ -89,7 +88,7 @@ export default class Calendar extends Component {
 
   createCalendar = () => {
     // find the days in the month and create an array
-    const daysArr = createDaysArr({
+    const daysArr = this.createDaysArr({
       year: this.props.year,
       month: this.props.month,
     });
@@ -97,13 +96,13 @@ export default class Calendar extends Component {
     // find the occupied dates and create an array
     let occupiedDates;
     if (this.props.clicked === 'checkIn') {
-      occupiedDates = findOccupiedDatesInMonth({
+      occupiedDates = this.findOccupiedDatesInMonth({
         month: this.props.month,
         year: this.props.year,
         dates: this.props.dates,
       });
     } else if (this.props.clicked === 'checkOut') {
-      occupiedDates = findOccupiedDatesInMonth({
+      occupiedDates = this.findOccupiedDatesInMonth({
         startDate: this.props.startDate,
         month: this.props.month,
         year: this.props.year,
