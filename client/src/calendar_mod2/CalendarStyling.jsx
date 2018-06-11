@@ -14,6 +14,34 @@ export const Tr = styled.tr`
   flex-wrap: wrap;
 `;
 
+function startThruMinStay({
+  day, minStay, startDate, endDate, calendar, toReturn,
+}) {
+  if (calendar === 'checkOut' && startDate) {
+    for (let i = 1; i < minStay - 1; i += 1) {
+      if (day === startDate + i) {
+        return toReturn;
+      }
+    }
+  }
+}
+
+function startThruEndOrHovered({
+  startDate, endDate, hoveredDate, day, toReturn,
+}) {
+  let plug;
+  if (endDate) {
+    plug = endDate;
+  } else {
+    plug = hoveredDate;
+  }
+  if (startDate && plug) {
+    if (day > startDate && day < plug) {
+      return toReturn;
+    }
+  }
+}
+
 export const Button = styled.button`
   border:none;
   outline: none;
@@ -24,55 +52,67 @@ export const Button = styled.button`
   font-size: 12px;
   color: ${(props) => {
     if (props.day === props.startDate || props.day === props.endDate) { return 'white'; }
-    if (props.calendar === 'checkOut') {
-      if (props.startDate && !props.endDate) {
-        for (let i = 1; i < props.minStay - 1; i += 1) {
-          if (props.day === props.startDate + i) {
-            return abnbGrey;
-          }
-        }
-      }
-    }
+    const color = startThruMinStay({
+      day: props.day,
+      minStay: props.minStay,
+      startDate: props.startDate,
+      endDate: props.endDate,
+      calendar: props.calendar,
+      toReturn: abnbGrey,
+    });
+    if (color) { return color; }
     return props.date ? abnbGrey : 'black';
   }};
-  text-decoration: ${props => (props.date ? 'line-through' : '')
-};
+  text-decoration: ${props => (props.date ? 'line-through' : '')};
   background-color: ${(props) => {
     if (props.week) { return ''; }
     if (props.startDate === props.day || props.endDate === props.day) {
       return abnbCalendarBlue;
     }
-    if (props.startDate && props.endDate) {
-      for (let i = props.startDate; i < props.endDate; i += 1) {
-        if (props.day === i) {
-          return abnbBlue;
-        }
-      }
-    }
+    let color = startThruEndOrHovered({
+      startDate: props.startDate,
+      endDate: props.endDate,
+      day: props.day,
+      toReturn: abnbBlue,
+    });
+    if (color) { return color; }
     if (props.calendar === 'checkOut') {
-      if (props.hoveredDate && props.startDate) {
-        for (let i = props.startDate + 1; i <= props.hoveredDate; i += 1) {
-          if (props.day === i) {
-            return abnbLightBlue;
-          }
-        }
-      }
+      color = startThruEndOrHovered({
+        startDate: props.startDate,
+        hoveredDate: props.hoveredDate,
+        day: props.day,
+        toReturn: abnbBlue,
+      });
+      if (color) { return color; }
     }
     return 'white';
   }}
   &:hover:enabled{
     background-color: ${(props) => {
-    if (props.calendar === 'checkOut') {
-      if (props.startDate && !props.endDate) {
-        for (let i = 1; i < props.minStay - 1; i += 1) {
-          if (props.day === props.startDate + i) {
-            return abnbLightGrey;
-          }
-        }
-      }
-    }
+    const color = startThruMinStay({
+      day: props.day,
+      minStay: props.minStay,
+      startDate: props.startDate,
+      endDate: props.endDate,
+      calendar: props.calendar,
+      toReturn: abnbLightGrey,
+    });
+    if (color) { return color; }
     return abnbLightBlue;
   }}
-    cursor: pointer;
+    cursor: ${(props) => {
+    const pointer = startThruMinStay({
+      day: props.day,
+      minStay: props.minStay,
+      startDate: props.startDate,
+      endDate: props.endDate,
+      calendar: props.calendar,
+      toReturn: 'default',
+    });
+    if (pointer) {
+      return pointer;
+    }
+    return 'pointer';
+  }};
   }
 `;

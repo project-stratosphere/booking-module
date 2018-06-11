@@ -14,6 +14,11 @@ export function clearDates() {
     startDate: null,
     endDate: null,
   });
+  if (this.state.mod2Clicked === 'checkOut') {
+    this.setState({
+      mod2Clicked: 'checkIn',
+    });
+  }
 }
 
 // *export into mod2, used inside dropdown

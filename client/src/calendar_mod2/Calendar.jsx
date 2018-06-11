@@ -20,7 +20,7 @@ export default class Calendar extends Component {
         }
         this.setState({
           hoveredDate: null,
-        }, console.log(this.state, this.props));
+        });
       }
       this.props.setDate('startDate', day);
       this.props.calendarChange('checkOutClicked');
