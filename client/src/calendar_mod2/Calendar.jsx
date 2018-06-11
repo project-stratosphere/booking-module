@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { Table, Tr, Button } from './CalendarStyling';
-import { createDaysArr, findOccupiedDatesInMonth, onDateClick } from './CalendarLogic';
+import { createDaysArr, findOccupiedDatesInMonth } from './CalendarLogic';
 
 export default class Calendar extends Component {
   constructor(props) {
@@ -11,6 +11,36 @@ export default class Calendar extends Component {
       hoveredDate: null,
     };
   }
+
+  onDateClick = (day) => {
+    if (this.props.clicked === 'checkIn') {
+      if (this.props.endDate) {
+        if (day > this.props.endDate || day + (this.props.minStay - 1) > this.props.endDate || day < this.props.startDate) {
+          this.props.clearDates();
+        }
+        this.setState({
+          hoveredDate: null,
+        }, console.log(this.state, this.props));
+      }
+      this.props.setDate('startDate', day);
+      this.props.calendarChange('checkOutClicked');
+    } else if (this.props.clicked === 'checkOut') {
+      const disabled = [];
+      for (let i = 1; i < this.props.minStay - 1; i += 1) {
+        disabled.push(this.props.startDate + i);
+      }
+      if (!disabled.includes(day)) {
+        if (!this.props.startDate) {
+          this.props.setDate('endDate', day);
+          return this.props.calendarChange('checkInClicked');
+        }
+        this.props.setDate('endDate', day);
+        this.props.calendarChange();
+      }
+      return null;
+    }
+    return null;
+  };
 
   createCalendar = () => {
     // find the days in the month and create an array
@@ -50,7 +80,8 @@ export default class Calendar extends Component {
           key={key}
           day={day}
           date={isOccupied}
-          onClick={() => onDateClick({ day, props: this.props })}
+          calendar={this.props.clicked}
+          onClick={() => this.onDateClick(day)}
           onFocus={() => null}
           onMouseOver={() => this.setState({ hoveredDate: day })}
           onMouseLeave={() => this.setState({ hoveredDate: null })}
@@ -98,9 +129,9 @@ Calendar.propTypes = {
   minStay: PropTypes.number,
   startDate: PropTypes.number,
   endDate: PropTypes.number,
-  // setDate: PropTypes.func,
-  // clearDates: PropTypes.func,
-  // calendarChange: PropTypes.func,
+  setDate: PropTypes.func,
+  clearDates: PropTypes.func,
+  calendarChange: PropTypes.func,
   // arrowClick: PropTypes.func,
   clicked: PropTypes.string,
   // currDate: momentPropTypes.momentObj,
@@ -113,9 +144,9 @@ Calendar.defaultProps = {
   minStay: 0,
   startDate: null,
   endDate: null,
-  // setDate: () => null,
-  // clearDates: () => null,
-  // calendarChange: () => null,
+  setDate: () => null,
+  clearDates: () => null,
+  calendarChange: () => null,
   // arrowClick: () => null,
   clicked: '',
   // currDate: null,

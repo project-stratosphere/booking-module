@@ -58,35 +58,6 @@ export function calendarChange(holderName) {
 }
 
 // export & used in calendar
-export const onDateClick = ({
-  day, props,
-}) => {
-  if (props.clicked === 'checkIn') {
-    if (props.endDate) {
-      if (day > props.endDate || day + (props.minStay - 1) > props.endDate) {
-        props.clearDates();
-      }
-    }
-    props.setDate('startDate', day);
-    props.calendarChange('checkOutClicked');
-  } else if (props.clicked === 'checkOut') {
-    const disabled = [];
-    for (let i = 1; i < props.minStay - 1; i += 1) {
-      disabled.push(props.startDate + i);
-    }
-    if (!disabled.includes(day)) {
-      if (!props.startDate) {
-        props.setDate('endDate', day);
-        return props.calendarChange('checkInClicked');
-      }
-      props.setDate('endDate', day);
-      props.calendarChange();
-    }
-    return null;
-  }
-  return null;
-};
-
 export function createDaysArr({ month, year }) {
   const firstDayOfTheMonth = moment(`${year}-${month}`, 'YYYY-MMM').date(1).day();
   const daysInMonth = moment(`${year}-${month}`, 'YYYY-MMM').daysInMonth();
