@@ -36,6 +36,7 @@
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "babel-jest": "^23.0.1",
+    "babel-plugin-styled-components": "^1.5.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
@@ -50,6 +51,7 @@
     "jest-cli": "^23.1.0",
     "jest-styled-components": "^5.0.1",
     "nodemon": "^1.17.5",
-    "react-test-renderer": "^16.4.0"
+    "react-test-renderer": "^16.4.0",
+    "sinon": "^6.0.0"
   }
 }

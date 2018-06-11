@@ -13,11 +13,11 @@ const props = {
 };
 
 describe('Rating component holder', () => {
-  it('is the main flex component', () => {
+  it('is not the main flex component', () => {
     const tree = renderer
       .create(<Holder mod1> things inside </Holder>)
       .toJSON();
-    expect(tree).toHaveStyleRule('display', 'flex');
+    expect(tree).not.toHaveStyleRule('display', 'flex');
   });
   it('contains price per night', () => {
     const tree = renderer

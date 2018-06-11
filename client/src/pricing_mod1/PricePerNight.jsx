@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 export const Holder = styled.div`
-  display: flex;
   justify-content: flex-start;
   width: inherit;
 `;

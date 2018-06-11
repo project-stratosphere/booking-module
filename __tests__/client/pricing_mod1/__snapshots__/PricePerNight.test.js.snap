@@ -4,10 +4,6 @@ exports[`Price Per Nights Component does not render if props.price is undefined 
 
 exports[`Rating component holder contains price per night 1`] = `
 .c0 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
