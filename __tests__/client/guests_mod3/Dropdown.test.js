@@ -1,7 +1,7 @@
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import 'jest-styled-components';
-import { configure, shallow, mount } from 'enzyme';
+import { configure, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { DropdownHolder } from '../../../client/src/ModStylings';
 import DropdownContents from '../../../client/src/guests_mod3/DropdownContents';

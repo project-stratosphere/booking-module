@@ -41,7 +41,6 @@ ModThree.propTypes = {
   infant: PropTypes.number,
   totalGuests: PropTypes.number,
   maxGuests: PropTypes.number,
-
 };
 ModThree.defaultProps = {
   btnClick: () => null,
