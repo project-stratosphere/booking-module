@@ -23,10 +23,10 @@ export const Button = styled.button`
   padding-bottom: 5px;
   font-size: 12px;
   color: ${(props) => {
-    if (props.startDate && props.endDate) {
+    if (props.startDate) {
       for (let i = 1; i < props.minStay - 1; i += 1) {
         if (props.day === props.startDate + i) {
-          return 'black';
+          return abnbGrey;
         }
       }
     }
@@ -54,10 +54,25 @@ export const Button = styled.button`
         }
       }
     }
+    if (props.hoveredDate && props.startDate) {
+      for (let i = props.startDate + 1; i <= props.hoveredDate; i += 1) {
+        if (props.day === i) {
+          console.log(props.hoveredDate);
+          return abnbLightBlue;
+        }
+      }
+    }
     return 'white';
   }}
   &:hover:enabled{
     background-color: ${(props) => {
+    if (props.hoveredDate && props.startDate) {
+      for (let i = props.startDate + 1; i <= props.hoveredDate; i += 1) {
+        if (props.day === i) {
+          return abnbLightBlue;
+        }
+      }
+    }
     if (props.startDate && !props.date) {
       return abnbLightBlue;
     }
@@ -73,7 +88,9 @@ export const Button = styled.button`
           return abnbGrey;
         }
       }
-      return abnbLightBlue;
+      if (props.day === props.startDate) {
+        return abnbLightBlue;
+      }
     }
     return 'white';
   }}

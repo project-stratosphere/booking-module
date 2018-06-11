@@ -1,19 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-const Holder = styled.div`
-  display: flex;
-  width: inherit;
-  font-size: 13px;
-  font-weight: ${props => (props.total ? 'bold' : '')};
-  border-bottom: ${props => ((!props.main && !props.total) ? '1px solid rgb(172,172,172)' : '')};
-  padding: 3px;
-  padding-top: ${props => (props.main ? '17px' : '5px')};
-  flex-direction: ${props => (props.main ? 'column' : 'row')};
-  justify-content: ${props => (props.main ? '' : 'space-between')};
-
-`;
+import { HolderMod4 } from '../ModStylings';
 
 export default function ModFour(props) {
   if (props.startDate && props.endDate) {
@@ -21,24 +8,24 @@ export default function ModFour(props) {
     const priceOfStay = numNights * props.price;
     const total = priceOfStay + props.cleaningFee + props.serviceFee;
     return (
-      <Holder main>
-        <Holder>
+      <HolderMod4 main>
+        <HolderMod4>
           <div> ${props.price} X {numNights} </div>
           <div> ${priceOfStay} </div>
-        </Holder>
-        <Holder>
+        </HolderMod4>
+        <HolderMod4>
           <div> Cleaning Fee </div>
           <div> ${props.cleaningFee}</div>
-        </Holder>
-        <Holder>
+        </HolderMod4>
+        <HolderMod4>
           <div> Service Fee </div>
           <div> ${props.serviceFee} </div>
-        </Holder>
-        <Holder total>
+        </HolderMod4>
+        <HolderMod4 total>
           <div> Total </div>
           <div> ${total} </div>
-        </Holder>
-      </Holder>
+        </HolderMod4>
+      </HolderMod4>
     );
   }
   return null;

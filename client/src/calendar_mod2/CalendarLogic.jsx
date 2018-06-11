@@ -63,19 +63,30 @@ export const onDateClick = ({
 }) => {
   if (props.clicked === 'checkIn') {
     if (props.endDate) {
-      if (day > props.endDate || day + props.minStay > props.endDate) {
+      if (day > props.endDate || day + (props.minStay - 1) > props.endDate) {
         props.clearDates();
       }
     }
     props.setDate('startDate', day);
     props.calendarChange('checkOutClicked');
   } else if (props.clicked === 'checkOut') {
-    props.setDate('endDate', day);
-    props.calendarChange();
+    const disabled = [];
+    for (let i = 1; i < props.minStay - 1; i += 1) {
+      disabled.push(props.startDate + i);
+    }
+    if (!disabled.includes(day)) {
+      if (!props.startDate) {
+        props.setDate('endDate', day);
+        return props.calendarChange('checkInClicked');
+      }
+      props.setDate('endDate', day);
+      props.calendarChange();
+    }
+    return null;
   }
+  return null;
 };
 
-// export & used in calendar
 export function createDaysArr({ month, year }) {
   const firstDayOfTheMonth = moment(`${year}-${month}`, 'YYYY-MMM').date(1).day();
   const daysInMonth = moment(`${year}-${month}`, 'YYYY-MMM').daysInMonth();
@@ -110,17 +121,17 @@ export function findOccupiedDatesInMonth({
     }
     // for blocking off the days after an occupied date
     const daysInMonth = moment(`${year}-${month}`, 'YYYY-MMM').daysInMonth();
-    let toBlockOut = targetDates
+    const toBlockOut = targetDates
       .sort((a, b) => a - b)
       .findIndex(num => num > startDate);
     for (let i = targetDates[toBlockOut]; i <= daysInMonth; i += 1) {
       targetDates.push(i);
     }
     // for getting the days for the minimum stay
-    toBlockOut = startDate + (minStay - 1);
-    for (let i = startDate + 1; i < toBlockOut; i += 1) {
-      targetDates.push(i);
-    }
+    // toBlockOut = startDate + (minStay - 1);
+    // for (let i = startDate + 1; i < toBlockOut; i += 1) {
+    //   targetDates.push(i);
+    // }
   }
   return targetDates;
 }

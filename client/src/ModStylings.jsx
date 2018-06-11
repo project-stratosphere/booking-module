@@ -28,6 +28,18 @@ export const Holder = styled.div`
   justify-content: ${props => (props.mod1 ? 'flex-start' : '')};
 `;
 
+export const HolderMod4 = styled.div`
+  display: flex;
+  width: inherit;
+  font-size: 13px;
+  font-weight: ${props => (props.total ? 'bold' : '')};
+  border-bottom: ${props => ((!props.main && !props.total) ? '1px solid rgb(172,172,172)' : '')};
+  padding: 3px;
+  padding-top: ${props => (props.main ? '17px' : '5px')};
+  flex-direction: ${props => (props.main ? 'column' : 'row')};
+  justify-content: ${props => (props.main ? '' : 'space-between')};
+`;
+
 export const InputHolder = styled.div`
   display: flex;
   flex-direction: row;
