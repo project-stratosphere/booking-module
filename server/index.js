@@ -13,8 +13,8 @@ const app = express();
 app.use(parser.json());
 app.use(cors());
 
-app.use('/', express.static(path.join(__dirname, '../client/dist/')));
-app.use('/:listingID', express.static(path.join(__dirname, '../client/dist/')));
+app.use('/', express.static(path.join(__dirname, '../client')));
+app.use('/:listingID', express.static(path.join(__dirname, '../client')));
 
 app.get('/rooms/:listingID/bookingInfo', async (req, res) => {
   const { listingID } = req.params;

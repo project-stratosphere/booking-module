@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Dropdown from './Dropdown';
-import { Holder, InputHolder, Title, Logo } from '../ModStylings';
+import { Holder, InputHolder, Title, Logo, Contents } from '../ModStylings';
 
 export default function ModThree(props) {
   let infantStatement;
@@ -15,10 +15,10 @@ export default function ModThree(props) {
     <Holder>
       <Title> Guests </Title>
       <InputHolder onClick={props.close}>
-        <div>
+        <Contents clicked={props.clicked} mod3>
           {props.totalGuests} {props.totalGuests > 1 ? 'guests' : 'guest'}
           {infantStatement}
-        </div>
+        </Contents>
         <Logo
           clicked={props.clicked}
         />

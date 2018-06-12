@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import Dropdown from './Dropdown';
-import { Holder, InputHolder, Title, Arrow } from '../ModStylings';
-
-export const Date = styled.div`
-`;
+import { Holder, InputHolder, Title, Arrow, Contents } from '../ModStylings';
 
 export default class ModTwo extends Component {
   constructor(props) {
@@ -47,15 +43,19 @@ export default class ModTwo extends Component {
       <Holder>
         <Title> Dates </Title>
         <InputHolder>
-          <Date
+          <Contents
+            clicked={this.props.clicked}
+            checkIn
             onClick={() => this.props.calendarChange('checkInClicked')}
           > {startDate || 'Check In'}
-          </Date>
+          </Contents>
           <Arrow />
-          <Date
+          <Contents
+            clicked={this.props.clicked}
+            checkOut
             onClick={() => this.props.calendarChange('checkOutClicked')}
           > {endDate || 'Check Out'}
-          </Date>
+          </Contents>
         </InputHolder>
         <Dropdown
           arrowClick={this.onArrowClick}
@@ -69,6 +69,7 @@ export default class ModTwo extends Component {
 
 ModTwo.propTypes = {
   dates: PropTypes.arrayOf(PropTypes.string),
+  clicked: PropTypes.string,
   minStay: PropTypes.number,
   startDate: PropTypes.number,
   endDate: PropTypes.number,
@@ -78,6 +79,7 @@ ModTwo.propTypes = {
 };
 ModTwo.defaultProps = {
   dates: [],
+  clicked: null,
   minStay: 0,
   startDate: null,
   endDate: null,
