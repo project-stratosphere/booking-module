@@ -36,7 +36,7 @@ ModFour.propTypes = {
   endDate: PropTypes.number,
   price: PropTypes.number,
   cleaningFee: PropTypes.number,
-  maxGuests: PropTypes.number,
+  // maxGuests: PropTypes.number,
   serviceFee: PropTypes.number,
 };
 
@@ -45,6 +45,6 @@ ModFour.defaultProps = {
   endDate: 0,
   price: 0,
   cleaningFee: 0,
-  maxGuests: 0,
+  // maxGuests: 0,
   serviceFee: 0,
 };
