@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "nodemon server/index.js",
+    "build": "webpack --mode production",
     "watch": "webpack -d --watch",
     "test": "jest",
     "update": "jest --updateSnapshot",

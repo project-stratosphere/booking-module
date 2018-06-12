@@ -1,6 +1,4 @@
-# Project Name
-
-> Booking Module
+# AirBnC Booking Module
 
 ## Related Projects
 
