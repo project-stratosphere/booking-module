@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import arrow from '../images/arrow.png';
 import { abnbGrey, abnbLightBlue } from '../ModStylings';
+
+const arrow = 'https://image.flaticon.com/icons/png/512/626/626054.png';
 
 export const Arrow = styled.div`
   border-radius: 10%;

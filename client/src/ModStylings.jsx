@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import logo from './images/arrowLogo.png';
-import arrow from './images/arrow.png';
+
+const arrow = 'https://image.flaticon.com/icons/png/512/626/626054.png';
+const logo = 'https://static.wixstatic.com/media/bcfd39_3e7d72527c2b471e96aa40a556b93694.png';
 
 export const abnbLightGrey = '#F0F0F0';
 export const abnbGrey = 'rgb(172, 172, 172)';
@@ -62,6 +63,19 @@ export const Title = styled.div`
 export const Details = styled.div`
   font-size: 12px;
   margin-top: 12px;
+`;
+
+export const Contents = styled.div`
+  background-color: ${(props) => {
+    if (props.clicked && props.mod3) {
+      return abnbLightBlue;
+    } else if (props.clicked === 'checkIn' && props.checkIn) {
+      return abnbLightBlue;
+    } else if (props.clicked === 'checkOut' && props.checkOut) {
+      return abnbLightBlue;
+    }
+    return 'white';
+  }}
 `;
 
 export const Logo = styled.div`
