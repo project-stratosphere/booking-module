@@ -76,6 +76,8 @@ export const Contents = styled.div`
     }
     return 'white';
   }}
+  padding-left: 7px;
+  padding-right: 7px;
 `;
 
 export const Logo = styled.div`
