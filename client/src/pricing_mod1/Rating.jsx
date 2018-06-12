@@ -1,27 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactStars from 'react-stars';
-import styled from 'styled-components';
+import { abnbDarkBlue, Holder } from '../ModStylings';
 
-export const Holder = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
-  width: inherit;
-`;
-
-export const NumReviews = styled.div`
-  margin-left: 7px;
-`;
-
-export default function Rating( props ) {
-  if ( props.rating ) {
+export default function Rating(props) {
+  if (props.rating) {
     return (
-      <Holder>
-        <ReactStars count={5} value={props.rating} color2="#007D8C" edit={false} />
-        <NumReviews>
+      <Holder mod1>
+        <ReactStars
+          count={5}
+          value={props.rating}
+          color2={abnbDarkBlue}
+          edit={false}
+        />
+        <div style={{ marginLeft: '7px' }}>
           {props.numReviews}
-        </NumReviews>
+        </div>
       </Holder>
     );
   }

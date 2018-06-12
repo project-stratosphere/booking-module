@@ -9,9 +9,11 @@
   },
   "scripts": {
     "start": "nodemon server/index.js",
+    "build": "webpack --mode production",
     "watch": "webpack -d --watch",
     "test": "jest",
-    "updateJest": "jest --updateSnapshot"
+    "update": "jest --updateSnapshot",
+    "coverage": "jest --coverage"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -20,6 +22,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "moment": "^2.22.2",
     "mysql": "^2.15.0",
@@ -35,6 +38,7 @@
   "devDependencies": {
     "babel-eslint": "^8.2.3",
     "babel-jest": "^23.0.1",
+    "babel-plugin-styled-components": "^1.5.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
@@ -49,6 +53,7 @@
     "jest-cli": "^23.1.0",
     "jest-styled-components": "^5.0.1",
     "nodemon": "^1.17.5",
-    "react-test-renderer": "^16.4.0"
+    "react-test-renderer": "^16.4.0",
+    "sinon": "^6.0.0"
   }
 }

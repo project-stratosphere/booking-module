@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mod4 component does not render if rating is undefined 1`] = `null`;
+
+exports[`mod4 component renders the calculator 1`] = `
+<ModStylings__HolderMod4
+  main={true}
+>
+  <ModStylings__HolderMod4>
+    <div>
+       $
+      51
+       X 
+      3
+       
+    </div>
+    <div>
+       $
+      153
+       
+    </div>
+  </ModStylings__HolderMod4>
+  <ModStylings__HolderMod4>
+    <div>
+       Cleaning Fee 
+    </div>
+    <div>
+       $
+      20
+    </div>
+  </ModStylings__HolderMod4>
+  <ModStylings__HolderMod4>
+    <div>
+       Service Fee 
+    </div>
+    <div>
+       $
+      20
+       
+    </div>
+  </ModStylings__HolderMod4>
+  <ModStylings__HolderMod4
+    total={true}
+  >
+    <div>
+       Total 
+    </div>
+    <div>
+       $
+      193
+       
+    </div>
+  </ModStylings__HolderMod4>
+</ModStylings__HolderMod4>
+`;

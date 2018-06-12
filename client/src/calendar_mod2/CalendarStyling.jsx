@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { abnbLightGrey, abnbGrey, abnbLightBlue, abnbBlue, abnbCalendarBlue } from '../ModStylings';
 
 export const Table = styled.table`
   margin-top: 20px;
@@ -13,10 +14,37 @@ export const Tr = styled.tr`
   flex-wrap: wrap;
 `;
 
-function findBetweenStartAndMinStay(props, whatToReturn) {
-  for (let i = 1; i < props.minStay - 1; i += 1) {
-    if (props.day === props.startDate + i) {
-      return whatToReturn;
+export const Td = styled.td`
+  min-width: 38px;
+  min-height: 25px;
+  font-size: 13px;
+  text-align: center;
+`;
+
+function startThruMinStay({
+  day, minStay, startDate, endDate, calendar, toReturn,
+}) {
+  if (calendar === 'checkOut' && startDate) {
+    for (let i = 1; i < minStay - 1; i += 1) {
+      if (day === startDate + i) {
+        return toReturn;
+      }
+    }
+  }
+}
+
+function startThruEndOrHovered({
+  startDate, endDate, hoveredDate, day, toReturn,
+}) {
+  let plug;
+  if (endDate) {
+    plug = endDate;
+  } else {
+    plug = hoveredDate;
+  }
+  if (startDate && plug) {
+    if (day > startDate && day < plug) {
+      return toReturn;
     }
   }
 }
@@ -30,50 +58,68 @@ export const Button = styled.button`
   padding-bottom: 5px;
   font-size: 12px;
   color: ${(props) => {
-    if (props.startDate && props.endDate) {
-      findBetweenStartAndMinStay(props, 'black');
-    }
-    return props.date ? 'rgb(172,172,172)' : 'black';
+    if (props.day === props.startDate || props.day === props.endDate) { return 'white'; }
+    const color = startThruMinStay({
+      day: props.day,
+      minStay: props.minStay,
+      startDate: props.startDate,
+      endDate: props.endDate,
+      calendar: props.calendar,
+      toReturn: abnbGrey,
+    });
+    if (color) { return color; }
+    return props.date ? abnbGrey : 'black';
   }};
-  text-decoration: ${(props) => {
-    if (props.startDate && props.endDate) {
-      findBetweenStartAndMinStay(props, 'none');
-    }
-    return props.date ? 'line-through' : '';
-  }};
+  text-decoration: ${props => (props.date ? 'line-through' : '')};
   background-color: ${(props) => {
     if (props.week) { return ''; }
     if (props.startDate === props.day || props.endDate === props.day) {
-      return '#00a699';
+      return abnbCalendarBlue;
     }
-    if (props.startDate && props.endDate) {
-      for (let i = props.startDate; i < props.endDate; i += 1) {
-        if (props.day === i) {
-          return '#33dacd';
-        }
-      }
+    let color = startThruEndOrHovered({
+      startDate: props.startDate,
+      endDate: props.endDate,
+      day: props.day,
+      toReturn: abnbBlue,
+    });
+    if (color) { return color; }
+    if (props.calendar === 'checkOut') {
+      color = startThruEndOrHovered({
+        startDate: props.startDate,
+        hoveredDate: props.hoveredDate,
+        day: props.day,
+        toReturn: abnbBlue,
+      });
+      if (color) { return color; }
     }
     return 'white';
   }}
   &:hover:enabled{
     background-color: ${(props) => {
-    if (props.startDate && !props.date) {
-      return '#33dacd';
-    }
-    return '#F0F0F0';
+    const color = startThruMinStay({
+      day: props.day,
+      minStay: props.minStay,
+      startDate: props.startDate,
+      endDate: props.endDate,
+      calendar: props.calendar,
+      toReturn: abnbLightGrey,
+    });
+    if (color) { return color; }
+    return abnbLightBlue;
   }}
-    cursor: pointer;
+    cursor: ${(props) => {
+    const pointer = startThruMinStay({
+      day: props.day,
+      minStay: props.minStay,
+      startDate: props.startDate,
+      endDate: props.endDate,
+      calendar: props.calendar,
+      toReturn: 'default',
+    });
+    if (pointer) {
+      return pointer;
+    }
+    return 'pointer';
+  }};
   }
-    &:hover:disabled{
-      background-color: ${(props) => {
-    if (props.startDate) {
-      findBetweenStartAndMinStay(props, 'rgb(172,172,172)');
-      return '33dacd';
-    }
-    return 'white';
-  }}
-    }
-    &:active:enabled{
-      background-color: #79CCCD;
-    }
 `;

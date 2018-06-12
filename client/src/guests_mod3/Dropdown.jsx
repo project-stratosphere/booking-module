@@ -1,13 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import DropdownContents from './DropdownContents';
-import { DropdownHolder, Close } from '../ModStylings';
-
-export const Details = styled.div`
-  font-size: 12px;
-  margin-top: 12px;
-`;
+import { DropdownHolder, Close, Details } from '../ModStylings';
 
 export default function Dropdown(props) {
   if (props.clicked) {

@@ -1,0 +1,410 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dropdown Component does not render if not clicked 1`] = `
+<Dropdown
+  arrowClick={[Function]}
+  calendarChange={[Function]}
+  clearDates={[Function]}
+  clicked=""
+  currDate={null}
+  dates={Array []}
+  endDate={null}
+  minStay={0}
+  month={null}
+  setDate={[Function]}
+  startDate={null}
+  year={null}
+/>
+`;
+
+exports[`Dropdown Component renders the right amount of children 1`] = `
+.c1 {
+  position: absolute;
+  z-index: 2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 286px;
+  border: 1px solid rgb(172,172,172);
+  border-radius: 1%;
+  padding: 20px;
+  background-color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.c10 {
+  margin-top: 8px;
+  border: none;
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  font-size: 14px;
+  color: #007D8C;
+  outline: none;
+}
+
+.c10:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.c10:active {
+  color: #F16664;
+}
+
+.c6 {
+  margin-top: 20px;
+  border-style: hidden;
+  border-collapse: collapse;
+  font-weight: bold;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.c8 {
+  min-width: 38px;
+  min-height: 25px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.c3 {
+  border-radius: 10%;
+  content: url(process:function process(src,filename) { return 'module.exports = ' + JSON.stringify(path.basename(filename)) + ';';
+}
+
+;);height:20px;border:1px solid rgb(172,172,172);border-radius:10%;padding:3px;-webkit-transform:rotate(0.5turn);-ms-transform:rotate(0.5turn);transform:rotate(0.5turn);} .c3:active {
+  background-color: #79CCCD;
+}
+
+.c3:hover {
+  cursor: pointer;
+}
+
+.c4 {
+  border-radius: 10%;
+  content: url(process:function process(src,filename) { return 'module.exports = ' + JSON.stringify(path.basename(filename)) + ';';
+}
+
+;);height:20px;border:1px solid rgb(172,172,172);border-radius:10%;padding:3px;} .c4:active {
+  background-color: #79CCCD;
+}
+
+.c4:hover {
+  cursor: pointer;
+}
+
+.c0 {
+  border-color: #ffffff #ffffff #acacac #ffffff;
+  border-style: solid;
+  border-width: 0px 8px 12px 8px;
+  height: 5px;
+  width: 0px;
+  margin-left: 20px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+<Dropdown
+  arrowClick={[Function]}
+  calendarChange={[Function]}
+  clearDates={[Function]}
+  clicked="checkIn"
+  currDate={null}
+  dates={Array []}
+  endDate={null}
+  minStay={0}
+  month={null}
+  setDate={[Function]}
+  startDate={null}
+  year={null}
+>
+  <div>
+    <DropdownStyling__Triangle
+      left="checkIn"
+    >
+      <div
+        className="c0"
+      />
+    </DropdownStyling__Triangle>
+    <ModStylings__DropdownHolder>
+      <div
+        className="c1"
+      >
+        <DropdownStyling__SectionOne>
+          <div
+            className="c2"
+          >
+            <DropdownStyling__Arrow
+              left={true}
+              onClick={[Function]}
+            >
+              <div
+                className="c3"
+                onClick={[Function]}
+              />
+            </DropdownStyling__Arrow>
+            <div>
+               
+               
+               
+            </div>
+            <DropdownStyling__Arrow
+              onClick={[Function]}
+            >
+              <div
+                className="c4"
+                onClick={[Function]}
+              />
+            </DropdownStyling__Arrow>
+          </div>
+        </DropdownStyling__SectionOne>
+        <DropdownStyling__SectionTwo>
+          <div
+            className="c5"
+          >
+            <Calendar
+              arrowClick={[Function]}
+              calendarChange={[Function]}
+              clearDates={[Function]}
+              clicked="checkIn"
+              currDate={null}
+              dates={Array []}
+              endDate={null}
+              minStay={0}
+              month={null}
+              setDate={[Function]}
+              startDate={null}
+              year={null}
+            >
+              <CalendarStyling__Table>
+                <table
+                  className="c6"
+                >
+                  <thead>
+                    <CalendarStyling__Tr>
+                      <tr
+                        className="c7"
+                      >
+                        <CalendarStyling__Td
+                          key="Su"
+                        >
+                          <td
+                            className="c8"
+                          >
+                            <div>
+                               
+                              Su
+                               
+                            </div>
+                          </td>
+                        </CalendarStyling__Td>
+                        <CalendarStyling__Td
+                          key="Mo"
+                        >
+                          <td
+                            className="c8"
+                          >
+                            <div>
+                               
+                              Mo
+                               
+                            </div>
+                          </td>
+                        </CalendarStyling__Td>
+                        <CalendarStyling__Td
+                          key="Tu"
+                        >
+                          <td
+                            className="c8"
+                          >
+                            <div>
+                               
+                              Tu
+                               
+                            </div>
+                          </td>
+                        </CalendarStyling__Td>
+                        <CalendarStyling__Td
+                          key="We"
+                        >
+                          <td
+                            className="c8"
+                          >
+                            <div>
+                               
+                              We
+                               
+                            </div>
+                          </td>
+                        </CalendarStyling__Td>
+                        <CalendarStyling__Td
+                          key="Th"
+                        >
+                          <td
+                            className="c8"
+                          >
+                            <div>
+                               
+                              Th
+                               
+                            </div>
+                          </td>
+                        </CalendarStyling__Td>
+                        <CalendarStyling__Td
+                          key="Fr"
+                        >
+                          <td
+                            className="c8"
+                          >
+                            <div>
+                               
+                              Fr
+                               
+                            </div>
+                          </td>
+                        </CalendarStyling__Td>
+                        <CalendarStyling__Td
+                          key="Sa"
+                        >
+                          <td
+                            className="c8"
+                          >
+                            <div>
+                               
+                              Sa
+                               
+                            </div>
+                          </td>
+                        </CalendarStyling__Td>
+                      </tr>
+                    </CalendarStyling__Tr>
+                  </thead>
+                  <tbody>
+                    <CalendarStyling__Tr>
+                      <tr
+                        className="c7"
+                      >
+                        <td />
+                      </tr>
+                    </CalendarStyling__Tr>
+                  </tbody>
+                </table>
+              </CalendarStyling__Table>
+            </Calendar>
+          </div>
+        </DropdownStyling__SectionTwo>
+        <DropdownStyling__SectionThree>
+          <div
+            className="c9"
+          >
+            <div>
+               
+              0
+               day minimum. 
+            </div>
+            <div>
+               Updated 2 days ago 
+            </div>
+          </div>
+        </DropdownStyling__SectionThree>
+        <ModStylings__Close
+          onClick={[Function]}
+        >
+          <button
+            className="c10"
+            onClick={[Function]}
+          >
+             Clear Dates 
+          </button>
+        </ModStylings__Close>
+      </div>
+    </ModStylings__DropdownHolder>
+  </div>
+</Dropdown>
+`;
+
+exports[`Holder Component is the main flex component 1`] = `
+.c0 {
+  position: absolute;
+  z-index: 2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 286px;
+  border: 1px solid rgb(172,172,172);
+  border-radius: 1%;
+  padding: 20px;
+  background-color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+<div
+  className="c0"
+>
+   things inside 
+</div>
+`;

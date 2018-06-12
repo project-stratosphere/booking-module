@@ -1,0 +1,498 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dropdown Component does not render if clicked is false 1`] = `
+<Dropdown
+  adult={0}
+  btnClick={[Function]}
+  child={0}
+  clicked={false}
+  close={[Function]}
+  infant={0}
+  maxGuests={0}
+  totalGuests={0}
+/>
+`;
+
+exports[`Dropdown Component renders the right amount of children 1`] = `
+.c11 {
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.c0 {
+  position: absolute;
+  z-index: 2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 50px;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 286px;
+  border: 1px solid rgb(172,172,172);
+  border-radius: 1%;
+  padding: 20px;
+  background-color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.c12 {
+  margin-top: 8px;
+  border: none;
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  font-size: 14px;
+  color: #007D8C;
+  outline: none;
+}
+
+.c12:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.c12:active {
+  color: #F16664;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-top: 10px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c3 {
+  text-transform: capitalize;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.c8 {
+  text-transform: capitalize;
+  margin-top: 0px;
+  font-weight: bold;
+}
+
+.c4 {
+  font-size: 12px;
+  min-height: 12px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-top: 0px;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-top: 4px;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-top: 0px;
+}
+
+.c7 {
+  min-width: 9px;
+  font-size: 17px;
+  margin-top: 2px;
+}
+
+.c6 {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  margin-left: 7px;
+  margin-right: 7px;
+  margin-top: 1px;
+  outline: none;
+  border: 1px solid rgb(172,172,172);
+}
+
+.c6:active {
+  background-color: #007D8C;
+}
+
+.c6:hover:enabled {
+  cursor: pointer;
+}
+
+.c10 {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  margin-left: 7px;
+  margin-right: 7px;
+  margin-top: 1px;
+  outline: none;
+  border: 1px solid #007D8C;
+}
+
+.c10:active {
+  background-color: #007D8C;
+}
+
+.c10:hover:enabled {
+  cursor: pointer;
+}
+
+<Dropdown
+  adult={0}
+  btnClick={[Function]}
+  child={0}
+  clicked={true}
+  close={[Function]}
+  infant={0}
+  maxGuests={0}
+  totalGuests={0}
+>
+  <ModStylings__DropdownHolder
+    guest={true}
+  >
+    <div
+      className="c0"
+    >
+      <DropdownContents
+        adult={0}
+        btnClick={[Function]}
+        child={0}
+        clicked={true}
+        close={[Function]}
+        infant={0}
+        maxGuests={0}
+        totalGuests={0}
+      >
+        <DropdownContentsStyling__Holder
+          key="adults"
+        >
+          <div
+            className="c1"
+          >
+            <DropdownContentsStyling__FeatureHolder>
+              <div
+                className="c2"
+              >
+                <DropdownContentsStyling__Guest
+                  guest="adults"
+                >
+                  <div
+                    className="c3"
+                  >
+                     
+                    adults
+                     
+                  </div>
+                </DropdownContentsStyling__Guest>
+                <DropdownContentsStyling__GuestDetails>
+                  <div
+                    className="c4"
+                  >
+                     
+                     
+                  </div>
+                </DropdownContentsStyling__GuestDetails>
+              </div>
+            </DropdownContentsStyling__FeatureHolder>
+            <DropdownContentsStyling__FeatureHolder
+              button={true}
+              guest="adults"
+            >
+              <div
+                className="c5"
+              >
+                <DropdownContentsStyling__Button
+                  disabled={true}
+                  guest="adults"
+                  number={0}
+                  onClick={[Function]}
+                >
+                  <button
+                    className="c6"
+                    disabled={true}
+                    onClick={[Function]}
+                  >
+                    -
+                  </button>
+                </DropdownContentsStyling__Button>
+                <DropdownContentsStyling__Number>
+                  <div
+                    className="c7"
+                  >
+                     
+                    0
+                     
+                  </div>
+                </DropdownContentsStyling__Number>
+                <DropdownContentsStyling__Button
+                  disabled={true}
+                  guest="adults"
+                  max={0}
+                  number={0}
+                  onClick={[Function]}
+                  total={0}
+                >
+                  <button
+                    className="c6"
+                    disabled={true}
+                    max={0}
+                    onClick={[Function]}
+                  >
+                    +
+                  </button>
+                </DropdownContentsStyling__Button>
+              </div>
+            </DropdownContentsStyling__FeatureHolder>
+          </div>
+        </DropdownContentsStyling__Holder>
+        <DropdownContentsStyling__Holder
+          key="children"
+        >
+          <div
+            className="c1"
+          >
+            <DropdownContentsStyling__FeatureHolder>
+              <div
+                className="c2"
+              >
+                <DropdownContentsStyling__Guest
+                  guest="children"
+                >
+                  <div
+                    className="c8"
+                  >
+                     
+                    children
+                     
+                  </div>
+                </DropdownContentsStyling__Guest>
+                <DropdownContentsStyling__GuestDetails>
+                  <div
+                    className="c4"
+                  >
+                     
+                    Ages 2-12
+                     
+                  </div>
+                </DropdownContentsStyling__GuestDetails>
+              </div>
+            </DropdownContentsStyling__FeatureHolder>
+            <DropdownContentsStyling__FeatureHolder
+              button={true}
+              guest="children"
+            >
+              <div
+                className="c9"
+              >
+                <DropdownContentsStyling__Button
+                  disabled={true}
+                  guest="children"
+                  number={0}
+                  onClick={[Function]}
+                >
+                  <button
+                    className="c6"
+                    disabled={true}
+                    onClick={[Function]}
+                  >
+                    -
+                  </button>
+                </DropdownContentsStyling__Button>
+                <DropdownContentsStyling__Number>
+                  <div
+                    className="c7"
+                  >
+                     
+                    0
+                     
+                  </div>
+                </DropdownContentsStyling__Number>
+                <DropdownContentsStyling__Button
+                  disabled={true}
+                  guest="children"
+                  max={0}
+                  number={0}
+                  onClick={[Function]}
+                  total={0}
+                >
+                  <button
+                    className="c6"
+                    disabled={true}
+                    max={0}
+                    onClick={[Function]}
+                  >
+                    +
+                  </button>
+                </DropdownContentsStyling__Button>
+              </div>
+            </DropdownContentsStyling__FeatureHolder>
+          </div>
+        </DropdownContentsStyling__Holder>
+        <DropdownContentsStyling__Holder
+          key="infants"
+        >
+          <div
+            className="c1"
+          >
+            <DropdownContentsStyling__FeatureHolder>
+              <div
+                className="c2"
+              >
+                <DropdownContentsStyling__Guest
+                  guest="infants"
+                >
+                  <div
+                    className="c8"
+                  >
+                     
+                    infants
+                     
+                  </div>
+                </DropdownContentsStyling__Guest>
+                <DropdownContentsStyling__GuestDetails>
+                  <div
+                    className="c4"
+                  >
+                     
+                    Under 2
+                     
+                  </div>
+                </DropdownContentsStyling__GuestDetails>
+              </div>
+            </DropdownContentsStyling__FeatureHolder>
+            <DropdownContentsStyling__FeatureHolder
+              button={true}
+              guest="infants"
+            >
+              <div
+                className="c9"
+              >
+                <DropdownContentsStyling__Button
+                  disabled={true}
+                  guest="infants"
+                  number={0}
+                  onClick={[Function]}
+                >
+                  <button
+                    className="c6"
+                    disabled={true}
+                    onClick={[Function]}
+                  >
+                    -
+                  </button>
+                </DropdownContentsStyling__Button>
+                <DropdownContentsStyling__Number>
+                  <div
+                    className="c7"
+                  >
+                     
+                    0
+                     
+                  </div>
+                </DropdownContentsStyling__Number>
+                <DropdownContentsStyling__Button
+                  disabled={false}
+                  guest="infants"
+                  max={0}
+                  number={0}
+                  onClick={[Function]}
+                  total={0}
+                >
+                  <button
+                    className="c10"
+                    disabled={false}
+                    max={0}
+                    onClick={[Function]}
+                  >
+                    +
+                  </button>
+                </DropdownContentsStyling__Button>
+              </div>
+            </DropdownContentsStyling__FeatureHolder>
+          </div>
+        </DropdownContentsStyling__Holder>
+      </DropdownContents>
+      <ModStylings__Details>
+        <div
+          className="c11"
+        >
+          0
+           guests maximum. Infants don’t count toward the number of guests.
+        </div>
+      </ModStylings__Details>
+      <ModStylings__Close
+        onClick={[Function]}
+      >
+        <button
+          className="c12"
+          onClick={[Function]}
+        >
+           Close 
+        </button>
+      </ModStylings__Close>
+    </div>
+  </ModStylings__DropdownHolder>
+</Dropdown>
+`;
+
+exports[`Holder Component is the main flex component 1`] = `
+.c0 {
+  position: absolute;
+  z-index: 2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 286px;
+  border: 1px solid rgb(172,172,172);
+  border-radius: 1%;
+  padding: 20px;
+  background-color: white;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+<div
+  className="c0"
+>
+   things inside 
+</div>
+`;

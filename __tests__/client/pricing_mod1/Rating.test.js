@@ -1,40 +1,43 @@
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import 'jest-styled-components';
-import { configure } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
-import Rating, { Holder, NumReviews } from '../../../client/src/pricing_mod1/Rating';
+import Rating from '../../../client/src/pricing_mod1/Rating';
+import { Holder } from '../../../client/src/ModStylings';
 
-configure( { adapter: new Adapter() } );
+configure({ adapter: new Adapter() });
 
 const props = {
   rating: 0,
-  numReviews: Math.floor( Math.random() * 2000 ),
+  numReviews: 300,
   ratingNull: undefined,
 };
 
-describe( 'Holder Component', () => {
-  it( 'is the main flex component', () => {
+describe('Rating component holder', () => {
+  it('is the main flex component', () => {
     const tree = renderer
-      .create( <Holder> things inside </Holder> )
+      .create(<Holder mod1> things inside </Holder>)
       .toJSON();
-    expect( tree ).toHaveStyleRule( 'display', 'flex' );
-    expect( tree ).toMatchSnapshot();
-  } );
-} );
-describe( 'Rating Component', () => {
-  it( 'renders number of reviews correctly', () => {
+    expect(tree).toHaveStyleRule('display', 'flex');
+  });
+  it('contains both price per night and number of reviews', () => {
     const tree = renderer
-      .create( <NumReviews> {props.numReviews}</NumReviews> )
+      .create(<Holder> things inside </Holder>)
       .toJSON();
-    const expected = [ ' ', `${ props.numReviews }` ];
-    expect( tree.children )
-      .toEqual( expect.arrayContaining( expected ) );
-  } );
-  it( 'does not render if rating is undefined', () => {
+    expect(tree).toMatchSnapshot();
+  });
+});
+
+describe('Rating component reviews', () => {
+  it('renders number of reviews correctly', () => {
+    const tree = shallow(<Holder mod1><div className="number"> {props.numReviews}</div></Holder>);
+    expect(tree.find('.number').text()).toEqual(` ${props.numReviews}`);
+  });
+  it('does not render if rating is undefined', () => {
     const tree = renderer
-      .create( <Rating rating={props.ratingNull} /> )
+      .create(<Rating rating={props.ratingNull} />)
       .toJSON();
-    expect( tree ).toMatchSnapshot();
-  } );
-} );
+    expect(tree).toMatchSnapshot();
+  });
+});

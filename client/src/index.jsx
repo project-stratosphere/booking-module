@@ -1,37 +1,13 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import styled, { injectGlobal } from 'styled-components';
 import axios from 'axios';
 import ModOne from './pricing_mod1/ModOne';
 import ModTwo from './calendar_mod2/ModTwo';
 import ModThree from './guests_mod3/ModThree';
-import { setStartOrEndDate, clearDates, calendarChange } from './calendar_mod2/CalendarLogic';
+import ModFour from './calculator_mod4/ModFour';
+import { Holder, Button, Details } from './IndexStylings';
 
-injectGlobal([`
-  html, body{
-    height: 100%;
-    width: 100%
-  }
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`]);
-
-export const Holder = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 328px;  
-  height: 300px;
-  border: 1px solid rgb(172, 172, 172);
-  font-family: Quicksand;
-  padding: 24px;
-`;
-
-export default class App extends Component {
+export default class Booking extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -45,9 +21,6 @@ export default class App extends Component {
       mod2Clicked: 'closed',
       mod3Clicked: false,
     };
-    this.setStartOrEndDate = setStartOrEndDate.bind(this);
-    this.clearDates = clearDates.bind(this);
-    this.calendarChange = calendarChange.bind(this);
   }
 
   componentDidMount() {
@@ -80,6 +53,12 @@ export default class App extends Component {
     });
   }
 
+  setStartOrEndDate = (type, day) => {
+    this.setState({
+      [type]: day,
+    });
+  }
+
   getListingData = () => {
     let id = window.location.pathname;
     if (id === '/') {
@@ -98,10 +77,41 @@ export default class App extends Component {
       });
   }
 
+  calendarChange = (holderName) => {
+    if (holderName === 'checkInClicked' && this.state.mod2Clicked !== 'checkIn') {
+      this.setState({
+        mod2Clicked: 'checkIn',
+      });
+    } else if (holderName === 'checkOutClicked' && this.state.mod2Clicked !== 'checkOut') {
+      this.setState({
+        mod2Clicked: 'checkOut',
+      });
+    } else {
+      this.setState({
+        mod2Clicked: 'closed',
+      });
+    }
+  }
+
+  clearDates = () => {
+    this.setState({
+      startDate: null,
+      endDate: null,
+    });
+    if (this.state.mod2Clicked === 'checkOut') {
+      this.setState({
+        mod2Clicked: 'checkIn',
+      });
+    }
+  }
+
   render() {
     if (this.state.listingData) {
       return (
-        <Holder>
+        <Holder
+          startDate={this.state.startDate}
+          endDate={this.state.endDate}
+        >
           <ModOne
             price={this.state.listingData.pricePerNight}
             rating={this.state.listingData.starRating}
@@ -127,7 +137,16 @@ export default class App extends Component {
             clicked={this.state.mod3Clicked}
             close={this.onMod3InputHolderClick}
           />
-          {/* <ModFour /> */}
+          <ModFour
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            price={this.state.listingData.pricePerNight}
+            cleaningFee={this.state.listingData.cleaningFee}
+            maxGuests={this.state.listingData.maxGuests}
+            serviceFee={this.state.listingData.serviceFee}
+          />
+          <Button> REQUEST TO BOOK </Button>
+          <Details> You won’t be charged yet </Details>
         </Holder>
       );
     }
@@ -135,8 +154,4 @@ export default class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('root'));
-
-// cleaningFee={this.state.listingData.cleaningFee}
-// maxGuests={this.state.listingData.maxGuests}
-// serviceFee={this.state.listingData.serviceFee}
+render(<Booking />, document.getElementById('Booking'));

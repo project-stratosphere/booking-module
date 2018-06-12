@@ -1,46 +1,47 @@
 import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import 'jest-styled-components';
-import { configure, shallow } from 'enzyme';
+import { configure, shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
-import ModOne, { Holder } from '../../../client/src/pricing_mod1/ModOne';
+import ModOne from '../../../client/src/pricing_mod1/ModOne';
 import PricePerNight from '../../../client/src/pricing_mod1/PricePerNight';
 import Rating from '../../../client/src/pricing_mod1/Rating';
+import { HolderMod1 } from '../../../client/src/ModStylings';
 
-configure( { adapter: new Adapter() } );
+configure({ adapter: new Adapter() });
 
 const props = {
-  price: Math.floor( Math.random() * 500 ),
+  price: Math.floor(Math.random() * 500),
   priceNull: undefined,
   rating: 4,
   numReviews: 100,
 
 };
 
-describe( 'Holder Component', () => {
-  it( 'is the main flex component', () => {
+describe('Holder Component', () => {
+  it('is the main flex component', () => {
     const tree = renderer
-      .create( <Holder> things inside </Holder> )
+      .create(<HolderMod1> things inside </HolderMod1>)
       .toJSON();
-    expect( tree ).toHaveStyleRule( 'display', 'flex' );
-    expect( tree ).toMatchSnapshot();
-  } );
-} );
-describe( 'Mod One Component', () => {
-  it( 'renders price per night and ratings correctly', () => {
-    const wrapper = shallow( <ModOne
+    expect(tree).toHaveStyleRule('display', 'flex');
+    expect(tree).toMatchSnapshot();
+  });
+});
+describe('Mod One Component', () => {
+  it('renders price per night and ratings correctly', () => {
+    const wrapper = mount(<ModOne
       price={props.price}
       rating={props.rating}
       numReviews={props.numReviews}
-    /> );
-    expect( wrapper.find( 'Holder' ) ).toHaveLength( 1 );
-    expect( wrapper.find( 'Holder' ).dive().find( PricePerNight ) ).toHaveLength( 1 );
-    expect( wrapper.find( 'Holder' ).dive().find( Rating ) ).toHaveLength( 1 );
-  } );
-  it( 'does not render if price is undefined', () => {
+    />);
+    expect(wrapper.find(HolderMod1)).toHaveLength(1);
+    expect(wrapper.find('PricePerNight').length).toEqual(1);
+    expect(wrapper.find(Rating).length).toEqual(1);
+  });
+  it('does not render if price is undefined', () => {
     const tree = renderer
-      .create( <ModOne price={props.priceNull} /> )
+      .create(<ModOne price={props.priceNull} />)
       .toJSON();
-    expect( tree ).toMatchSnapshot();
-  } );
-} );
+    expect(tree).toMatchSnapshot();
+  });
+});

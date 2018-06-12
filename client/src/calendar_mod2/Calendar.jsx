@@ -1,77 +1,168 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import moment from 'moment';
-import { Table, Tr, Button } from './CalendarStyling';
-import { createDaysArr, findOccupiedDatesInMonth, onDateClick } from './CalendarLogic';
+import PropTypes from 'prop-types';
+import { Table, Tr, Td, Button } from './CalendarStyling';
 
-export default function Calendar(props) {
-  const daysArr = createDaysArr({
-    year: props.year,
-    month: props.month,
-  });
+export default class Calendar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hoveredDate: null,
+    };
+  }
 
-  let occupiedDates;
-  if (props.clicked === 'checkIn') {
-    occupiedDates = findOccupiedDatesInMonth({
-      month: props.month,
-      year: props.year,
-      dates: props.dates,
+  onDateClick = (day) => {
+    if (this.props.clicked === 'checkIn') {
+      if (this.props.endDate) {
+        if (day > this.props.endDate
+          || day + (this.props.minStay - 1) > this.props.endDate
+          || day < this.props.startDate) {
+          this.props.clearDates();
+        }
+        this.setState({
+          hoveredDate: null,
+        });
+      }
+      this.props.setDate('startDate', day);
+      this.props.calendarChange('checkOutClicked');
+    } else if (this.props.clicked === 'checkOut') {
+      const disabled = [];
+      for (let i = 1; i < this.props.minStay - 1; i += 1) {
+        disabled.push(this.props.startDate + i);
+      }
+      if (!disabled.includes(day)) {
+        if (!this.props.startDate) {
+          this.props.setDate('endDate', day);
+          return this.props.calendarChange('checkInClicked');
+        }
+        this.props.setDate('endDate', day);
+        this.props.calendarChange();
+      }
+      return null;
+    }
+    return null;
+  };
+
+  createDaysArr = ({ month, year }) => {
+    const firstDayOfTheMonth = moment(`${year}-${month}`, 'YYYY-MMM').date(1).day();
+    const daysInMonth = moment(`${year}-${month}`, 'YYYY-MMM').daysInMonth();
+
+    const daysInMonthArr = [];
+    for (let i = 0; i < firstDayOfTheMonth; i += 1) {
+      daysInMonthArr.push('');
+    }
+    for (let i = 1; i <= daysInMonth; i += 1) {
+      daysInMonthArr.push(i);
+    }
+    return daysInMonthArr;
+  }
+
+  findOccupiedDatesInMonth = ({
+    startDate, month, year, dates,
+  }) => {
+    const targetDates = [];
+    dates.forEach((date) => {
+      const dateDay = Number(moment.utc(date).format('DD'));
+      const dateMonth = moment.utc(date).format('MMMM');
+      const dateYear = Number(moment.utc(date).format('YYYY'));
+      if (dateMonth === month && dateYear === year) {
+        targetDates.push(dateDay);
+      }
     });
-  } else if (props.clicked === 'checkOut') {
-    occupiedDates = findOccupiedDatesInMonth({
-      startDate: props.startDate,
-      month: props.month,
-      year: props.year,
-      minStay: props.minStay,
-      dates: props.dates,
+    if (startDate) {
+      // for getting the days before the start date
+      for (let i = 1; i < startDate; i += 1) {
+        targetDates.push(i);
+      }
+      // for blocking off the days after an occupied date
+      const daysInMonth = moment(`${year}-${month}`, 'YYYY-MMM').daysInMonth();
+      const toBlockOut = targetDates
+        .sort((a, b) => a - b)
+        .findIndex(num => num > startDate);
+      for (let i = targetDates[toBlockOut]; i <= daysInMonth; i += 1) {
+        targetDates.push(i);
+      }
+    }
+    return targetDates;
+  }
+
+  createCalendar = () => {
+    // find the days in the month and create an array
+    const daysArr = this.createDaysArr({
+      year: this.props.year,
+      month: this.props.month,
+    });
+
+    // find the occupied dates and create an array
+    let occupiedDates;
+    if (this.props.clicked === 'checkIn') {
+      occupiedDates = this.findOccupiedDatesInMonth({
+        month: this.props.month,
+        year: this.props.year,
+        dates: this.props.dates,
+      });
+    } else if (this.props.clicked === 'checkOut') {
+      occupiedDates = this.findOccupiedDatesInMonth({
+        startDate: this.props.startDate,
+        month: this.props.month,
+        year: this.props.year,
+        dates: this.props.dates,
+      });
+    }
+
+    // create the calendar
+    return daysArr.map((day, i) => {
+      let isOccupied = false;
+      let key = day;
+      if (occupiedDates.includes(day) || day === '') {
+        key = `${i}blank`;
+        isOccupied = true;
+      }
+      return (
+        <Button
+          key={key}
+          day={day}
+          date={isOccupied}
+          calendar={this.props.clicked}
+          onClick={() => this.onDateClick(day)}
+          onFocus={() => null}
+          onMouseOver={() => this.setState({ hoveredDate: day })}
+          onMouseLeave={() => this.setState({ hoveredDate: null })}
+          hoveredDate={this.state.hoveredDate}
+          minStay={this.props.minStay}
+          startDate={this.props.startDate}
+          endDate={this.props.endDate}
+          disabled={isOccupied || (this.props.startDate === day)}
+        >
+          {day}
+        </Button>
+      );
     });
   }
 
-  const calendar = daysArr.map((day, i) => {
-    let isOccupied = false;
-    let key = day;
-    if (occupiedDates.includes(day) || day === '') {
-      key = `${i}blank`;
-      isOccupied = true;
-    }
+  render() {
+    const weekDayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
+      <Td key={day}><div> {day} </div></Td>
+    ));
+    const calendar = this.createCalendar();
+
     return (
-      <Button
-        key={key}
-        day={day}
-        date={isOccupied}
-        onClick={() => onDateClick({ day, props })}
-        minStay={props.minStay}
-        startDate={props.startDate}
-        endDate={props.endDate}
-        disabled={isOccupied || (props.startDate === day)}
-      >
-        {day}
-      </Button>
-    );
-  });
-
-  const weekDayNames = moment.weekdaysMin().map(day => (
-    <Button week key={day} disabled> {day} </Button>
-  ));
-
-  return (
-    <Table>
-      <thead>
-        <Tr>
-          <td>
+      <Table>
+        <thead>
+          <Tr>
             {weekDayNames}
-          </td>
-        </Tr>
-      </thead>
-      <tbody>
-        <Tr>
-          <td>
-            {calendar}
-          </td>
-        </Tr>
-      </tbody>
-    </Table>
-  );
+          </Tr>
+        </thead>
+        <tbody>
+          <Tr>
+            <td>
+              {calendar}
+            </td>
+          </Tr>
+        </tbody>
+      </Table>
+    );
+  }
 }
 
 Calendar.propTypes = {
@@ -79,9 +170,9 @@ Calendar.propTypes = {
   minStay: PropTypes.number,
   startDate: PropTypes.number,
   endDate: PropTypes.number,
-  // setDate: PropTypes.func,
-  // clearDates: PropTypes.func,
-  // calendarChange: PropTypes.func,
+  setDate: PropTypes.func,
+  clearDates: PropTypes.func,
+  calendarChange: PropTypes.func,
   // arrowClick: PropTypes.func,
   clicked: PropTypes.string,
   // currDate: momentPropTypes.momentObj,
@@ -94,9 +185,9 @@ Calendar.defaultProps = {
   minStay: 0,
   startDate: null,
   endDate: null,
-  // setDate: () => null,
-  // clearDates: () => null,
-  // calendarChange: () => null,
+  setDate: () => null,
+  clearDates: () => null,
+  calendarChange: () => null,
   // arrowClick: () => null,
   clicked: '',
   // currDate: null,
