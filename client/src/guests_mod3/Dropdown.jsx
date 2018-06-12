@@ -2,43 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import DropdownContents from './DropdownContents';
-
-export const Holder = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  width: 230px;
-  border: 1px solid rgb(172, 172, 172);
-  margin-top: 50px;
-  padding: 10px;
-  padding-top: 0px;
-  background-color: white;
-`;
+import { DropdownHolder, Close } from '../ModStylings';
 
 export const Details = styled.div`
   font-size: 12px;
   margin-top: 12px;
 `;
 
-export const Close = styled.button`
-  margin-top: 8px;
-  border: none;
-  align-self: flex-end;
-  font-size: 14px;
-  color: #007D8C;
-  &:hover{
-    text-decoration: underline;
-    outline: none;
-  }
-  &:active{
-    color: #FD5C63;
-  }
-`;
-
-export default function Dropdown( props ) {
-  if ( props.clicked ) {
+export default function Dropdown(props) {
+  if (props.clicked) {
     return (
-      <Holder>
+      <DropdownHolder guest>
         <DropdownContents
           {...props}
         />
@@ -46,8 +20,8 @@ export default function Dropdown( props ) {
           {props.maxGuests } guests maximum.
           Infants don’t count toward the number of guests.
         </Details>
-        <Close onClick={() => props.close()}> Close </Close>
-      </Holder>
+        <Close onClick={props.close}> Close </Close>
+      </DropdownHolder>
     );
   }
   return null;
