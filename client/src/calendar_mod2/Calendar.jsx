@@ -141,8 +141,8 @@ export default class Calendar extends Component {
   }
 
   render() {
-    const weekDayNames = moment.weekdaysMin().map(day => (
-      <Td><div week key={day}> {day} </div></Td>
+    const weekDayNames = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
+      <Td key={day}><div> {day} </div></Td>
     ));
     const calendar = this.createCalendar();
 
