@@ -7,7 +7,7 @@ import ModThree from './guests_mod3/ModThree';
 import ModFour from './calculator_mod4/ModFour';
 import { Holder, Button, Details } from './IndexStylings';
 
-export default class App extends Component {
+export default class Booking extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -154,4 +154,4 @@ export default class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('root'));
+render(<Booking />, document.getElementById('Booking'));
