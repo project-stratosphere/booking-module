@@ -22,7 +22,7 @@ export const Holder = styled.div`
   width: 328px;  
   height: ${props => ((props.startDate && props.endDate) ? '400px' : '300px')};
   border: 1px solid ${abnbGrey};
-  font-family: Quicksand;
+  font-family: Roboto;
   padding: 24px;
 `;
 

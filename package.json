@@ -4,6 +4,10 @@
   "description": "Full stack booking module, potentially to be used for the group project AirBnC",
   "author": "Catherine Ligad",
   "license": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/airBnC/booking-module"
+  },
   "engines": {
     "node": ">=6.13.0"
   },
