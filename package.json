@@ -12,6 +12,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "deploy": "npm install && npm run mysqlStart && npm run build && && npm start",
     "start": "nodemon server/index.js",
     "build": "webpack --mode production",
     "watch": "webpack -d --watch",
