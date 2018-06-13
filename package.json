@@ -13,7 +13,8 @@
     "watch": "webpack -d --watch",
     "test": "jest",
     "update": "jest --updateSnapshot",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "mysqlStart": "mysql -u root < database/schema.sql && mysql -u root < database/populateUsers.sql && mysql -u root < database/populateUserListings.sql && Smysql -u root < database/populateOccupiedDates.sql"
   },
   "dependencies": {
     "axios": "^0.18.0",
