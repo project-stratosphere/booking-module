@@ -22,7 +22,7 @@ export const Td = styled.td`
 `;
 
 function startThruMinStay({
-  day, minStay, startDate, endDate, calendar, toReturn,
+  day, minStay, startDate, calendar, toReturn,
 }) {
   if (calendar === 'checkOut' && startDate) {
     for (let i = 1; i < minStay - 1; i += 1) {

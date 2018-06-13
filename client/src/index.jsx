@@ -61,12 +61,13 @@ export default class Booking extends Component {
 
   getListingData = () => {
     let id = window.location.pathname;
-    if (id === '/') {
+    if (id === '/rooms/') {
       id = 1;
     } else {
+      id = id.replace(/\/rooms/g, '');
       id = id.replace(/\//g, '');
     }
-    axios.get(`http://127.0.0.1:3002/rooms/${id}/bookingInfo/`)
+    axios.get(`/api/rooms/${id}/bookingInfo/`)
       .then((response) => {
         this.setState({
           listingData: response.data,

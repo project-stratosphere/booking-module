@@ -13,10 +13,10 @@ const app = express();
 app.use(parser.json());
 app.use(cors());
 
-app.use('/', express.static(path.join(__dirname, '../client')));
-app.use('/:listingID', express.static(path.join(__dirname, '../client')));
+app.use('/rooms', express.static(path.join(__dirname, '../client')));
+app.use('/rooms/:listingID', express.static(path.join(__dirname, '../client')));
 
-app.get('/rooms/:listingID/bookingInfo', async (req, res) => {
+app.get('/api/rooms/:listingID/bookingInfo', async (req, res) => {
   const { listingID } = req.params;
   const listingResultsQuery = `select * from userListing where id =${listingID}`;
   const calendarResultsQuery = `select * from occupiedDates where listing_id =${listingID}`;
