@@ -14,6 +14,7 @@ injectGlobal([`
 `]);
 
 export const Holder = styled.div`
+  user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
