@@ -13,6 +13,7 @@ const app = express();
 app.use(parser.json());
 app.use(cors());
 
+app.use('/', express.static(path.join(__dirname, '../client')));
 app.use('/rooms', express.static(path.join(__dirname, '../client')));
 app.use('/rooms/:listingID', express.static(path.join(__dirname, '../client')));
 

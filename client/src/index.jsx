@@ -61,7 +61,7 @@ export default class Booking extends Component {
 
   getListingData = () => {
     let id = window.location.pathname;
-    if (id === '/rooms/') {
+    if (id === '/rooms/' || id === '/') {
       id = 1;
     } else {
       id = id.replace(/\/rooms/g, '');
