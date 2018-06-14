@@ -71,7 +71,7 @@ export default class Booking extends Component {
       .then((response) => {
         this.setState({
           listingData: response.data,
-        });
+        }, console.log(this.state));
       })
       .catch(() => {
         console.log('there was an error!');
