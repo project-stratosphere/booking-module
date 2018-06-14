@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  bookings:
+    build: ../booking/
+    links:
+      - 'db:db'
+    environment:
+      - DATABASE_HOST=db
+    depends_on:
+      - 'db'
+    ports:
+      - '3002:3002'
+    expose:
+      - '3002'
+  
+  db:
+    image: 'mysql:5.7.22'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: booking
+      MYSQL_USER: cat
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_HOST: db
+    expose:
+      - '3306'
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./database/populateUsers.sql:/docker-entrypoint-initdb.d/2-populateUsers.sql
+      - ./database/populateUserListings.sql:/docker-entrypoint-initdb.d/3-populateUserListings.sql
+      - ./database/populateOccupiedDates.sql:/docker-entrypoint-initdb.d/4-populateOccupiedDates.sql
