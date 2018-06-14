@@ -94,16 +94,15 @@ export const Arrow = styled.div`
 
 export const DropdownHolder = styled.div`
   position: absolute;
-  z-index: 2;
+  z-index: ${props => (props.guest ? '' : '2')};
   display: flex;
-  margin-top: ${props => (props.guest ? '50px' : '')};
+  margin-top: ${props => (props.guest ? '48px' : '')};
   flex-direction: column;
   width: 286px;
   border: 1px solid ${abnbGrey};
   border-radius: 1%;
   padding: 20px;
   background-color: white;
-  user-select: none;
 `;
 
 export const Close = styled.button`
