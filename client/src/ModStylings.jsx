@@ -96,7 +96,7 @@ export const DropdownHolder = styled.div`
   position: absolute;
   z-index: ${props => (props.guest ? '' : '2')};
   display: flex;
-  margin-top: ${props => (props.guest ? '48px' : '')};
+  margin-top: ${props => (props.guest ? '47px' : '')};
   flex-direction: column;
   width: 286px;
   border: 1px solid ${abnbGrey};
