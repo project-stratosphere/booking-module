@@ -6,6 +6,10 @@
 DROP DATABASE IF EXISTS Booking;
 
 CREATE DATABASE Booking;
+
+CREATE USER 'cat'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON * . * TO 'cat'@'%';
+
 USE Booking;
 	
 		

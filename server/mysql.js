@@ -1,13 +1,40 @@
 const mysql = require('mysql');
+const util = require('util');
 
-const connection = mysql.createConnection({
+const prodConfig = {
   host: 'db',
   user: 'cat',
   password: 'password',
-  database: 'booking',
+  database: 'Booking',
   port: 3306,
-});
+};
 
-connection.connect();
+const devConfig = {
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'Booking',
+};
 
-module.exports = connection;
+let connection = mysql.createConnection(prodConfig);
+
+function tryToConnect() {
+  connection = mysql.createConnection(prodConfig);
+  connection.connect = util.promisify(connection.connect);
+  connection.connect()
+    .then(() => {
+      console.log('SUCCESS. Connected to mysql.');
+    })
+    .catch((err) => {
+      console.log('Could not connect to mysql', err);
+      setTimeout(() => tryToConnect(), 10000);
+    });
+}
+
+tryToConnect();
+
+function getConnection() {
+  return connection;
+}
+
+module.exports = getConnection;
