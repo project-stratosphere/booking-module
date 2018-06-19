@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  bookings:
+    image: kateligad/bookingairbnc:v2
+    external_links:
+      - 'db:db'
+    environment:
+      - DATABASE_HOST=db
+    command: npm start
+    depends_on:
+      - db
+    ports:
+      - '80:3002'
+
+  db:
+    image: 'mysql:5.7.22'
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: db
+    expose:
+      - 3306
+    command: mysqld --sql_mode=""
+    volumes:
+      - ../booking/database/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ../booking/database/populateUsers.sql:/docker-entrypoint-initdb.d/2-populateUsers.sql
+      - ../booking/database/populateUserListings.sql:/docker-entrypoint-initdb.d/3-populateUserListings.sql
+      - ../booking/database/populateOccupiedDates.sql:/docker-entrypoint-initdb.d/4-populateOccupiedDates.sql
+
