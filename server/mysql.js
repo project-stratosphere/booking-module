@@ -1,25 +1,25 @@
 const mysql = require('mysql');
 const util = require('util');
 
-const prodConfig = {
-  host: 'db',
-  user: 'cat',
-  password: 'password',
-  database: 'Booking',
-  port: 3306,
-};
-
-// const devConfig = {
-//   host: 'localhost',
-//   user: 'root',
-//   password: '',
+// const prodConfig = {
+//   host: 'db',
+//   user: 'cat',
+//   password: 'password',
 //   database: 'Booking',
+//   port: 3306,
 // };
 
-let connection = mysql.createConnection(prodConfig);
+const devConfig = {
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'Booking',
+};
+
+let connection = mysql.createConnection(devConfig);
 
 function tryToConnect() {
-  connection = mysql.createConnection(prodConfig);
+  connection = mysql.createConnection(devConfig);
   connection.connect = util.promisify(connection.connect);
   connection.connect()
     .then(() => {
