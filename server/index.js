@@ -1,12 +1,10 @@
 /* eslint-disable no-console */
-const mysql = require('./mysql');
+const getConnection = require('./mysql');
 const path = require('path');
 const parser = require('body-parser');
 const express = require('express');
 const util = require('util');
 const cors = require('cors');
-
-mysql.query = util.promisify(mysql.query);
 
 const PORT = 3002;
 const app = express();
@@ -22,6 +20,9 @@ app.get('/api/rooms/:listingID/bookingInfo', async (req, res) => {
   const listingResultsQuery = `select * from userListing where id =${listingID}`;
   const calendarResultsQuery = `select * from occupiedDates where listing_id =${listingID}`;
   try {
+    const mysql = getConnection();
+    mysql.query = util.promisify(mysql.query);
+
     const listingResults = await mysql.query(listingResultsQuery);
     const calendarResults = await mysql.query(calendarResultsQuery);
     const toSendBack = {};
