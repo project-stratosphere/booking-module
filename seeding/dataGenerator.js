@@ -1,0 +1,9 @@
+name
+user_id
+price_per_night
+star_rating
+cust_rev_num
+min_stay
+cleaning_fee
+service_fee
+max_guests
