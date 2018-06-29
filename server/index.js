@@ -47,6 +47,33 @@ app.get('/api/rooms/:listingID/bookingInfo', async (req, res) => {
   }
 });
 
+/* ------------------------------------------------------------
+New API Routes
+-------------------------------------------------------------*/
+app.post('/api/rooms/:listingID/:bookingDate', (req, res) => {
+  const mySql = getConnection();
+  const query = ``;
+  mySql.query(query);
+  res.status(204).end();
+});
+
+app.delete('/api/rooms/:listingID/:bookingDate', (req, res) => {
+  const mySql = getConnection();
+  const query = ``;
+  mySql.query(query);
+  res.status(204).end();
+});
+
+app.patch('/api/rooms/updates/:listingID/', (req, res) => {
+  const mySql = getConnection();
+  const { listingID } = req.params;
+  const updates = req.body;
+  const query = ``;
+  mySql.query(query);
+  res.status(204).end();
+});
+/* ----------------------------------------------------------*/
+
 app.listen(PORT, () => {
   console.log(`I'm in the year ${PORT}`);
 });
