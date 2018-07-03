@@ -1,19 +1,19 @@
 {
-  "name": "bookingairbnc",
+  "name": "stratosphere-bookings",
   "version": "1.0.0",
   "description": "Full stack booking module, potentially to be used for the group project AirBnC",
-  "author": "Catherine Ligad",
+  "author": "Luke Brennan",
   "license": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/airBnC/booking-module"
+    "url": "git+https://github.com/projectstratosphere/booking-module"
   },
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
     "deploy": "npm install && npm run mysqlStart && npm run build && npm start",
-    "start": "nodemon server/index.js",
+    "start": "NODE_ENV=production nodemon server/index.js",
     "build": "webpack --mode production",
     "watch": "webpack -d --watch",
     "test": "jest",
@@ -63,6 +63,7 @@
     "jest": "^23.1.0",
     "jest-cli": "^23.1.0",
     "jest-styled-components": "^5.0.1",
+    "newrelic": "^4.2.0",
     "nodemon": "^1.17.5",
     "react-test-renderer": "^16.4.0",
     "sinon": "^6.0.0"

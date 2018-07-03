@@ -25,3 +25,5 @@ build/
 dist/
 data/
 
+# Misc
+test.js
