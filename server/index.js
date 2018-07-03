@@ -1,23 +1,34 @@
+require('newrelic');
 const path = require('path');
 const parser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
-const { Client } = require('pg');
+const { Pool } = require('pg');
 
-const client = new Client({
+console.log('NODE_ENV:', process.env.NODE_ENV);
+
+const pool = new Pool({
   user: 'LHB',
   host: 'localhost',
   database: 'stratosphere',
+  max: 100,
   // password: 'strat',
   // port: 3211,
 });
 
-client.connect();
+// pool.on('error', (err, client) => {
+//   console.error('Unexpected error on idle client', err);
+//   process.exit(-1);
+// });
 
 const PORT = 3002;
 const app = express();
-app.use(cors());
-app.use(parser.json());
+// app.use(function serverHearsYou(req, res, next) {
+//   console.log('hitting the server');
+//   next();
+// });
+// app.use(cors());
+// app.use(parser.json());
 
 app.use('/', express.static(path.join(__dirname, '../client')));
 app.use('/rooms', express.static(path.join(__dirname, '../client')));
@@ -25,15 +36,18 @@ app.use('/rooms/:listingID', express.static(path.join(__dirname, '../client')));
 
 app.get('/api/rooms/:listingID/bookingInfo', async (req, res) => {
   const { listingID } = req.params;
+  // console.log(`***** getting dates for ${listingID} *****`);
   const query = 'SELECT occupied_date FROM occupied_dates WHERE listing_id = $1;';
 
   try {
-    const clientData = { occupied_dates: [] };
-    const queryResults = await client.query(query, [listingID]);
+    const clientData = { datesTaken: [] };
+    const queryResults = await pool.query(query, [listingID]);
     const calendarResults = queryResults.rows;
-    calendarResults.forEach((result) => {
-      clientData.occupied_dates.push(result.occupied_date);
-    });
+    // calendarResults.forEach((result) => {
+    //   clientData.datesTaken.push(result.occupied_date);
+    // });
+    clientData.datesTaken = calendarResults;
+    // console.log(clientData.datesTaken.slice(0, 5));
     res.status(200).json(clientData);
   } catch (err) {
     console.log('Error!', err);
