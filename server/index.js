@@ -5,8 +5,6 @@ const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
 
-console.log('NODE_ENV:', process.env.NODE_ENV);
-
 const pool = new Pool({
   user: 'LHB',
   host: 'localhost',
