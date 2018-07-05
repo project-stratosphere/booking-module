@@ -6,12 +6,12 @@ const cors = require('cors');
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  user: 'LHB',
-  host: 'localhost',
+  user: 'power_user',
+  host: 'ec2-54-183-198-165.us-west-1.compute.amazonaws.com',
   database: 'stratosphere_enhanced',
   max: 100,
-  // password: 'strat',
-  // port: 3211,
+  password: 'strat',
+  port: 5432,
 });
 
 // pool.on('error', (err, client) => {
