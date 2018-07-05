@@ -1,0 +1,18 @@
+config:
+  target: 'http://localhost:3002/api/rooms'
+  # processor: "./my-functions.js"
+  phases:
+    - duration: 60
+      arrivalRate: 400
+  payload:
+    path: "randomIds.csv"
+    fields:
+      - "listingId"
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    # - function: "generateRandomListingId"
+    - get:
+        url: "/{{ listingId }}/bookingInfo/"

@@ -5,10 +5,12 @@ const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
 
+console.log('NODE_ENV:', process.env.NODE_ENV);
+
 const pool = new Pool({
   user: 'LHB',
   host: 'localhost',
-  database: 'stratosphere_enhanced',
+  database: 'stratosphere',
   max: 100,
   // password: 'strat',
   // port: 3211,
@@ -35,7 +37,7 @@ app.use('/rooms/:listingID', express.static(path.join(__dirname, '../client')));
 app.get('/api/rooms/:listingID/bookingInfo', async (req, res) => {
   const { listingID } = req.params;
   // console.log(`***** getting dates for ${listingID} *****`);
-  const query = 'SELECT (start_date, end_date) FROM reservations WHERE listing_id = $1;';
+  const query = 'SELECT occupied_date FROM occupied_dates WHERE listing_id = $1;';
 
   try {
     const clientData = { datesTaken: [] };
