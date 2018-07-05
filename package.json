@@ -13,7 +13,7 @@
   },
   "scripts": {
     "deploy": "npm install && npm run mysqlStart && npm run build && npm start",
-    "start": "NODE_ENV=production nodemon server/index.js",
+    "start": "NODE_ENV=production node server/index.js",
     "build": "webpack --mode production",
     "watch": "webpack -d --watch",
     "test": "jest",
