@@ -3,7 +3,7 @@ config:
   # processor: "./my-functions.js"
   phases:
     - duration: 60
-      arrivalRate: 200
+      arrivalRate: 400
   payload:
     path: "randomIds.csv"
     fields:
