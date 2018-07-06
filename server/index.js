@@ -25,7 +25,7 @@ const app = express();
 //   console.log('hitting the server');
 //   next();
 // });
-// app.use(cors());
+app.use(cors());
 // app.use(parser.json());
 
 app.use('/', express.static(path.join(__dirname, '../client')));
@@ -81,5 +81,5 @@ New API Routes
 /* ----------------------------------------------------------*/
 
 app.listen(PORT, () => {
-  console.log(`I'm in the year ${PORT}`);
+  console.log(`Party in the year ${PORT}`);
 });
